@@ -135,21 +135,24 @@ const ModernHomePage = () => {
 
   const fetchHomeData = async () => {
     try {
+      setLoading(true);
       const [featuredRes, bestsellerRes] = await Promise.all([
         fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/featured?limit=12`),
         fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/bestsellers?limit=8`)
       ]);
 
-      const [featuredData, bestsellerData] = await Promise.all([
-        featuredRes.json(),
-        bestsellerRes.json()
-      ]);
+      if (featuredRes.ok) {
+        const featuredData = await featuredRes.json();
+        if (featuredData.success) setFeaturedProducts(featuredData.data);
+      }
 
-      if (featuredData.success) setFeaturedProducts(featuredData.data);
-      if (bestsellerData.success) setBestsellerProducts(bestsellerData.data);
+      if (bestsellerRes.ok) {
+        const bestsellerData = await bestsellerRes.json();
+        if (bestsellerData.success) setBestsellerProducts(bestsellerData.data);
+      }
     } catch (error) {
       console.error('Error fetching home data:', error);
-      toast.error('Failed to load some content. Please refresh the page.');
+      // Don't show error toast for failed requests, just continue with empty data
     } finally {
       setLoading(false);
     }
