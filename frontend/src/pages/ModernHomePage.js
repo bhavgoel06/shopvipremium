@@ -305,9 +305,9 @@ const ModernHomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="relative py-20 bg-gradient-to-b from-black to-gray-900">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <section className="relative py-24 bg-gradient-to-b from-black to-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -318,16 +318,16 @@ const ModernHomePage = () => {
                 className="text-center group"
               >
                 <motion.div
-                  className="text-4xl mb-4"
+                  className="text-5xl mb-6"
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 >
                   {stat.icon}
                 </motion.div>
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-3">
                   {stat.number}
                 </div>
-                <div className="text-gray-400">{stat.label}</div>
+                <div className="text-gray-400 text-lg">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -335,23 +335,23 @@ const ModernHomePage = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="relative py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative py-24 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6">
               Explore Categories
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Discover premium subscriptions across all major platforms
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {categories.map((category, index) => (
               <motion.div
                 key={category.slug}
@@ -363,19 +363,19 @@ const ModernHomePage = () => {
                 className="group cursor-pointer"
               >
                 <Link to={`/category/${category.slug}`}>
-                  <div className={`relative p-8 rounded-3xl bg-gradient-to-br ${category.gradient} overflow-hidden`}>
+                  <div className={`relative p-10 rounded-3xl bg-gradient-to-br ${category.gradient} overflow-hidden`}>
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300" />
                     <div className="relative z-10">
-                      <div className="text-4xl mb-4">{category.icon}</div>
-                      <h3 className="text-2xl font-bold text-white mb-2">{category.name}</h3>
-                      <p className="text-white/80 mb-4">{category.description}</p>
+                      <div className="text-5xl mb-6">{category.icon}</div>
+                      <h3 className="text-2xl font-bold text-white mb-3">{category.name}</h3>
+                      <p className="text-white/80 mb-6">{category.description}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-white/60">{category.count}</span>
+                        <span className="text-white/60 text-lg">{category.count}</span>
                         <motion.div
-                          className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
+                          className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
                           whileHover={{ scale: 1.1 }}
                         >
-                          <span className="text-white">→</span>
+                          <span className="text-white text-xl">→</span>
                         </motion.div>
                       </div>
                     </div>
@@ -388,23 +388,23 @@ const ModernHomePage = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="relative py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="relative py-24 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6">
               Featured Deals
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
               Hand-picked premium subscriptions at unbeatable prices
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
             {loading ? (
               Array(12).fill(0).map((_, index) => (
                 <motion.div 
