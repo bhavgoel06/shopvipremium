@@ -30,7 +30,8 @@ const Header = () => {
     { name: 'Education', slug: 'education', icon: '📚' },
     { name: 'Gaming', slug: 'gaming', icon: '🎮' },
     { name: 'Social Media', slug: 'social_media', icon: '💝' },
-    { name: 'Health & Fitness', slug: 'health', icon: '💪' }
+    { name: 'Health & Fitness', slug: 'health', icon: '💪' },
+    { name: 'Adult Content', slug: 'adult', icon: '🔞' }
   ];
 
   return (
