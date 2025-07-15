@@ -1758,10 +1758,18 @@ def generate_reviews(product_id, product_name, rating, num_reviews):
         "Pooja Mehta", "Arun Kumar", "Sneha Patel", "Deepak Sharma", "Manish Gupta"
     ]
     
-    # Create reviews
+    # Create reviews with randomized dates
     for i in range(min(num_reviews, len(review_templates))):
         template = review_templates[i]
         user_name = user_names[i % len(user_names)]
+        
+        # Generate random date within last 6 months
+        import random
+        from datetime import datetime, timedelta
+        
+        # Random date between 1 and 180 days ago
+        days_ago = random.randint(1, 180)
+        random_date = datetime.utcnow() - timedelta(days=days_ago)
         
         # Convert float rating to int
         int_rating = int(rating)
@@ -1776,7 +1784,7 @@ def generate_reviews(product_id, product_name, rating, num_reviews):
             content=template["content"],
             is_verified=True,
             is_approved=True,
-            created_at=datetime.utcnow()
+            created_at=random_date
         ))
     
     return reviews
