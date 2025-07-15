@@ -178,7 +178,7 @@ MEGA_PREMIUM_PRODUCTS = [
             "No Ads",
             "4K Quality"
         ],
-        "image_url": "https://img.hotstar.com/image/upload/v1656431456/web-images/logo-d-plus.svg",
+        "image_url": "https://img.icons8.com/color/480/disney-plus.png",
         "gallery_images": [],
         "is_featured": True,
         "is_bestseller": True,
