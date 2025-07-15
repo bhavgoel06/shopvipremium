@@ -207,7 +207,7 @@ MEGA_PREMIUM_PRODUCTS = [
             "Exclusive Content",
             "Multiple Device Support"
         ],
-        "image_url": "https://www.youtube.com/img/desktop/yt_1200.png",
+        "image_url": "https://img.icons8.com/color/480/youtube-play.png",
         "gallery_images": [],
         "is_featured": True,
         "is_bestseller": True,
