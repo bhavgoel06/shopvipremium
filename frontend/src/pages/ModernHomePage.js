@@ -262,7 +262,7 @@ const ModernHomePage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                {currentSlideData.subtitle}
+                Access Premium Services at a Fraction of the Price – Group Subscriptions for Everyone
               </motion.h2>
               
               <motion.p
