@@ -322,6 +322,256 @@ class BackendTester:
             print(f"❌ Product search error: {e}")
             return False
 
+    def test_expanded_product_catalog(self):
+        """Test the expanded product catalog with 58 products"""
+        print("📈 Testing expanded product catalog (58 products)...")
+        try:
+            response = self.session.get(f"{self.api_url}/products?per_page=100", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and isinstance(data.get('data'), list):
+                    products = data['data']
+                    total = data.get('total', 0)
+                    print(f"✅ Expanded catalog retrieved: {len(products)} products shown, {total} total")
+                    
+                    if total >= 58:
+                        print(f"✅ Catalog expansion successful: {total} products (target: 58+)")
+                        return True
+                    else:
+                        print(f"❌ Catalog expansion incomplete: {total} products (expected: 58+)")
+                        return False
+                else:
+                    print(f"❌ Expanded catalog: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Expanded catalog failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Expanded catalog error: {e}")
+            return False
+
+    def test_adult_content_products(self):
+        """Test adult content products are included and accessible"""
+        print("🔞 Testing adult content products...")
+        try:
+            response = self.session.get(f"{self.api_url}/products?category=adult", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and isinstance(data.get('data'), list):
+                    adult_products = data['data']
+                    print(f"✅ Adult content products accessible: {len(adult_products)} products")
+                    
+                    if adult_products:
+                        sample = adult_products[0]
+                        print(f"   Sample adult product: {sample.get('name', 'Unknown')}")
+                        print(f"   Category: {sample.get('category', 'Unknown')}")
+                        
+                        # Verify pricing structure
+                        if 'original_price' in sample and 'discounted_price' in sample:
+                            print(f"   Pricing: ${sample.get('original_price')} → ${sample.get('discounted_price')}")
+                            return True
+                        else:
+                            print("❌ Adult products missing pricing structure")
+                            return False
+                    else:
+                        print("❌ No adult content products found")
+                        return False
+                else:
+                    print(f"❌ Adult content: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Adult content failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Adult content error: {e}")
+            return False
+
+    def test_category_filtering(self):
+        """Test product filtering by all categories"""
+        print("🏷️ Testing category filtering...")
+        categories_to_test = [
+            'adult', 'ott', 'software', 'vpn', 'education', 
+            'social_media', 'gaming', 'health', 'membership', 
+            'professional', 'financial'
+        ]
+        
+        passed_categories = 0
+        total_categories = len(categories_to_test)
+        
+        for category in categories_to_test:
+            try:
+                response = self.session.get(f"{self.api_url}/products?category={category}", timeout=10)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get('success') and isinstance(data.get('data'), list):
+                        products = data['data']
+                        print(f"   ✅ {category}: {len(products)} products")
+                        passed_categories += 1
+                    else:
+                        print(f"   ❌ {category}: Invalid response format")
+                else:
+                    print(f"   ❌ {category}: Failed ({response.status_code})")
+            except Exception as e:
+                print(f"   ❌ {category}: Error ({e})")
+        
+        success_rate = (passed_categories / total_categories) * 100
+        print(f"✅ Category filtering: {passed_categories}/{total_categories} categories working ({success_rate:.1f}%)")
+        return passed_categories >= 8  # At least 8 out of 11 categories should work
+
+    def test_pricing_structure(self):
+        """Test pricing display with original vs discounted prices"""
+        print("💰 Testing pricing structure...")
+        try:
+            response = self.session.get(f"{self.api_url}/products?per_page=10", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and isinstance(data.get('data'), list):
+                    products = data['data']
+                    pricing_valid = 0
+                    discount_valid = 0
+                    
+                    for product in products:
+                        # Check required pricing fields
+                        if all(field in product for field in ['original_price', 'discounted_price', 'discount_percentage']):
+                            pricing_valid += 1
+                            
+                            # Verify discount calculation
+                            original = float(product['original_price'])
+                            discounted = float(product['discounted_price'])
+                            discount_pct = float(product['discount_percentage'])
+                            
+                            expected_discount = ((original - discounted) / original) * 100
+                            if abs(expected_discount - discount_pct) < 1:  # Allow 1% tolerance
+                                discount_valid += 1
+                    
+                    print(f"✅ Pricing structure: {pricing_valid}/{len(products)} products have complete pricing")
+                    print(f"✅ Discount calculations: {discount_valid}/{len(products)} products have correct discounts")
+                    
+                    if pricing_valid >= len(products) * 0.9:  # 90% should have complete pricing
+                        return True
+                    else:
+                        print("❌ Too many products missing pricing structure")
+                        return False
+                else:
+                    print(f"❌ Pricing test: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Pricing test failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Pricing test error: {e}")
+            return False
+
+    def test_reviews_system(self):
+        """Test that products have 4-5 star reviews"""
+        print("⭐ Testing reviews system...")
+        try:
+            response = self.session.get(f"{self.api_url}/products?per_page=10", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and isinstance(data.get('data'), list):
+                    products = data['data']
+                    reviews_valid = 0
+                    
+                    for product in products:
+                        if 'rating' in product and 'reviews_count' in product:
+                            rating = float(product['rating'])
+                            reviews_count = int(product['reviews_count'])
+                            
+                            if 4.0 <= rating <= 5.0 and reviews_count > 0:
+                                reviews_valid += 1
+                    
+                    print(f"✅ Reviews system: {reviews_valid}/{len(products)} products have 4-5 star reviews")
+                    
+                    if reviews_valid >= len(products) * 0.8:  # 80% should have good reviews
+                        return True
+                    else:
+                        print("❌ Too many products missing proper reviews")
+                        return False
+                else:
+                    print(f"❌ Reviews test: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Reviews test failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Reviews test error: {e}")
+            return False
+
+    def test_stock_quantities(self):
+        """Test that products have proper stock quantities"""
+        print("📦 Testing stock quantities...")
+        try:
+            response = self.session.get(f"{self.api_url}/products?per_page=20", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and isinstance(data.get('data'), list):
+                    products = data['data']
+                    stock_valid = 0
+                    
+                    for product in products:
+                        if 'stock_quantity' in product and 'status' in product:
+                            stock = int(product['stock_quantity'])
+                            status = product['status']
+                            
+                            if stock > 0 and status == 'active':
+                                stock_valid += 1
+                    
+                    print(f"✅ Stock management: {stock_valid}/{len(products)} products have proper stock")
+                    
+                    if stock_valid >= len(products) * 0.9:  # 90% should have stock
+                        return True
+                    else:
+                        print("❌ Too many products out of stock or invalid status")
+                        return False
+                else:
+                    print(f"❌ Stock test: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Stock test failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Stock test error: {e}")
+            return False
+
+    def test_currency_conversion_data(self):
+        """Test that backend provides proper data for USD/INR conversion"""
+        print("💱 Testing currency conversion data...")
+        try:
+            response = self.session.get(f"{self.api_url}/products?per_page=5", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and isinstance(data.get('data'), list):
+                    products = data['data']
+                    
+                    for product in products:
+                        # Check that backend provides the necessary price data
+                        required_fields = ['original_price', 'discounted_price', 'discount_percentage']
+                        if all(field in product for field in required_fields):
+                            print(f"   ✅ {product.get('name', 'Unknown')}: Complete pricing data")
+                        else:
+                            print(f"   ❌ {product.get('name', 'Unknown')}: Missing pricing fields")
+                            return False
+                    
+                    print("✅ Currency conversion: Backend provides proper price data for frontend conversion")
+                    return True
+                else:
+                    print(f"❌ Currency test: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Currency test failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Currency test error: {e}")
+            return False
+
     def test_categories_endpoint(self):
         """Test categories endpoint"""
         print("📂 Testing categories endpoint...")
