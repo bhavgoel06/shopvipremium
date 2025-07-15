@@ -7,12 +7,15 @@ import uuid
 class CategoryType(str, Enum):
     OTT = "ott"
     SOFTWARE = "software"
+    PROFESSIONAL = "professional"
+    EDUCATION = "education"
+    SOCIAL_MEDIA = "social_media"
     VPN = "vpn"
     GAMING = "gaming"
-    PROFESSIONAL = "professional"
-    SOCIAL_MEDIA = "social_media"
+    HEALTH = "health"
+    FINANCIAL = "financial"
+    MEMBERSHIP = "membership"
     ADULT = "adult"
-    EDUCATION = "education"
 
 class ProductStatus(str, Enum):
     ACTIVE = "active"
