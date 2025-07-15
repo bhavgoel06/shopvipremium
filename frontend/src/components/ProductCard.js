@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 const ProductCard = ({ product, className = '' }) => {
   const { addToCart } = useCart();
   const { formatPrice } = useCurrency();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -16,6 +18,15 @@ const ProductCard = ({ product, className = '' }) => {
     const defaultDuration = product.duration_options[0];
     addToCart(product, defaultDuration);
     toast.success(`${product.name} added to cart!`);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoaded(true);
   };
 
   const renderStars = (rating) => {
@@ -56,15 +67,31 @@ const ProductCard = ({ product, className = '' }) => {
       >
         <div className="relative">
           {/* Product Image */}
-          <div className="aspect-w-16 aspect-h-12 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-            <img
-              src={product.image_url}
-              alt={product.name}
-              className="w-full h-48 object-contain group-hover:scale-105 transition-transform duration-300 p-4"
-              onError={(e) => {
-                e.target.src = `https://via.placeholder.com/400x200/4F46E5/FFFFFF?text=${encodeURIComponent(product.name)}`;
-              }}
-            />
+          <div className="aspect-w-16 aspect-h-12 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden h-48 relative">
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              </div>
+            )}
+            
+            {imageError ? (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                <div className="text-center">
+                  <div className="text-4xl text-gray-400 mb-2">📦</div>
+                  <div className="text-xs text-gray-500">No Image</div>
+                </div>
+              </div>
+            ) : (
+              <img
+                src={product.image_url}
+                alt={product.name}
+                className={`w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 p-4 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+              />
+            )}
           </div>
           
           {/* Badges */}
