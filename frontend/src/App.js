@@ -68,6 +68,8 @@ function App() {
                   <Route path="/checkout" element={<CheckoutPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
+                  <Route path="/terms" element={<TermsPage />} />
+                  <Route path="/privacy" element={<PrivacyPage />} />
                   <Route path="/admin" element={<AdminDashboard />} />
                 </Routes>
               </main>
