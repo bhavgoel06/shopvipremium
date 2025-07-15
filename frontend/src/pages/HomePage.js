@@ -171,43 +171,68 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-black opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Premium Subscriptions at
-              <span className="text-yellow-400"> Unbeatable Prices</span>
+            <div className="mb-6">
+              <span className="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-bold mb-4">
+                🔥 LIMITED TIME OFFER - Up to 70% OFF
+              </span>
+            </div>
+            <h1 className="responsive-heading font-bold mb-6 leading-tight">
+              {heroContent.title}
             </h1>
-            <p className="text-xl mb-8 opacity-90">
-              Save up to 70% on Netflix, Adobe, Microsoft Office, VPNs, and more premium services. 
-              Instant delivery, genuine accounts, 24/7 support.
+            <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+              {heroContent.subtitle}
             </p>
+            
+            {/* Trust indicators */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 text-sm">
+              {heroContent.benefits.map((benefit, index) => (
+                <div key={index} className="flex items-center justify-center">
+                  <span className="text-green-400 mr-2">✓</span>
+                  <span>{benefit.replace('✅ ', '')}</span>
+                </div>
+              ))}
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/products"
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="btn-primary transform hover:scale-105"
               >
-                Browse All Deals
+                🛍️ Browse All Deals
               </Link>
               <Link
                 to="/category/ott"
-                className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                className="btn-secondary text-white border-white hover:bg-white hover:text-blue-600"
               >
-                OTT Platforms
+                📺 OTT Platforms
               </Link>
+            </div>
+            
+            {/* Current currency display */}
+            <div className="mt-6 text-sm opacity-75">
+              <span>💰 Prices shown in {currency} • Switch currency anytime</span>
             </div>
           </div>
         </div>
         
-        {/* Floating Elements */}
-        <div className="absolute top-10 left-10 animate-bounce">
-          <div className="bg-white bg-opacity-20 p-4 rounded-lg">
-            <span className="text-2xl">📺</span>
+        {/* Enhanced floating elements */}
+        <div className="absolute top-10 left-10 animate-bounce hidden md:block">
+          <div className="bg-white bg-opacity-20 p-4 rounded-xl shadow-lg">
+            <span className="text-3xl">📺</span>
           </div>
         </div>
-        <div className="absolute bottom-10 right-10 animate-bounce" style={{ animationDelay: '0.5s' }}>
-          <div className="bg-white bg-opacity-20 p-4 rounded-lg">
-            <span className="text-2xl">💻</span>
+        <div className="absolute bottom-10 right-10 animate-bounce hidden md:block" style={{ animationDelay: '0.5s' }}>
+          <div className="bg-white bg-opacity-20 p-4 rounded-xl shadow-lg">
+            <span className="text-3xl">💻</span>
+          </div>
+        </div>
+        <div className="absolute top-1/2 left-5 animate-pulse hidden lg:block" style={{ animationDelay: '1s' }}>
+          <div className="bg-white bg-opacity-15 p-3 rounded-lg">
+            <span className="text-2xl">🔒</span>
           </div>
         </div>
       </section>
