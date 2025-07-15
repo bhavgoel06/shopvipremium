@@ -133,14 +133,16 @@ class Database:
         return [Product(**product) for product in products]
     
     # User operations
-    async def create_user(self, user: UserCreate) -> User:
+    async def create_user(self, user: User) -> User:
         user_dict = user.dict()
-        user_dict.pop('password')  # Remove password from storage for now
-        user_obj = User(**user_dict)
-        await self.db.users.insert_one(user_obj.dict())
-        return user_obj
+        await self.db.users.insert_one(user_dict)
+        return user
     
     async def get_user(self, user_id: str) -> Optional[User]:
+        user = await self.db.users.find_one({"id": user_id})
+        return User(**user) if user else None
+    
+    async def get_user_by_id(self, user_id: str) -> Optional[User]:
         user = await self.db.users.find_one({"id": user_id})
         return User(**user) if user else None
     
