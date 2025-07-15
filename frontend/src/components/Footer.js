@@ -169,6 +169,38 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Disclaimers Section */}
+      <div className="bg-gray-800 py-6 border-t border-gray-700">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h4 className="text-lg font-semibold text-white mb-4">Important Disclaimers</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-300">
+              <div>
+                <h5 className="font-medium text-gray-200 mb-2">🔒 Account Security</h5>
+                <p>All subscriptions are genuine and legally obtained. We do not sell cracked, hacked, or stolen accounts. Your privacy and security are our top priorities.</p>
+              </div>
+              <div>
+                <h5 className="font-medium text-gray-200 mb-2">⚖️ Legal Compliance</h5>
+                <p>All products are resold in compliance with applicable laws and platform terms of service. We maintain proper licensing and authorization for all subscriptions.</p>
+              </div>
+              <div>
+                <h5 className="font-medium text-gray-200 mb-2">🛡️ Warranty & Support</h5>
+                <p>We provide 30-day warranty on all subscriptions. Any issues will be resolved promptly with replacement or refund. 24/7 customer support available.</p>
+              </div>
+              <div>
+                <h5 className="font-medium text-gray-200 mb-2">💳 Payment Security</h5>
+                <p>All payments are processed through secure, encrypted gateways. We do not store payment information and use industry-standard security measures.</p>
+              </div>
+            </div>
+            <div className="mt-6 p-4 bg-yellow-900 bg-opacity-50 rounded-lg border border-yellow-700">
+              <p className="text-yellow-200 text-sm">
+                <strong>⚠️ Adult Content Notice:</strong> Some products may contain adult content. Must be 18+ to purchase. By using our services, you confirm you are of legal age in your jurisdiction.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Trust Badges */}
       <div className="bg-gray-800 py-8">
         <div className="container mx-auto px-4">
