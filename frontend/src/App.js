@@ -15,6 +15,8 @@ import AboutPage from './pages/AboutPage';
 import CheckoutPage from './pages/CheckoutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import TermsPage from './pages/TermsPage';
+import PrivacyPage from './pages/PrivacyPage';
 import AdminDashboard from './pages/AdminDashboard';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
