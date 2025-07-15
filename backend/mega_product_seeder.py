@@ -33,7 +33,7 @@ MEGA_PREMIUM_PRODUCTS = [
             "HDR Support",
             "Dolby Atmos Audio"
         ],
-        "image_url": "https://logos-world.net/wp-content/uploads/2020/04/Netflix-Logo.png",
+        "image_url": "https://img.icons8.com/color/480/netflix.png",
         "gallery_images": [],
         "is_featured": True,
         "is_bestseller": True,
