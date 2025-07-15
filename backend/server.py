@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 import json
 import jwt
 import bcrypt
+import uuid
 
 # Import models and database
 from models import *
