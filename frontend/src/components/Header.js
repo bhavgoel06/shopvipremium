@@ -27,7 +27,10 @@ const Header = () => {
     { name: 'Software & Tools', slug: 'software', icon: '💻' },
     { name: 'VPN & Security', slug: 'vpn', icon: '🔒' },
     { name: 'Professional', slug: 'professional', icon: '🎓' },
-    { name: 'Gaming', slug: 'gaming', icon: '🎮' }
+    { name: 'Education', slug: 'education', icon: '📚' },
+    { name: 'Gaming', slug: 'gaming', icon: '🎮' },
+    { name: 'Social Media', slug: 'social_media', icon: '💝' },
+    { name: 'Health & Fitness', slug: 'health', icon: '💪' }
   ];
 
   return (
