@@ -310,9 +310,16 @@ const HomePage = () => {
             <p className="text-gray-600">Hand-picked premium subscriptions at amazing prices</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+            {loading ? (
+              // Loading skeletons
+              Array(8).fill(0).map((_, index) => (
+                <ProductSkeleton key={index} />
+              ))
+            ) : (
+              featuredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))
+            )}
           </div>
           <div className="text-center mt-8">
             <Link
