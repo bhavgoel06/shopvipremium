@@ -44,6 +44,16 @@ const Header = () => {
               <div className="flex items-center space-x-4">
                 <span>⚡ Instant Delivery</span>
                 <span className="hidden md:inline">🔒 Secure Payments</span>
+                {/* Currency Switcher */}
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm">Currency:</span>
+                  <button
+                    onClick={() => switchCurrency(currency === 'USD' ? 'INR' : 'USD')}
+                    className="bg-white bg-opacity-20 text-white px-3 py-1 rounded-lg hover:bg-opacity-30 transition-colors text-sm font-medium"
+                  >
+                    {currency === 'USD' ? '🇺🇸 USD' : '🇮🇳 INR'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
