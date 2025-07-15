@@ -164,15 +164,15 @@ const ModernHomePage = () => {
     <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Cursor follower */}
       <motion.div
-        className="fixed w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-50 mix-blend-difference"
+        className="fixed w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-50 mix-blend-difference"
         animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
+          x: mousePosition.x - 8,
+          y: mousePosition.y - 8,
         }}
         transition={{
           type: "spring",
-          stiffness: 500,
-          damping: 28,
+          stiffness: 1000,
+          damping: 30,
         }}
       />
 
