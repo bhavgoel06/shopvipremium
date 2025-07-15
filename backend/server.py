@@ -1,13 +1,16 @@
 from fastapi import FastAPI, HTTPException, Depends, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from pathlib import Path
 import os
 import logging
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
+import jwt
+import bcrypt
 
 # Import models and database
 from models import *
