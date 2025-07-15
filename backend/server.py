@@ -107,6 +107,116 @@ async def analytics_middleware(request: Request, call_next):
 
 # Routes
 
+# Authentication Routes
+@app.post("/api/auth/register", response_model=AuthResponse)
+async def register_user(user_data: UserCreate):
+    """Register a new user"""
+    try:
+        # Check if user already exists
+        existing_user = await db.get_user_by_email(user_data.email)
+        if existing_user:
+            raise HTTPException(status_code=400, detail="User already exists")
+        
+        # Hash password
+        hashed_password = hash_password(user_data.password)
+        
+        # Create user
+        user = User(
+            id=generate_uuid(),
+            first_name=user_data.first_name,
+            last_name=user_data.last_name,
+            email=user_data.email,
+            password=hashed_password,
+            created_at=datetime.utcnow()
+        )
+        
+        created_user = await db.create_user(user)
+        
+        # Create access token
+        access_token = create_access_token(data={"sub": created_user.id})
+        
+        return AuthResponse(
+            success=True,
+            message="User registered successfully",
+            data=AuthData(
+                access_token=access_token,
+                token_type="bearer",
+                user=UserResponse(
+                    id=created_user.id,
+                    first_name=created_user.first_name,
+                    last_name=created_user.last_name,
+                    email=created_user.email,
+                    created_at=created_user.created_at
+                )
+            )
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error registering user: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/auth/login", response_model=AuthResponse)
+async def login_user(login_data: UserLogin):
+    """Login user"""
+    try:
+        # Get user by email
+        user = await db.get_user_by_email(login_data.email)
+        if not user:
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        
+        # Verify password
+        if not verify_password(login_data.password, user.password):
+            raise HTTPException(status_code=401, detail="Invalid credentials")
+        
+        # Create access token
+        access_token = create_access_token(data={"sub": user.id})
+        
+        return AuthResponse(
+            success=True,
+            message="Login successful",
+            data=AuthData(
+                access_token=access_token,
+                token_type="bearer",
+                user=UserResponse(
+                    id=user.id,
+                    first_name=user.first_name,
+                    last_name=user.last_name,
+                    email=user.email,
+                    created_at=user.created_at
+                )
+            )
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error logging in user: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/auth/me", response_model=UserResponse)
+async def get_current_user(current_user_id: str = Depends(verify_token)):
+    """Get current user info"""
+    try:
+        user = await db.get_user_by_id(current_user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        return UserResponse(
+            id=user.id,
+            first_name=user.first_name,
+            last_name=user.last_name,
+            email=user.email,
+            created_at=user.created_at
+        )
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting current user: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # Product Routes
 @app.get("/api/products", response_model=PaginatedResponse)
 async def get_products(
