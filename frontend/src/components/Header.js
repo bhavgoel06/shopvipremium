@@ -286,9 +286,6 @@ const Header = () => {
                 <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">
                   Contact
                 </Link>
-                <Link to="/admin" className="text-gray-700 hover:text-blue-600 transition-colors font-semibold">
-                  🛠️ Admin
-                </Link>
               </div>
             </div>
           </div>
