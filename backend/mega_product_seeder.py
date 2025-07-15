@@ -499,7 +499,7 @@ MEGA_PREMIUM_PRODUCTS = [
             "Lossless Audio",
             "Apple Integration"
         ],
-        "image_url": "https://www.apple.com/apple-music/",
+        "image_url": "https://img.icons8.com/color/480/apple-music.png",
         "gallery_images": [],
         "is_featured": True,
         "is_bestseller": True,
