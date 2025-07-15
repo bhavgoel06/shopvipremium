@@ -32,7 +32,7 @@ function App() {
     // Simulate initial loading
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
 
   if (loading) {
