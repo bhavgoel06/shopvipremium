@@ -174,14 +174,10 @@ const Footer = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h4 className="text-lg font-semibold text-white mb-4">Important Disclaimers</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-300">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-300">
               <div>
                 <h5 className="font-medium text-gray-200 mb-2">🔒 Account Security</h5>
                 <p>All subscriptions are genuine and legally obtained. We do not sell cracked, hacked, or stolen accounts. Your privacy and security are our top priorities.</p>
-              </div>
-              <div>
-                <h5 className="font-medium text-gray-200 mb-2">⚖️ Legal Compliance</h5>
-                <p>All products are resold in compliance with applicable laws and platform terms of service. We maintain proper licensing and authorization for all subscriptions.</p>
               </div>
               <div>
                 <h5 className="font-medium text-gray-200 mb-2">🛡️ Warranty & Support</h5>
