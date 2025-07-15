@@ -166,22 +166,7 @@ const ModernHomePage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Cursor follower - Desktop only */}
-      {window.innerWidth > 768 && (
-        <motion.div
-          className="fixed w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-50 mix-blend-difference"
-          animate={{
-            x: mousePosition.x - 6,
-            y: mousePosition.y - 6,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 2000,
-            damping: 50,
-            mass: 0.1,
-          }}
-        />
-      )}
+      {/* Remove cursor follower completely */}
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
