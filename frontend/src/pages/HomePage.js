@@ -20,6 +20,17 @@ const HomePage = () => {
     today_visitors: 0
   });
 
+  // Loading skeleton component
+  const ProductSkeleton = () => (
+    <div className="bg-white rounded-lg shadow-md p-4 animate-pulse">
+      <div className="loading-shimmer h-48 bg-gray-200 rounded-lg mb-4"></div>
+      <div className="loading-shimmer h-4 bg-gray-200 rounded mb-2"></div>
+      <div className="loading-shimmer h-3 bg-gray-200 rounded mb-3 w-3/4"></div>
+      <div className="loading-shimmer h-6 bg-gray-200 rounded mb-2 w-1/2"></div>
+      <div className="loading-shimmer h-8 bg-gray-200 rounded"></div>
+    </div>
+  );
+
   // Memoized hero content for better performance
   const heroContent = useMemo(() => ({
     title: "Premium Subscriptions at Unbeatable Prices",
