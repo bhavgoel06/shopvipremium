@@ -470,7 +470,7 @@ MEGA_PREMIUM_PRODUCTS = [
             "Podcast Access",
             "Multiple Device Support"
         ],
-        "image_url": "https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png",
+        "image_url": "https://img.icons8.com/color/480/spotify.png",
         "gallery_images": [],
         "is_featured": True,
         "is_bestseller": True,
