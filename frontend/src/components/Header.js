@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useCurrency } from '../context/CurrencyContext';
+import ProfessionalLogo from './ProfessionalLogo';
 import CartSidebar from './CartSidebar';
 
 const Header = () => {
