@@ -8,13 +8,6 @@ const ProductCard = ({ product, className = '' }) => {
   const { addToCart } = useCart();
   const { formatPrice } = useCurrency();
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-    }).format(price);
-  };
-
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
