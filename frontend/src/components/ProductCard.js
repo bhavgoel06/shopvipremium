@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { toast } from 'react-toastify';
 
 const ProductCard = ({ product, className = '' }) => {
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {
