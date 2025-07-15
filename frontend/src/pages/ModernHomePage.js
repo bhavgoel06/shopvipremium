@@ -417,16 +417,14 @@ const ModernHomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-gray-800 rounded-3xl overflow-hidden"
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse"
                 >
-                  <div className="aspect-w-16 aspect-h-9 bg-gray-700 animate-pulse">
-                    <div className="h-48 bg-gradient-to-r from-gray-700 to-gray-600 rounded-t-3xl" />
-                  </div>
+                  <div className="h-48 bg-gray-200" />
                   <div className="p-6 space-y-3">
-                    <div className="h-6 bg-gray-700 rounded animate-pulse" />
-                    <div className="h-4 bg-gray-700 rounded w-3/4 animate-pulse" />
-                    <div className="h-4 bg-gray-700 rounded w-1/2 animate-pulse" />
-                    <div className="h-10 bg-gray-700 rounded animate-pulse" />
+                    <div className="h-6 bg-gray-200 rounded" />
+                    <div className="h-4 bg-gray-200 rounded w-3/4" />
+                    <div className="h-4 bg-gray-200 rounded w-1/2" />
+                    <div className="h-10 bg-gray-200 rounded" />
                   </div>
                 </motion.div>
               ))
@@ -439,7 +437,7 @@ const ModernHomePage = () => {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <ProductCard product={product} className="bg-gray-800 border-gray-700 hover:border-gray-600 transition-all duration-300" />
+                  <ProductCard product={product} />
                 </motion.div>
               ))
             ) : (
