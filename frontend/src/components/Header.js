@@ -163,20 +163,9 @@ const Header = () => {
         {/* Main Header */}
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-lg">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M8 11v6a2 2 0 002 2h4a2 2 0 002-2v-6M8 11h8" />
-                  </svg>
-                </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full border-2 border-white"></div>
-              </div>
-              <div>
-                <span className="text-xl font-bold text-gray-800">Shop For Premium</span>
-                <div className="text-xs text-gray-500">Get More, Pay Less</div>
-              </div>
+            {/* Professional Logo */}
+            <Link to="/" className="flex items-center">
+              <ProfessionalLogo size="medium" />
             </Link>
 
             {/* Search Bar */}
