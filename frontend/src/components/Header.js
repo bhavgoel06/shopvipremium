@@ -11,6 +11,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { getCartItemsCount } = useCart();
   const { isAuthenticated, user, logout } = useAuth();
+  const { currency, switchCurrency } = useCurrency();
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
