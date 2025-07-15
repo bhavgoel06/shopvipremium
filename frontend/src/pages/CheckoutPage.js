@@ -213,18 +213,19 @@ const CheckoutPage = () => {
                       <input
                         type="radio"
                         name="paymentMethod"
-                        value="paypal"
-                        checked={formData.paymentMethod === 'paypal'}
+                        value="crypto"
+                        checked={formData.paymentMethod === 'crypto'}
                         onChange={handleInputChange}
                         className="mr-3"
                       />
                       <div className="flex items-center">
-                        <div className="text-blue-500 mr-2">
+                        <div className="text-yellow-500 mr-2">
                           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd"/>
+                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8.070 8.025 8.433 7.418zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.364.558 0 .8-.155.103-.346.196-.567.267z"/>
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-6-8a6 6 0 1112 0 6 6 0 01-12 0z" clipRule="evenodd"/>
                           </svg>
                         </div>
-                        <span>PayPal</span>
+                        <span>Cryptocurrency</span>
                       </div>
                     </label>
                   </div>
