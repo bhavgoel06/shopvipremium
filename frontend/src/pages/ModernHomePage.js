@@ -9,6 +9,7 @@ const ModernHomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [bestsellerProducts, setBestsellerProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [adultProducts, setAdultProducts] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef(null);
