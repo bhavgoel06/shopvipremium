@@ -124,9 +124,9 @@ const ProductCard = ({ product, className = '' }) => {
         </div>
 
         {/* Price Section */}
-        <div className="mb-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+        <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
               <span className="text-2xl font-bold text-gray-900">
                 {formatPrice(product.discounted_price)}
               </span>
@@ -137,10 +137,13 @@ const ProductCard = ({ product, className = '' }) => {
               )}
             </div>
             <div className="text-right">
-              <span className="text-sm font-medium text-green-600">
+              <span className="text-sm font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
                 Save {formatPrice(product.original_price - product.discounted_price)}
               </span>
             </div>
+          </div>
+          <div className="text-xs text-gray-500">
+            💰 Best price guaranteed • 🔒 Secure payment
           </div>
         </div>
 
