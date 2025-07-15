@@ -439,16 +439,26 @@ const HomePage = () => {
             <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4">
               <input
                 type="email"
-                name="email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="Enter your email address"
                 required
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                disabled={newsletterLoading}
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                disabled={newsletterLoading}
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Subscribe
+                {newsletterLoading ? (
+                  <span className="flex items-center">
+                    <div className="loading-spinner mr-2"></div>
+                    Subscribing...
+                  </span>
+                ) : (
+                  'Subscribe'
+                )}
               </button>
             </form>
             <p className="text-sm text-gray-400 mt-4">
