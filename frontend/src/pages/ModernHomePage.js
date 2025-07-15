@@ -280,7 +280,7 @@ const ModernHomePage = () => {
                 <div className="flex items-center gap-4 text-white">
                   <span className="text-lg">Prices in {currency}</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-3xl font-bold">{getCurrencySymbol()}99</span>
+                    <span className="text-3xl font-bold">{getCurrencySymbol()}5</span>
                     <span className="text-lg text-gray-300">starting from</span>
                   </div>
                 </div>
