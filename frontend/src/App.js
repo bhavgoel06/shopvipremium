@@ -29,11 +29,13 @@ import './App.css';
 function App() {
   const [loading, setLoading] = useState(true);
 
+  // Simulate initial loading
   useEffect(() => {
-    // Simulate initial loading
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 100); // Reduced to 100ms for faster loading
+    
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
