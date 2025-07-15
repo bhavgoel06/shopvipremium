@@ -180,15 +180,15 @@ const Header = () => {
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
               {/* Categories */}
-              <div className="hidden md:flex items-center space-x-8 py-4">
+              <div className="hidden lg:flex items-center space-x-6 py-4 overflow-x-auto">
                 {categories.map((category) => (
                   <Link
                     key={category.slug}
                     to={`/category/${category.slug}`}
-                    className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
+                    className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors whitespace-nowrap"
                   >
                     <span>{category.icon}</span>
-                    <span className="font-medium">{category.name}</span>
+                    <span className="font-medium text-sm">{category.name}</span>
                   </Link>
                 ))}
               </div>
