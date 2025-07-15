@@ -545,7 +545,200 @@ const ModernHomePage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Testimonials Section */}
+      <section className="relative py-24 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6">
+              What Our Users Say
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Join thousands of satisfied customers saving money on premium subscriptions
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah Johnson",
+                role: "Digital Marketing Manager",
+                content: "I've saved over $300 this year using Shop For Premium! The group subscriptions work perfectly and the service is incredibly reliable.",
+                rating: 5,
+                avatar: "💼",
+                date: "2 days ago"
+              },
+              {
+                name: "Michael Chen",
+                role: "Software Developer",
+                content: "Finally found a trustworthy platform for premium subscriptions. The Netflix and Spotify accounts work flawlessly. Highly recommended!",
+                rating: 5,
+                avatar: "👨‍💻",
+                date: "1 week ago"
+              },
+              {
+                name: "Emma Rodriguez",
+                role: "Content Creator",
+                content: "Game changer! I get access to all the creative tools I need at 70% less cost. The support team is amazing and delivery is instant.",
+                rating: 5,
+                avatar: "🎨",
+                date: "3 days ago"
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gray-800 rounded-2xl p-8 shadow-xl"
+              >
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-yellow-400 text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+                  "{testimonial.content}"
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-xl">
+                      {testimonial.avatar}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-white">{testimonial.name}</p>
+                      <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <div className="text-gray-500 text-sm">{testimonial.date}</div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Safety Section */}
+      <section className="relative py-24 bg-gradient-to-br from-blue-900 to-purple-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">
+              Trust & Safety
+            </h2>
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto">
+              Your security and satisfaction are our top priorities
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: "🔒",
+                title: "Secure Transactions",
+                description: "All payments are encrypted and processed through secure gateways. Your financial information is never stored."
+              },
+              {
+                icon: "🛡️",
+                title: "No Password Sharing",
+                description: "We never share your personal passwords. Each subscription is managed through secure, dedicated channels."
+              },
+              {
+                icon: "💰",
+                title: "Money Back Guarantee",
+                description: "30-day full refund policy. If you're not satisfied, we'll refund your money, no questions asked."
+              },
+              {
+                icon: "🚀",
+                title: "Instant Delivery",
+                description: "Get your subscriptions activated within minutes. Our automated system ensures immediate access to your services."
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/20 transition-all duration-300"
+              >
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                <p className="text-gray-200 text-sm leading-relaxed">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="relative py-24 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent mb-6">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to know about our service
+            </p>
+          </motion.div>
+
+          <div className="space-y-6">
+            {[
+              {
+                question: "How do group subscriptions work?",
+                answer: "We purchase family or group plans from official providers and share access with multiple users. Each user gets their own profile/account within the subscription, ensuring privacy and security."
+              },
+              {
+                question: "Are the subscriptions legal and safe?",
+                answer: "Yes, absolutely! We purchase legitimate family and group plans directly from official providers. All subscriptions are legal and comply with the terms of service of respective platforms."
+              },
+              {
+                question: "What if my subscription stops working?",
+                answer: "We provide 30-day warranty on all subscriptions. If your subscription stops working, we'll immediately provide a replacement or issue a full refund. Our support team is available 24/7."
+              },
+              {
+                question: "How quickly will I receive my subscription?",
+                answer: "Most subscriptions are delivered instantly after payment. In some cases, it may take up to 30 minutes. You'll receive all login details via WhatsApp or email."
+              },
+              {
+                question: "Can I change or cancel my subscription?",
+                answer: "Yes, you can request changes or cancellations within the first 30 days. We offer flexible terms and will work with you to find the best solution."
+              },
+              {
+                question: "Do you offer refunds?",
+                answer: "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with our service, we'll provide a full refund, no questions asked."
+              }
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl p-6 shadow-lg"
+              >
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{faq.question}</h3>
+                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="relative py-24 bg-gradient-to-r from-purple-900 via-blue-900 to-purple-900">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <motion.div
