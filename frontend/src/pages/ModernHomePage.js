@@ -60,53 +60,69 @@ const ModernHomePage = () => {
 
   // Categories data
   const categories = [
-    {
-      name: "OTT Platforms",
-      slug: "ott",
-      icon: "🎬",
-      description: "Netflix, Disney+, Amazon Prime",
-      gradient: "from-red-500 to-pink-500",
-      count: "25+ Services"
+    { 
+      name: 'OTT Platforms', 
+      slug: 'ott', 
+      icon: '📺',
+      gradient: 'from-red-500 to-red-700',
+      description: 'Netflix, Disney+, Amazon Prime',
+      count: '17+ platforms'
     },
-    {
-      name: "AI & Software",
-      slug: "software",
-      icon: "🤖",
-      description: "ChatGPT, Perplexity, Dev Tools",
-      gradient: "from-blue-500 to-cyan-500",
-      count: "30+ Tools"
+    { 
+      name: 'Software & Tools', 
+      slug: 'software', 
+      icon: '💻',
+      gradient: 'from-blue-500 to-blue-700',
+      description: 'Adobe, Microsoft, Canva',
+      count: '10+ tools'
     },
-    {
-      name: "Professional",
-      slug: "professional",
-      icon: "💼",
-      description: "LinkedIn, Career Tools",
-      gradient: "from-purple-500 to-indigo-500",
-      count: "15+ Services"
+    { 
+      name: 'VPN & Security', 
+      slug: 'vpn', 
+      icon: '🔒',
+      gradient: 'from-green-500 to-green-700',
+      description: 'NordVPN, ExpressVPN',
+      count: '4+ services'
     },
-    {
-      name: "Music & Audio",
-      slug: "music",
-      icon: "🎵",
-      description: "Spotify, Apple Music, YouTube",
-      gradient: "from-green-500 to-teal-500",
-      count: "10+ Platforms"
+    { 
+      name: 'Adult Content', 
+      slug: 'adult', 
+      icon: '🔞',
+      gradient: 'from-pink-500 to-red-700',
+      description: 'Premium adult subscriptions',
+      count: '11+ sites'
     },
-    {
-      name: "Education",
-      slug: "education",
-      icon: "📚",
-      description: "Courses, Certifications",
-      gradient: "from-orange-500 to-red-500",
-      count: "20+ Courses"
+    { 
+      name: 'Education', 
+      slug: 'education', 
+      icon: '📚',
+      gradient: 'from-yellow-500 to-orange-700',
+      description: 'Coursera, Udemy, LeetCode',
+      count: '4+ platforms'
     },
-    {
-      name: "Social & Dating",
-      slug: "social",
-      icon: "💝",
-      description: "Tinder, Premium Features",
-      gradient: "from-pink-500 to-rose-500",
-      count: "8+ Apps"
+    { 
+      name: 'Gaming', 
+      slug: 'gaming', 
+      icon: '🎮',
+      gradient: 'from-purple-500 to-purple-700',
+      description: 'Steam, Epic Games',
+      count: '2+ stores'
+    },
+    { 
+      name: 'Social Media', 
+      slug: 'social_media', 
+      icon: '💝',
+      gradient: 'from-pink-500 to-purple-700',
+      description: 'Tinder, Bumble',
+      count: '3+ apps'
+    },
+    { 
+      name: 'Professional', 
+      slug: 'professional', 
+      icon: '🎓',
+      gradient: 'from-indigo-500 to-blue-700',
+      description: 'LinkedIn, Business tools',
+      count: '2+ services'
     }
   ];
 
