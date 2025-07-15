@@ -6,8 +6,8 @@ from models import *
 
 class Database:
     def __init__(self):
-        self.client = AsyncIOMotorClient(os.environ['MONGO_URL'])
-        self.db = self.client[os.environ['DB_NAME']]
+        self.client = AsyncIOMotorClient(os.environ.get('MONGO_URL', 'mongodb://localhost:27017'))
+        self.db = self.client[os.environ.get('DB_NAME', 'premium_shop')]
         
     async def close(self):
         self.client.close()
