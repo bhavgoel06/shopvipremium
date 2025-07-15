@@ -1,0 +1,71 @@
+{
+  "homepage": {
+    "hero": {
+      "title": "Premium Subscriptions at Unbeatable Prices",
+      "subtitle": "Save up to 70% on Netflix, Adobe, Microsoft Office, VPNs, and more premium services. Instant delivery, genuine accounts, 24/7 support.",
+      "primary_button": "Browse All Deals",
+      "secondary_button": "OTT Platforms"
+    },
+    "stats": {
+      "products_label": "Premium Products",
+      "customers_label": "Happy Customers", 
+      "savings_label": "Max Savings",
+      "support_label": "Support Available"
+    },
+    "features": {
+      "title": "Why Choose Premium Shop?",
+      "subtitle": "We make premium subscriptions accessible to everyone",
+      "items": [
+        {
+          "icon": "⚡",
+          "title": "Instant Delivery",
+          "description": "Get your subscription details instantly via WhatsApp or email"
+        },
+        {
+          "icon": "🔒",
+          "title": "100% Secure",
+          "description": "SSL encrypted payments and secure checkout process"
+        },
+        {
+          "icon": "💰",
+          "title": "Best Prices",
+          "description": "Save up to 70% on premium subscription services"
+        },
+        {
+          "icon": "🎯",
+          "title": "Genuine Accounts",
+          "description": "All subscriptions are 100% genuine and legally obtained"
+        },
+        {
+          "icon": "📞",
+          "title": "24/7 Support",
+          "description": "Round-the-clock customer support via WhatsApp and email"
+        },
+        {
+          "icon": "✅",
+          "title": "Money Back Guarantee",
+          "description": "30-day money-back guarantee if not satisfied"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team for any questions or support",
+    "email": "support@shopforpremium.com",
+    "phone": "+1 (555) 123-4567",
+    "whatsapp": "+1 (555) 123-4567",
+    "business_hours": "24/7 Support Available"
+  },
+  "about": {
+    "title": "About Premium Shop",
+    "subtitle": "We're on a mission to make premium digital subscriptions accessible to everyone. Since 2020, we've helped thousands of customers save money on their favorite services.",
+    "mission": "To make premium digital subscriptions accessible to everyone at affordable prices while maintaining the highest quality standards.",
+    "vision": "To become the world's most trusted platform for discounted premium subscriptions, helping millions save money on digital services."
+  },
+  "footer": {
+    "company_description": "Your trusted source for premium subscriptions at unbeatable prices. We offer genuine accounts with instant delivery and 24/7 support.",
+    "newsletter_title": "Stay Updated with Latest Deals",
+    "newsletter_subtitle": "Subscribe to our newsletter and never miss exclusive discounts on premium subscriptions"
+  }
+}
