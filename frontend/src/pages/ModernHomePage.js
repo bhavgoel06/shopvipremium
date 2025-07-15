@@ -114,17 +114,19 @@ const ModernHomePage = () => {
     fetchHomeData();
   }, []);
 
-  // Mouse movement tracking
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (window.innerWidth > 768) { // Only on desktop
-        setMousePosition({ x: e.clientX, y: e.clientY });
-      }
-    };
+  // Remove mouse tracking - not needed
+  // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // Remove mouse movement tracking
+  // useEffect(() => {
+  //   const handleMouseMove = (e) => {
+  //     if (window.innerWidth > 768) {
+  //       setMousePosition({ x: e.clientX, y: e.clientY });
+  //     }
+  //   };
+  //   window.addEventListener('mousemove', handleMouseMove);
+  //   return () => window.removeEventListener('mousemove', handleMouseMove);
+  // }, []);
 
   // Auto-slide effect
   useEffect(() => {
