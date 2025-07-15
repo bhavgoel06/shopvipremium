@@ -107,6 +107,7 @@ class User(BaseModel):
     first_name: str
     last_name: str
     phone: Optional[str] = None
+    password: str
     is_active: bool = True
     is_admin: bool = False
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -122,6 +123,26 @@ class UserCreate(BaseModel):
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class UserResponse(BaseModel):
+    id: str
+    email: str
+    first_name: str
+    last_name: str
+    phone: Optional[str] = None
+    is_active: bool = True
+    is_admin: bool = False
+    created_at: datetime
+
+class AuthData(BaseModel):
+    access_token: str
+    token_type: str
+    user: UserResponse
+
+class AuthResponse(BaseModel):
+    success: bool
+    message: str
+    data: AuthData
 
 # Order Models
 class OrderItem(BaseModel):
