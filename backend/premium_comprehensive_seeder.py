@@ -816,30 +816,76 @@ PREMIUM_PRODUCTS = [
 ]
 
 # Generate comprehensive reviews for each product
-def generate_reviews(product_name, rating, num_reviews):
+def generate_reviews(product_id, product_name, rating, num_reviews):
     reviews = []
     review_templates = [
-        "Excellent service! {} exceeded my expectations. Fast delivery and genuine subscription.",
-        "Amazing value for money! {} is working perfectly and the setup was instant.",
-        "Great quality subscription for {}. Highly recommend this seller - very professional.",
-        "Perfect experience with {}. Delivered immediately and works exactly as described.",
-        "Outstanding service! {} subscription is authentic and the price is unbeatable.",
-        "Fantastic deal on {}! Quick delivery and excellent customer support.",
-        "Superb quality for {}. The subscription is genuine and works flawlessly.",
-        "Incredible value! {} is working great and the service was professional.",
-        "Top-notch service for {}. Fast, reliable, and exactly what I needed.",
-        "Excellent purchase! {} delivered instantly and quality is premium."
+        {
+            "title": "Excellent service!",
+            "content": f"{product_name} exceeded my expectations. Fast delivery and genuine subscription. Highly recommend!"
+        },
+        {
+            "title": "Amazing value for money!",
+            "content": f"{product_name} is working perfectly and the setup was instant. Great deal!"
+        },
+        {
+            "title": "Great quality subscription",
+            "content": f"Perfect experience with {product_name}. Professional seller and authentic product."
+        },
+        {
+            "title": "Perfect experience!",
+            "content": f"{product_name} delivered immediately and works exactly as described. Outstanding!"
+        },
+        {
+            "title": "Outstanding service!",
+            "content": f"{product_name} subscription is authentic and the price is unbeatable. Fantastic!"
+        },
+        {
+            "title": "Fantastic deal!",
+            "content": f"Quick delivery and excellent customer support for {product_name}. Superb quality!"
+        },
+        {
+            "title": "Superb quality!",
+            "content": f"The {product_name} subscription is genuine and works flawlessly. Incredible value!"
+        },
+        {
+            "title": "Incredible value!",
+            "content": f"{product_name} is working great and the service was professional. Top-notch!"
+        },
+        {
+            "title": "Top-notch service!",
+            "content": f"Fast, reliable, and exactly what I needed with {product_name}. Excellent purchase!"
+        },
+        {
+            "title": "Excellent purchase!",
+            "content": f"{product_name} delivered instantly and quality is premium. Highly satisfied!"
+        }
     ]
     
+    # Generate user names
+    user_names = [
+        "Rajesh Kumar", "Priya Sharma", "Amit Patel", "Neha Singh", "Vikram Gupta",
+        "Anjali Verma", "Rohit Jain", "Kavya Reddy", "Arjun Mehta", "Sonia Agarwal",
+        "Rahul Singh", "Divya Sharma", "Karan Patel", "Riya Gupta", "Suresh Kumar"
+    ]
+    
+    # Create reviews
     for i in range(min(num_reviews, len(review_templates))):
-        review_text = review_templates[i].format(product_name)
+        template = review_templates[i]
+        user_name = user_names[i % len(user_names)]
+        
+        # Convert float rating to int
+        int_rating = int(rating)
+        
         reviews.append(Review(
             id=generate_uuid(),
-            product_name=product_name,
-            customer_name=f"Customer{i+1}",
-            rating=rating,
-            review_text=review_text,
-            verified_purchase=True,
+            product_id=product_id,
+            user_id=generate_uuid(),
+            user_name=user_name,
+            rating=int_rating,
+            title=template["title"],
+            content=template["content"],
+            is_verified=True,
+            is_approved=True,
             created_at=datetime.utcnow()
         ))
     
