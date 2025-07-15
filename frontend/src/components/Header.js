@@ -70,7 +70,7 @@ const Header = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">Premium Shop</h1>
+                <h1 className="text-2xl font-bold text-gray-800">Shop For Premium</h1>
                 <p className="text-sm text-gray-600">Get More, Pay Less</p>
               </div>
             </Link>
