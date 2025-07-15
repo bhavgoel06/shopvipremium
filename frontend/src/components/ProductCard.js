@@ -158,13 +158,13 @@ const ProductCard = ({ product, className = '' }) => {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-3">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
             disabled={product.stock_quantity === 0}
-            className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
+            className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-300 text-center ${
               product.stock_quantity > 0
                 ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700'
                 : 'bg-gray-600 text-gray-400 cursor-not-allowed'
@@ -174,9 +174,9 @@ const ProductCard = ({ product, className = '' }) => {
           </motion.button>
           <Link
             to={`/products/${product.slug}`}
-            className="px-4 py-3 border border-gray-600 rounded-xl text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
+            className="sm:w-auto w-full text-center px-4 py-3 border border-gray-600 rounded-xl text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300"
           >
-            👁️
+            👁️ View Details
           </Link>
         </div>
       </div>
