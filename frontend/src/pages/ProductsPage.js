@@ -152,20 +152,20 @@ const ProductsPage = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Price Range
                 </label>
-                <div className="flex space-x-2">
+                <div className="grid grid-cols-2 gap-2">
                   <input
                     type="number"
                     placeholder="Min"
                     value={filters.min_price}
                     onChange={(e) => handleFilterChange('min_price', e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                   <input
                     type="number"
                     placeholder="Max"
                     value={filters.max_price}
                     onChange={(e) => handleFilterChange('max_price', e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   />
                 </div>
               </div>
