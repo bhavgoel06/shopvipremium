@@ -23,15 +23,70 @@ const Header = () => {
   };
 
   const categories = [
-    { name: 'OTT Platforms', slug: 'ott', icon: '📺' },
-    { name: 'Software & Tools', slug: 'software', icon: '💻' },
-    { name: 'VPN & Security', slug: 'vpn', icon: '🔒' },
-    { name: 'Professional', slug: 'professional', icon: '🎓' },
-    { name: 'Education', slug: 'education', icon: '📚' },
-    { name: 'Gaming', slug: 'gaming', icon: '🎮' },
-    { name: 'Social Media', slug: 'social_media', icon: '💝' },
-    { name: 'Health & Fitness', slug: 'health', icon: '💪' },
-    { name: 'Adult Content', slug: 'adult', icon: '🔞' }
+    { 
+      name: 'OTT Platforms', 
+      slug: 'ott', 
+      icon: '📺',
+      gradient: 'from-red-500 to-red-700',
+      description: 'Netflix, Disney+, Amazon Prime',
+      count: '17+ platforms'
+    },
+    { 
+      name: 'Software & Tools', 
+      slug: 'software', 
+      icon: '💻',
+      gradient: 'from-blue-500 to-blue-700',
+      description: 'Adobe, Microsoft, Canva',
+      count: '10+ tools'
+    },
+    { 
+      name: 'VPN & Security', 
+      slug: 'vpn', 
+      icon: '🔒',
+      gradient: 'from-green-500 to-green-700',
+      description: 'NordVPN, ExpressVPN',
+      count: '4+ services'
+    },
+    { 
+      name: 'Adult Content', 
+      slug: 'adult', 
+      icon: '🔞',
+      gradient: 'from-pink-500 to-red-700',
+      description: 'Premium adult subscriptions',
+      count: '11+ sites'
+    },
+    { 
+      name: 'Education', 
+      slug: 'education', 
+      icon: '📚',
+      gradient: 'from-yellow-500 to-orange-700',
+      description: 'Coursera, Udemy, LeetCode',
+      count: '4+ platforms'
+    },
+    { 
+      name: 'Gaming', 
+      slug: 'gaming', 
+      icon: '🎮',
+      gradient: 'from-purple-500 to-purple-700',
+      description: 'Steam, Epic Games',
+      count: '2+ stores'
+    },
+    { 
+      name: 'Social Media', 
+      slug: 'social_media', 
+      icon: '💝',
+      gradient: 'from-pink-500 to-purple-700',
+      description: 'Tinder, Bumble',
+      count: '3+ apps'
+    },
+    { 
+      name: 'Professional', 
+      slug: 'professional', 
+      icon: '🎓',
+      gradient: 'from-indigo-500 to-blue-700',
+      description: 'LinkedIn, Business tools',
+      count: '2+ services'
+    }
   ];
 
   return (
