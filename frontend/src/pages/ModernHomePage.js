@@ -117,7 +117,9 @@ const ModernHomePage = () => {
   // Mouse movement tracking
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (window.innerWidth > 768) { // Only on desktop
+        setMousePosition({ x: e.clientX, y: e.clientY });
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
