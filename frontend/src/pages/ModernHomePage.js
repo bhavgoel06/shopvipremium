@@ -278,29 +278,56 @@ const ModernHomePage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+                className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8"
               >
                 <Link
-                  to={currentSlideData.ctaLink}
-                  className="group relative px-8 py-4 bg-white text-black rounded-full font-semibold text-lg overflow-hidden transition-all duration-300 hover:scale-105"
+                  to="/products"
+                  className="px-10 py-4 bg-white text-gray-900 rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-lg flex items-center gap-2"
                 >
-                  <span className="relative z-10">{currentSlideData.cta}</span>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500"
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileHover={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Start Your Subscription
                 </Link>
-                
-                <div className="flex items-center gap-4 text-white">
-                  <span className="text-lg">Prices in {currency}</span>
+                <Link
+                  to="/products"
+                  className="px-10 py-4 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center gap-2"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  Browse Available Subscriptions
+                </Link>
+              </motion.div>
+
+              {/* Social Proof */}
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex items-center gap-6 text-sm text-gray-200">
                   <div className="flex items-center gap-2">
-                    <span className="text-3xl font-bold">{getCurrencySymbol()}5</span>
-                    <span className="text-lg text-gray-300">starting from</span>
+                    <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                    </svg>
+                    <span>Trusted by 10,000+ users</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd"/>
+                    </svg>
+                    <span>Secured with SSL</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <span>4.8/5 Rating</span>
                   </div>
                 </div>
-              </motion.div>
+                <div className="text-center">
+                  <span className="text-lg text-gray-200">Prices in {currency}</span>
+                  <div className="text-4xl font-bold text-white">{getCurrencySymbol()}5</div>
+                  <span className="text-sm text-gray-300">starting from</span>
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
