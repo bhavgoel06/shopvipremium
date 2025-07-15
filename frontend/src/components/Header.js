@@ -85,6 +85,24 @@ const Header = () => {
           </div>
         </div>
 
+        {/* Running Disclaimer */}
+        <div className="bg-yellow-500 text-black py-1 overflow-hidden">
+          <div className="animate-marquee whitespace-nowrap">
+            <span className="text-sm font-medium">
+              🎯 Looking for any other software/subscription/product/license key? Contact us on Telegram for instant support: 
+              <a 
+                href="https://t.me/shopforpremium" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="underline hover:text-blue-800 ml-1 font-semibold"
+              >
+                @shopforpremium
+              </a>
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🔥 Custom orders available • Best prices guaranteed • Instant delivery
+            </span>
+          </div>
+        </div>
+
         {/* Main Header */}
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
