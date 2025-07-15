@@ -139,11 +139,11 @@ const Footer = () => {
             <div>
               <h4 className="text-lg font-semibold mb-6">Support</h4>
               <ul className="space-y-3">
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Refund Policy</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Help Center</Link></li>
+                <li><Link to="/terms" className="text-gray-400 hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Refund Policy</Link></li>
+                <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">FAQ</Link></li>
               </ul>
               
               <div className="mt-6">
