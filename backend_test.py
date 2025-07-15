@@ -479,9 +479,9 @@ class BackendTester:
                     reviews_valid = 0
                     
                     for product in products:
-                        if 'rating' in product and 'reviews_count' in product:
+                        if 'rating' in product and 'total_reviews' in product:
                             rating = float(product['rating'])
-                            reviews_count = int(product['reviews_count'])
+                            reviews_count = int(product['total_reviews'])
                             
                             if 4.0 <= rating <= 5.0 and reviews_count > 0:
                                 reviews_valid += 1
