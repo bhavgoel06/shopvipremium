@@ -327,7 +327,7 @@ const ModernHomePage = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="relative py-24 bg-gray-900">
+      <section className="relative py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -335,15 +335,15 @@ const ModernHomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6">
-              Explore Categories
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent mb-6">
+              Choose Categories
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Discover premium subscriptions across all major platforms
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => (
               <motion.div
                 key={category.slug}
@@ -355,26 +355,68 @@ const ModernHomePage = () => {
                 className="group cursor-pointer"
               >
                 <Link to={`/category/${category.slug}`}>
-                  <div className={`relative p-10 rounded-3xl bg-gradient-to-br ${category.gradient} overflow-hidden`}>
+                  <div className={`relative p-8 rounded-2xl bg-gradient-to-br ${category.gradient} overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300`}>
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all duration-300" />
-                    <div className="relative z-10">
-                      <div className="text-5xl mb-6">{category.icon}</div>
-                      <h3 className="text-2xl font-bold text-white mb-3">{category.name}</h3>
-                      <p className="text-white/80 mb-6">{category.description}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-white/60 text-lg">{category.count}</span>
-                        <motion.div
-                          className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          <span className="text-white text-xl">→</span>
-                        </motion.div>
+                    <div className="relative z-10 text-center">
+                      <div className="text-4xl mb-4">{category.icon}</div>
+                      <h3 className="text-xl font-bold text-white mb-2">{category.name}</h3>
+                      <p className="text-white/80 text-sm mb-4">{category.description}</p>
+                      <div className="flex items-center justify-center">
+                        <span className="text-white/90 text-sm">{category.count}</span>
                       </div>
                     </div>
                   </div>
                 </Link>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Adult Content Section */}
+      <section className="relative py-24 bg-gradient-to-r from-red-900 via-pink-900 to-purple-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">
+              Adult Content
+            </h2>
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-6">
+              Premium adult subscriptions with instant access
+            </p>
+            <div className="bg-yellow-900 bg-opacity-50 rounded-lg p-4 max-w-lg mx-auto">
+              <p className="text-yellow-200 text-sm">
+                <strong>⚠️ 18+ Only:</strong> Must be 18 or older to access adult content
+              </p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {loading ? (
+              Array(8).fill(0).map((_, index) => (
+                <div key={index} className="bg-white/10 rounded-2xl p-6 animate-pulse">
+                  <div className="h-32 bg-white/20 rounded mb-4" />
+                  <div className="h-4 bg-white/20 rounded mb-2" />
+                  <div className="h-3 bg-white/20 rounded w-2/3" />
+                </div>
+              ))
+            ) : (
+              adultProducts.map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <ProductCard product={product} />
+                </motion.div>
+              ))
+            )}
           </div>
         </div>
       </section>
