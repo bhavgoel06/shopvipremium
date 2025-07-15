@@ -680,6 +680,159 @@ async def get_categories():
         logger.error(f"Error getting categories: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+# Admin Stock Management Routes
+@app.post("/api/admin/stock/set-all-out-of-stock")
+async def set_all_out_of_stock(current_user_id: str = Depends(verify_token)):
+    """Set all products to out of stock"""
+    try:
+        result = await db.db.products.update_many(
+            {},
+            {
+                "$set": {
+                    "stock_quantity": 0,
+                    "status": ProductStatus.OUT_OF_STOCK.value,
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+        return {
+            "success": True,
+            "message": f"Successfully set {result.modified_count} products to out of stock",
+            "data": {"updated_count": result.modified_count}
+        }
+    except Exception as e:
+        logger.error(f"Error setting all products out of stock: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/admin/stock/set-all-in-stock")
+async def set_all_in_stock(
+    default_stock: int = 100,
+    current_user_id: str = Depends(verify_token)
+):
+    """Set all products to in stock with default quantity"""
+    try:
+        result = await db.db.products.update_many(
+            {},
+            {
+                "$set": {
+                    "stock_quantity": default_stock,
+                    "status": ProductStatus.ACTIVE.value,
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+        return {
+            "success": True,
+            "message": f"Successfully set {result.modified_count} products to in stock",
+            "data": {"updated_count": result.modified_count, "default_stock": default_stock}
+        }
+    except Exception as e:
+        logger.error(f"Error setting all products in stock: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/admin/stock/set-product-stock")
+async def set_product_stock(
+    product_id: str,
+    stock_quantity: int,
+    current_user_id: str = Depends(verify_token)
+):
+    """Set stock for a specific product"""
+    try:
+        status = ProductStatus.ACTIVE if stock_quantity > 0 else ProductStatus.OUT_OF_STOCK
+        result = await db.db.products.update_one(
+            {"id": product_id},
+            {
+                "$set": {
+                    "stock_quantity": stock_quantity,
+                    "status": status.value,
+                    "updated_at": datetime.utcnow()
+                }
+            }
+        )
+        
+        if result.modified_count > 0:
+            return {
+                "success": True,
+                "message": f"Successfully updated stock for product {product_id}",
+                "data": {"product_id": product_id, "stock_quantity": stock_quantity}
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Product not found")
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error setting product stock: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/stock/overview")
+async def get_stock_overview(current_user_id: str = Depends(verify_token)):
+    """Get stock overview for all products"""
+    try:
+        pipeline = [
+            {
+                "$group": {
+                    "_id": None,
+                    "total_products": {"$sum": 1},
+                    "in_stock": {
+                        "$sum": {
+                            "$cond": [{"$gt": ["$stock_quantity", 0]}, 1, 0]
+                        }
+                    },
+                    "out_of_stock": {
+                        "$sum": {
+                            "$cond": [{"$eq": ["$stock_quantity", 0]}, 1, 0]
+                        }
+                    },
+                    "total_stock_units": {"$sum": "$stock_quantity"}
+                }
+            }
+        ]
+        
+        result = await db.db.products.aggregate(pipeline).to_list(length=1)
+        if result:
+            data = result[0]
+            data.pop('_id', None)
+            return {
+                "success": True,
+                "message": "Stock overview retrieved successfully",
+                "data": data
+            }
+        else:
+            return {
+                "success": True,
+                "message": "Stock overview retrieved successfully",
+                "data": {
+                    "total_products": 0,
+                    "in_stock": 0,
+                    "out_of_stock": 0,
+                    "total_stock_units": 0
+                }
+            }
+    except Exception as e:
+        logger.error(f"Error getting stock overview: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/stock/low-stock")
+async def get_low_stock_products(
+    threshold: int = 10,
+    current_user_id: str = Depends(verify_token)
+):
+    """Get products with low stock"""
+    try:
+        cursor = db.db.products.find(
+            {"stock_quantity": {"$lte": threshold, "$gt": 0}},
+            {"id": 1, "name": 1, "stock_quantity": 1, "category": 1, "discounted_price": 1}
+        )
+        products = await cursor.to_list(length=100)
+        return {
+            "success": True,
+            "message": f"Found {len(products)} products with low stock",
+            "data": products
+        }
+    except Exception as e:
+        logger.error(f"Error getting low stock products: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # Newsletter Routes
 @app.post("/api/newsletter", response_model=ProductResponse)
 async def subscribe_newsletter(newsletter: NewsletterCreate):
