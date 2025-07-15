@@ -58,7 +58,7 @@ function App() {
               <Header />
               <main className="min-h-screen">
                 <Routes>
-                  <Route path="/" element={<HomePage />} />
+                  <Route path="/" element={<ModernHomePage />} />
                   <Route path="/products" element={<ProductsPage />} />
                   <Route path="/products/:slug" element={<ProductDetailPage />} />
                   <Route path="/category/:category" element={<CategoryPage />} />
