@@ -924,7 +924,7 @@ async def seed_comprehensive_products():
             await db.db.products.insert_one(product.dict())
             
             # Generate and insert reviews
-            reviews = generate_reviews(product_data["name"], product_data["rating"], product_data["total_reviews"])
+            reviews = generate_reviews(product.id, product_data["name"], product_data["rating"], min(product_data["total_reviews"], 10))
             for review in reviews:
                 await db.db.reviews.insert_one(review.dict())
             
