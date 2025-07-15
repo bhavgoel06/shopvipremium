@@ -407,14 +407,25 @@ const ModernHomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {loading ? (
               Array(12).fill(0).map((_, index) => (
-                <div key={index} className="bg-gray-800 rounded-3xl p-6 animate-pulse">
-                  <div className="h-48 bg-gray-700 rounded-xl mb-4" />
-                  <div className="h-6 bg-gray-700 rounded mb-2" />
-                  <div className="h-4 bg-gray-700 rounded w-3/4 mb-4" />
-                  <div className="h-10 bg-gray-700 rounded" />
-                </div>
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-gray-800 rounded-3xl overflow-hidden"
+                >
+                  <div className="aspect-w-16 aspect-h-9 bg-gray-700 animate-pulse">
+                    <div className="h-48 bg-gradient-to-r from-gray-700 to-gray-600 rounded-t-3xl" />
+                  </div>
+                  <div className="p-6 space-y-3">
+                    <div className="h-6 bg-gray-700 rounded animate-pulse" />
+                    <div className="h-4 bg-gray-700 rounded w-3/4 animate-pulse" />
+                    <div className="h-4 bg-gray-700 rounded w-1/2 animate-pulse" />
+                    <div className="h-10 bg-gray-700 rounded animate-pulse" />
+                  </div>
+                </motion.div>
               ))
-            ) : (
+            ) : featuredProducts.length > 0 ? (
               featuredProducts.map((product, index) => (
                 <motion.div
                   key={product.id}
@@ -426,6 +437,12 @@ const ModernHomePage = () => {
                   <ProductCard product={product} className="bg-gray-800 border-gray-700 hover:border-gray-600 transition-all duration-300" />
                 </motion.div>
               ))
+            ) : (
+              <div className="col-span-full text-center py-16">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-2xl font-bold text-gray-300 mb-2">No Products Found</h3>
+                <p className="text-gray-400">Please check back later for featured products.</p>
+              </div>
             )}
           </div>
 
