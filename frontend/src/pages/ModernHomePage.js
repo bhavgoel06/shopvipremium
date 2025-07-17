@@ -449,7 +449,7 @@ const ModernHomePage = () => {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <ProductCard product={product} />
+                  <ModernProductCard product={product} />
                 </motion.div>
               ))
             )}
