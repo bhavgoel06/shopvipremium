@@ -14,74 +14,80 @@ const ProfessionalLogo = ({ className = '', size = 'medium' }) => {
       {/* Professional Logo Icon */}
       <div className={`${currentSize.container} relative`}>
         <svg 
-          viewBox="0 0 100 100" 
+          viewBox="0 0 120 120" 
           className="w-full h-full"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Background Circle with Gradient */}
           <defs>
-            <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#4F46E5', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#7C3AED', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#EC4899', stopOpacity: 1}} />
+            <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#667eea', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#764ba2', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#f093fb', stopOpacity: 1}} />
             </linearGradient>
             
-            <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#F1F5F9', stopOpacity: 1}} />
+            <linearGradient id="secondaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#4facfe', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#00f2fe', stopOpacity: 1}} />
             </linearGradient>
             
-            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-              <feOffset dx="2" dy="2" result="offset"/>
-              <feComponentTransfer>
-                <feFuncA type="linear" slope="0.3"/>
-              </feComponentTransfer>
-              <feMerge> 
-                <feMergeNode/>
-                <feMergeNode in="SourceGraphic"/> 
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
           </defs>
           
-          {/* Main Circle */}
-          <circle cx="50" cy="50" r="48" fill="url(#bgGradient)" filter="url(#shadow)"/>
+          {/* Background Circle */}
+          <circle cx="60" cy="60" r="55" fill="url(#primaryGradient)" filter="url(#glow)"/>
           
-          {/* Inner Circle */}
-          <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1"/>
+          {/* Inner Ring */}
+          <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2"/>
           
-          {/* Shopping Cart Icon */}
-          <g transform="translate(25, 25) scale(0.8)">
+          {/* Modern Shopping Bag Icon */}
+          <g transform="translate(60, 60) scale(1.2)">
             <path 
-              d="M7 4V2C7 1.45 7.45 1 8 1H9C9.55 1 10 1.45 10 2V4H20L18 12H9L7 4Z" 
-              fill="url(#iconGradient)"
-              stroke="rgba(255,255,255,0.5)"
-              strokeWidth="0.5"
+              d="M-15 -10 L15 -10 L12 20 L-12 20 Z" 
+              fill="rgba(255,255,255,0.95)"
+              stroke="rgba(255,255,255,0.8)"
+              strokeWidth="1"
+              rx="2"
             />
+            
+            {/* Bag Handles */}
             <path 
-              d="M10 12V14C10 14.55 10.45 15 11 15H17C17.55 15 18 14.55 18 14V12" 
-              fill="url(#iconGradient)"
+              d="M-8 -10 L-8 -16 C-8 -18 -6 -20 -4 -20 L4 -20 C6 -20 8 -18 8 -16 L8 -10" 
+              fill="none"
+              stroke="rgba(255,255,255,0.9)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
             />
-            <circle cx="11" cy="18" r="1.5" fill="url(#iconGradient)"/>
-            <circle cx="17" cy="18" r="1.5" fill="url(#iconGradient)"/>
+            
+            {/* Premium Star */}
+            <g transform="translate(8, -12) scale(0.8)">
+              <path 
+                d="M0 -6 L1.8 -1.8 L6 -1.8 L2.4 1.2 L4.2 6 L0 3 L-4.2 6 L-2.4 1.2 L-6 -1.8 L-1.8 -1.8 Z"
+                fill="#FFD700"
+                stroke="#FFA500"
+                strokeWidth="0.5"
+              />
+            </g>
           </g>
           
-          {/* Premium Badge */}
-          <g transform="translate(65, 15)">
-            <circle cx="8" cy="8" r="6" fill="#FCD34D"/>
-            <path d="M5 8L7 10L11 6" stroke="#92400E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </g>
-          
-          {/* Sparkle Effects */}
-          <g opacity="0.8">
-            <circle cx="20" cy="30" r="1" fill="#FFFFFF">
-              <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+          {/* Floating Elements */}
+          <g opacity="0.6">
+            <circle cx="25" cy="35" r="2" fill="#FFFFFF">
+              <animate attributeName="cy" values="35;25;35" dur="3s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="75" cy="45" r="1.5" fill="#FFFFFF">
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+            <circle cx="95" cy="45" r="1.5" fill="#FFFFFF">
+              <animate attributeName="cy" values="45;35;45" dur="4s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
             </circle>
-            <circle cx="30" cy="70" r="1" fill="#FFFFFF">
-              <animate attributeName="opacity" values="0.4;1;0.4" dur="2.5s" repeatCount="indefinite"/>
+            <circle cx="30" cy="85" r="1.8" fill="#FFFFFF">
+              <animate attributeName="cy" values="85;75;85" dur="3.5s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite"/>
             </circle>
           </g>
         </svg>
