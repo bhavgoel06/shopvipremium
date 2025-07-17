@@ -20,39 +20,69 @@ const ModernProductCard = ({ product }) => {
     console.log('Added to cart:', product.name);
   };
   
+  const getProductImage = () => {
+    if (product.image_url && product.image_url !== 'https://via.placeholder.com/300x200') {
+      return product.image_url;
+    }
+    
+    // Use product name to get better placeholder
+    const productName = product.name.toLowerCase();
+    if (productName.includes('netflix')) return 'https://logos-world.net/wp-content/uploads/2020/04/Netflix-Logo.png';
+    if (productName.includes('spotify')) return 'https://logos-world.net/wp-content/uploads/2020/06/Spotify-Logo.png';
+    if (productName.includes('amazon')) return 'https://logos-world.net/wp-content/uploads/2020/04/Amazon-Logo.png';
+    if (productName.includes('disney')) return 'https://logos-world.net/wp-content/uploads/2020/11/Disney-Logo.png';
+    if (productName.includes('youtube')) return 'https://logos-world.net/wp-content/uploads/2020/04/YouTube-Logo.png';
+    if (productName.includes('office')) return 'https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Office-Logo.png';
+    if (productName.includes('canva')) return 'https://logos-world.net/wp-content/uploads/2021/08/Canva-Logo.png';
+    if (productName.includes('chatgpt')) return 'https://logos-world.net/wp-content/uploads/2023/02/ChatGPT-Logo.png';
+    if (productName.includes('onlyfans')) return 'https://logos-world.net/wp-content/uploads/2021/04/OnlyFans-Logo.png';
+    if (productName.includes('hbo')) return 'https://logos-world.net/wp-content/uploads/2022/01/HBO-Max-Logo.png';
+    if (productName.includes('hulu')) return 'https://logos-world.net/wp-content/uploads/2020/05/Hulu-Logo.png';
+    if (productName.includes('coursera')) return 'https://logos-world.net/wp-content/uploads/2021/11/Coursera-Logo.png';
+    if (productName.includes('udemy')) return 'https://logos-world.net/wp-content/uploads/2020/11/Udemy-Logo.png';
+    if (productName.includes('linkedin')) return 'https://logos-world.net/wp-content/uploads/2020/04/LinkedIn-Logo.png';
+    
+    return `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.name)}`;
+  };
+  
   return (
     <div 
-      className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden group"
+      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer relative overflow-hidden"
       onClick={handleCardClick}
     >
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      
       {/* Badges */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
+      <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
         {product.discount_percentage > 0 && (
-          <span className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-            {product.discount_percentage}% OFF
+          <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+            -{product.discount_percentage}%
           </span>
         )}
         {product.is_bestseller && (
-          <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-            🔥 Bestseller
+          <span className="bg-orange-500 text-white px-2 py-1 rounded text-xs font-medium">
+            Bestseller
           </span>
         )}
-        {product.is_featured && (
-          <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-            ⭐ Featured
+      </div>
+      
+      {/* Stock status */}
+      <div className="absolute top-2 right-2 z-10">
+        {product.stock_quantity > 0 ? (
+          <span className="bg-green-500 text-white px-2 py-1 rounded text-xs font-medium">
+            In Stock
+          </span>
+        ) : (
+          <span className="bg-red-500 text-white px-2 py-1 rounded text-xs font-medium">
+            Out of stock
           </span>
         )}
       </div>
       
       {/* Product Image */}
-      <div className="relative w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden">
+      <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
         <img
-          src={product.image_url || `https://via.placeholder.com/300x200?text=${encodeURIComponent(product.name)}`}
+          src={getProductImage()}
           alt={product.name}
-          className={`w-full h-full object-cover transition-all duration-300 group-hover:scale-105 ${
+          className={`w-full h-full object-contain transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={() => setImageLoaded(true)}
@@ -63,30 +93,19 @@ const ModernProductCard = ({ product }) => {
         />
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="animate-pulse bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 w-full h-full"></div>
-          </div>
-        )}
-        
-        {/* Stock status overlay */}
-        {product.stock_quantity <= 0 && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <span className="text-white font-bold text-lg">Out of Stock</span>
+            <div className="animate-pulse bg-gray-200 w-full h-full"></div>
           </div>
         )}
       </div>
       
       {/* Product Info */}
-      <div className="relative p-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2 min-h-[3rem] group-hover:text-blue-600 transition-colors">
+      <div className="p-4">
+        <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2 min-h-[3rem]">
           {product.name}
         </h3>
         
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
-          {product.short_description}
-        </p>
-        
         {/* Rating */}
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
               <svg
@@ -102,45 +121,41 @@ const ModernProductCard = ({ product }) => {
             ))}
           </div>
           <span className="text-sm text-gray-600 ml-2">
-            {product.rating} ({product.total_reviews} reviews)
+            ({product.total_reviews})
           </span>
         </div>
         
         {/* Price */}
         <div className="flex items-center mb-4">
-          <span className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold text-gray-900">
             {currency === 'USD' ? '$' : '₹'}{convertedDiscountedPrice}
           </span>
           {product.discount_percentage > 0 && (
-            <span className="text-lg text-gray-500 line-through ml-3">
+            <span className="text-lg text-gray-500 line-through ml-2">
               {currency === 'USD' ? '$' : '₹'}{convertedOriginalPrice}
             </span>
           )}
         </div>
         
         {/* Categories */}
-        <div className="flex flex-wrap gap-1 mb-4">
-          <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
-            {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-          </span>
-          {product.duration_options && product.duration_options.length > 0 && (
-            <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-              {product.duration_options[0]}
-            </span>
-          )}
+        <div className="text-xs text-gray-500 mb-3">
+          {product.category.charAt(0).toUpperCase() + product.category.slice(1)} • 
+          {product.duration_options && product.duration_options.length > 0 
+            ? ` ${product.duration_options[0]}` 
+            : ' Multiple Options'}
         </div>
         
         {/* Add to Cart Button */}
         <button
           onClick={handleAddToCart}
           disabled={product.stock_quantity <= 0}
-          className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 ${
+          className={`w-full py-3 px-4 rounded-lg font-medium transition-colors duration-200 ${
             product.stock_quantity > 0
-              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl'
+              ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500'
               : 'bg-gray-400 text-gray-600 cursor-not-allowed'
           }`}
         >
-          {product.stock_quantity > 0 ? '🛒 Add to Cart' : 'Out of Stock'}
+          {product.stock_quantity > 0 ? 'Add to Cart' : 'Out of Stock'}
         </button>
       </div>
     </div>
