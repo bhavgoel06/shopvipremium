@@ -880,6 +880,144 @@ async def get_analytics_stats():
         logger.error(f"Error getting analytics stats: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+# Payment Routes
+@app.get("/api/payments/crypto/currencies")
+async def get_crypto_currencies():
+    """Get available cryptocurrency options"""
+    try:
+        from nowpayments_service import nowpayments_service
+        currencies = await nowpayments_service.get_available_currencies()
+        return {
+            "success": True,
+            "message": "Crypto currencies retrieved successfully",
+            "data": currencies
+        }
+    except Exception as e:
+        logger.error(f"Error getting crypto currencies: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/payments/crypto/create")
+async def create_crypto_payment(payment_request: CryptoPaymentRequest):
+    """Create a new cryptocurrency payment"""
+    try:
+        from nowpayments_service import nowpayments_service
+        
+        # Get the order to validate
+        order = await db.get_order(payment_request.order_id)
+        if not order:
+            raise HTTPException(status_code=404, detail="Order not found")
+        
+        # Create payment in NOWPayments
+        payment_data = {
+            "order_id": payment_request.order_id,
+            "amount": payment_request.amount,
+            "price_currency": payment_request.currency,
+            "crypto_currency": payment_request.crypto_currency,
+            "description": f"Order {payment_request.order_id} - Premium subscription"
+        }
+        
+        payment_response = await nowpayments_service.create_payment(payment_data)
+        
+        # Create payment transaction record
+        payment_create = PaymentCreate(
+            order_id=payment_request.order_id,
+            payment_method=PaymentMethod.CRYPTO,
+            amount=payment_request.amount,
+            currency=payment_request.currency,
+            crypto_currency=payment_request.crypto_currency
+        )
+        
+        payment_transaction = await db.create_payment_transaction(payment_create)
+        
+        # Update payment transaction with external payment ID
+        payment_transaction.payment_id = payment_response.get("id")
+        await db.update_payment_status(
+            payment_response.get("id"),
+            PaymentStatus.WAITING,
+            payment_response
+        )
+        
+        return {
+            "success": True,
+            "message": "Crypto payment created successfully",
+            "data": {
+                "payment_id": payment_response.get("id"),
+                "pay_address": payment_response.get("pay_address"),
+                "pay_amount": payment_response.get("pay_amount"),
+                "pay_currency": payment_response.get("pay_currency"),
+                "payment_url": payment_response.get("invoice_url")
+            }
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error creating crypto payment: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/payments/{payment_id}/status")
+async def get_payment_status(payment_id: str):
+    """Get payment status"""
+    try:
+        from nowpayments_service import nowpayments_service
+        
+        # Get status from NOWPayments
+        payment_status = await nowpayments_service.get_payment_status(payment_id)
+        
+        # Update local payment record
+        await db.update_payment_status(
+            payment_id,
+            PaymentStatus(payment_status.get("payment_status")),
+            payment_status
+        )
+        
+        return {
+            "success": True,
+            "message": "Payment status retrieved successfully",
+            "data": payment_status
+        }
+    except Exception as e:
+        logger.error(f"Error getting payment status: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/payments/nowpayments/ipn")
+async def handle_nowpayments_ipn(request: Request):
+    """Handle NOWPayments IPN callback"""
+    try:
+        from nowpayments_service import nowpayments_service
+        
+        # Get request data
+        payload = await request.json()
+        signature = request.headers.get("x-nowpayments-sig")
+        
+        # Validate signature
+        if not nowpayments_service.validate_ipn_signature(payload, signature):
+            raise HTTPException(status_code=401, detail="Invalid signature")
+        
+        # Process IPN
+        ipn_data = await nowpayments_service.process_ipn_callback(payload)
+        
+        # Update payment status
+        await db.update_payment_status(
+            ipn_data["payment_id"],
+            PaymentStatus(ipn_data["status"]),
+            payload
+        )
+        
+        # Update order status based on payment status
+        if ipn_data["status"] == "finished":
+            await db.update_order_status(ipn_data["order_id"], OrderStatus.COMPLETED)
+            await db.update_order_payment_status(ipn_data["order_id"], PaymentStatus.FINISHED)
+        elif ipn_data["status"] in ["failed", "expired"]:
+            await db.update_order_status(ipn_data["order_id"], OrderStatus.CANCELLED)
+            await db.update_order_payment_status(ipn_data["order_id"], PaymentStatus.FAILED)
+        
+        return {"status": "OK"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error handling NOWPayments IPN: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # Health check
 @app.get("/api/health")
 async def health_check():
