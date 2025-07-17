@@ -351,11 +351,22 @@ class Database:
         if gateway_response:
             update_data["gateway_response"] = gateway_response
         
-        await self.db.payment_transactions.update_one(
-            {"payment_id": payment_id},
-            {"$set": update_data}
-        )
-        return await self.get_payment_transaction(payment_id)
+        # Try to find by payment_id first, then by order_id if payment_id is not set yet
+        payment = await self.db.payment_transactions.find_one({"payment_id": payment_id})
+        if not payment:
+            # If not found by payment_id, try to find by order_id and update payment_id
+            payment = await self.db.payment_transactions.find_one({"order_id": payment_id})
+            if payment:
+                update_data["payment_id"] = payment_id
+        
+        if payment:
+            await self.db.payment_transactions.update_one(
+                {"id": payment["id"]},
+                {"$set": update_data}
+            )
+            return await self.get_payment_transaction(payment_id)
+        
+        return None
 
 # Global database instance
 db = Database()
