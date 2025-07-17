@@ -199,7 +199,7 @@ class OrderCreate(BaseModel):
 class PaymentTransaction(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     order_id: str
-    payment_id: str  # External payment ID from gateway
+    payment_id: Optional[str] = None  # External payment ID from gateway
     payment_method: PaymentMethod
     amount: float
     currency: str
