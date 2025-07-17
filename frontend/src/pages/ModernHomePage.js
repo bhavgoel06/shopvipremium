@@ -457,8 +457,8 @@ const ModernHomePage = () => {
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="relative py-24 bg-gradient-to-b from-gray-900 to-black">
+      {/* Modern Product Showcase */}
+      <section className="relative py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -466,15 +466,23 @@ const ModernHomePage = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6">
-              Featured Deals
+            <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 rounded-full px-4 py-2 mb-6">
+              <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+              <span className="font-medium text-sm">Popular Services</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Premium subscriptions at
+              <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                unbeatable prices
+              </span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Hand-picked premium subscriptions at unbeatable prices
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Get instant access to your favorite services and save up to 90% compared to official pricing
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          {/* Modern Product Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {loading ? (
               Array(12).fill(0).map((_, index) => (
                 <motion.div 
@@ -482,14 +490,14 @@ const ModernHomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-lg animate-pulse"
+                  className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-2xl transition-all duration-500"
                 >
-                  <div className="h-48 bg-gray-200" />
-                  <div className="p-6 space-y-3">
-                    <div className="h-6 bg-gray-200 rounded" />
-                    <div className="h-4 bg-gray-200 rounded w-3/4" />
-                    <div className="h-4 bg-gray-200 rounded w-1/2" />
-                    <div className="h-10 bg-gray-200 rounded" />
+                  <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse" />
+                  <div className="p-6 space-y-4">
+                    <div className="h-6 bg-gray-200 rounded-lg animate-pulse" />
+                    <div className="h-4 bg-gray-200 rounded w-3/4 animate-pulse" />
+                    <div className="h-4 bg-gray-200 rounded w-1/2 animate-pulse" />
+                    <div className="h-12 bg-gray-200 rounded-xl animate-pulse" />
                   </div>
                 </motion.div>
               ))
@@ -501,31 +509,41 @@ const ModernHomePage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
+                  className="group"
                 >
-                  <ProductCard product={product} />
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-2xl group-hover:border-blue-200 transition-all duration-500 group-hover:-translate-y-2">
+                    <ProductCard product={product} className="border-0 shadow-none rounded-3xl" />
+                  </div>
                 </motion.div>
               ))
             ) : (
-              <div className="col-span-full text-center py-16">
-                <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-2xl font-bold text-gray-300 mb-2">No Products Found</h3>
-                <p className="text-gray-400">Please check back later for featured products.</p>
+              <div className="col-span-full text-center py-20">
+                <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">No Products Available</h3>
+                <p className="text-gray-600">Check back soon for amazing deals on premium subscriptions.</p>
               </div>
             )}
           </div>
 
+          {/* View All Button */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center mt-12"
+            className="text-center mt-16"
           >
             <Link
               to="/products"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 text-white rounded-2xl font-semibold hover:bg-gray-800 transition-all duration-300 group"
             >
-              View All Products
-              <span>→</span>
+              <span>View All Products</span>
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </motion.div>
         </div>
