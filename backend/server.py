@@ -508,10 +508,10 @@ async def get_user_orders(user_id: str):
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.put("/api/orders/{order_id}/status", response_model=ProductResponse)
-async def update_order_status(order_id: str, status: OrderStatus):
+async def update_order_status(order_id: str, status_update: OrderStatusUpdate):
     """Update order status"""
     try:
-        updated = await db.update_order_status(order_id, status)
+        updated = await db.update_order_status(order_id, status_update.status)
         if not updated:
             raise HTTPException(status_code=404, detail="Order not found")
         
@@ -526,10 +526,10 @@ async def update_order_status(order_id: str, status: OrderStatus):
         raise HTTPException(status_code=500, detail="Internal server error")
 
 @app.put("/api/orders/{order_id}/payment", response_model=ProductResponse)
-async def update_payment_status(order_id: str, payment_status: PaymentStatus):
+async def update_payment_status(order_id: str, payment_update: PaymentStatusUpdate):
     """Update payment status"""
     try:
-        updated = await db.update_payment_status(order_id, payment_status)
+        updated = await db.update_order_payment_status(order_id, payment_update.payment_status)
         if not updated:
             raise HTTPException(status_code=404, detail="Order not found")
         
