@@ -78,7 +78,6 @@ function App() {
                 </Routes>
               </main>
               <Footer />
-              <WhatsAppButton />
               <FloatingWhatsApp />
               <ToastContainer
                 position="top-right"
