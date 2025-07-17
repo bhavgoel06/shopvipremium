@@ -31,9 +31,19 @@ class OrderStatus(str, Enum):
 
 class PaymentStatus(str, Enum):
     PENDING = "pending"
-    COMPLETED = "completed"
+    WAITING = "waiting"
+    CONFIRMING = "confirming"
+    CONFIRMED = "confirmed"
+    SENDING = "sending"
+    FINISHED = "finished"
     FAILED = "failed"
     REFUNDED = "refunded"
+    EXPIRED = "expired"
+
+class PaymentMethod(str, Enum):
+    CREDIT_CARD = "credit_card"
+    UPI = "upi"
+    CRYPTO = "crypto"
 
 # Product Models
 class Product(BaseModel):
