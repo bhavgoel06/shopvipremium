@@ -120,6 +120,20 @@ class Database:
         if filters.rating:
             query["rating"] = {"$gte": filters.rating}
         
+        # Add search functionality
+        if filters.search:
+            search_query = {
+                "$or": [
+                    {"name": {"$regex": filters.search, "$options": "i"}},
+                    {"description": {"$regex": filters.search, "$options": "i"}},
+                    {"short_description": {"$regex": filters.search, "$options": "i"}},
+                    {"seo_keywords": {"$in": [filters.search]}},
+                    {"category": {"$regex": filters.search, "$options": "i"}},
+                    {"subcategory": {"$regex": filters.search, "$options": "i"}}
+                ]
+            }
+            query = {"$and": [query, search_query]}
+        
         return await self.db.products.count_documents(query)
     
     async def get_featured_products(self, limit: int = 8) -> List[Product]:
