@@ -1,167 +1,146 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 const PrivacyPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
-            <p className="text-xl opacity-90">
-              Your privacy is important to us. Learn how we protect your information.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">1. Information We Collect</h2>
-              <p className="text-gray-600 mb-4">
-                Shop For Premium collects information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.
+    <div className="min-h-screen bg-gray-50 py-12">
+      <Helmet>
+        <title>Privacy Policy - Shop For Premium</title>
+        <meta name="description" content="Privacy Policy for Shop For Premium - Your privacy is important to us." />
+      </Helmet>
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-lg shadow-lg p-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Privacy Policy</h1>
+          
+          <div className="prose prose-lg max-w-none">
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Shop For Premium</h2>
+              <p className="text-gray-700 mb-4">
+                <strong>Your privacy is important to us.</strong>
               </p>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-2">Information collected includes:</h3>
-                <ul className="list-disc list-inside text-blue-700 space-y-1">
-                  <li>Name and email address</li>
-                  <li>Phone number (for WhatsApp delivery)</li>
-                  <li>Payment information (processed securely)</li>
-                  <li>Order history and preferences</li>
-                  <li>Support communications</li>
-                </ul>
-              </div>
+              <p className="text-gray-700 mb-4">
+                It is Shop For Premium policy to respect your privacy regarding any information we may collect while operating our website. Accordingly, we have developed this privacy policy in order for you to understand how we collect, use, communicate, disclose and otherwise make use of personal information. We have outlined our privacy policy below.
+              </p>
             </div>
 
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">2. How We Use Your Information</h2>
-              <p className="text-gray-600 mb-4">
-                We use the information we collect to provide, maintain, and improve our services, including:
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Information Collection</h3>
+              <p className="text-gray-700 mb-4">
+                We will collect personal information by lawful and fair means and, where appropriate, with the knowledge or consent of the individual concerned.
               </p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
-                <li>Processing and fulfilling your orders</li>
-                <li>Sending you account confirmations and updates</li>
-                <li>Providing customer support</li>
-                <li>Improving our website and services</li>
-                <li>Sending promotional emails (with your consent)</li>
-                <li>Preventing fraud and ensuring security</li>
+              <p className="text-gray-700 mb-4">
+                Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Information Use</h3>
+              <p className="text-gray-700 mb-4">
+                We will collect and use personal information solely for fulfilling those purposes specified by us and for other ancillary purposes, unless we obtain the consent of the individual concerned or as required by law.
+              </p>
+              <p className="text-gray-700 mb-4">
+                Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Information Protection</h3>
+              <p className="text-gray-700 mb-4">
+                We will protect personal information by using reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.
+              </p>
+              <p className="text-gray-700 mb-4">
+                We will make readily available to customers information about our policies and practices relating to the management of personal information.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Information Retention</h3>
+              <p className="text-gray-700 mb-4">
+                We will only retain personal information for as long as necessary for the fulfilment of those purposes.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Use License</h3>
+              <p className="text-gray-700 mb-4">
+                Permission is granted to temporarily download one copy of the materials (information or software) on Shop For Premium website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
+                <li>Modify or copy the materials</li>
+                <li>Use the materials for any commercial purpose, or for any public display (commercial or non-commercial)</li>
+                <li>Attempt to decompile or reverse engineer any software contained on Shop For Premium website</li>
+                <li>Remove any copyright or other proprietary notations from the materials</li>
+                <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
               </ul>
             </div>
 
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">3. Information Sharing</h2>
-              <p className="text-gray-600 mb-4">
-                We do not sell, trade, or otherwise transfer your personal information to third parties except as described in this policy:
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Disclaimer</h3>
+              <p className="text-gray-700 mb-4">
+                The materials on Shop For Premium website are provided on an 'as is' basis. Shop For Premium makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
               </p>
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-                <h3 className="font-semibold text-green-800 mb-2">We may share information with:</h3>
-                <ul className="list-disc list-inside text-green-700 space-y-1">
-                  <li>Payment processors (for transaction processing)</li>
-                  <li>Service providers (for website hosting and analytics)</li>
-                  <li>Legal authorities (when required by law)</li>
-                  <li>Business partners (with your explicit consent)</li>
-                </ul>
+              <p className="text-gray-700 mb-4">
+                Further, Shop For Premium does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Limitations</h3>
+              <p className="text-gray-700 mb-4">
+                In no event shall Shop For Premium or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Shop For Premium website, even if Shop For Premium or a Shop For Premium authorized representative has been notified orally or in writing of the possibility of such damage.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Accuracy of Materials</h3>
+              <p className="text-gray-700 mb-4">
+                The materials appearing on Shop For Premium website could include technical, typographical, or photographic errors. Shop For Premium does not warrant that any of the materials on its website are accurate, complete or current. Shop For Premium may make changes to the materials contained on its website at any time without notice. However Shop For Premium does not make any commitment to update the materials.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Links</h3>
+              <p className="text-gray-700 mb-4">
+                Shop For Premium has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Shop For Premium of the site. Use of any such linked website is at the user's own risk.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Modifications</h3>
+              <p className="text-gray-700 mb-4">
+                Shop For Premium may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Governing Law</h3>
+              <p className="text-gray-700 mb-4">
+                These terms and conditions are governed by and construed in accordance with the laws of India and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Commitment</h3>
+              <p className="text-gray-700 mb-4">
+                We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained. Shop For Premium may change this privacy policy from time to time at Shop For Premium sole discretion.
+              </p>
+            </div>
+
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+              <p className="text-gray-700 mb-4">
+                If you have any questions about this Privacy Policy, please contact us at:
+              </p>
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <p className="text-gray-700"><strong>Email:</strong> support@shopforpremium.com</p>
+                <p className="text-gray-700"><strong>WhatsApp:</strong> +91 9876543210</p>
+                <p className="text-gray-700"><strong>Telegram:</strong> @shopforpremium</p>
               </div>
             </div>
 
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">4. Data Security</h2>
-              <p className="text-gray-600 mb-4">
-                We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
-              </p>
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                <h3 className="font-semibold text-yellow-800 mb-2">Security measures include:</h3>
-                <ul className="list-disc list-inside text-yellow-700 space-y-1">
-                  <li>SSL encryption for all data transmission</li>
-                  <li>Secure payment processing</li>
-                  <li>Regular security audits</li>
-                  <li>Access controls and authentication</li>
-                  <li>Data backup and recovery procedures</li>
-                </ul>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">5. Cookies and Tracking</h2>
-              <p className="text-gray-600 mb-4">
-                We use cookies and similar tracking technologies to enhance your experience on our website.
-              </p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
-                <li>Essential cookies for website functionality</li>
-                <li>Analytics cookies to understand user behavior</li>
-                <li>Preference cookies to remember your settings</li>
-                <li>Marketing cookies (with your consent)</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">6. Your Rights</h2>
-              <p className="text-gray-600 mb-4">
-                You have certain rights regarding your personal information:
-              </p>
-              <ul className="list-disc list-inside text-gray-600 space-y-2 mb-4">
-                <li>Access and review your personal information</li>
-                <li>Correct inaccurate information</li>
-                <li>Delete your account and data</li>
-                <li>Opt-out of marketing communications</li>
-                <li>Request data portability</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">7. Age Restrictions</h2>
-              <p className="text-gray-600 mb-4">
-                Our services are intended for users who are 18 years of age or older. We do not knowingly collect personal information from minors.
-              </p>
-              <p className="text-gray-600">
-                If you are under 18, please do not use our services or provide any personal information to us.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">8. International Transfers</h2>
-              <p className="text-gray-600 mb-4">
-                Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place to protect your data.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">9. Data Retention</h2>
-              <p className="text-gray-600 mb-4">
-                We retain your personal information only for as long as necessary to provide our services and comply with legal obligations.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">10. Changes to Privacy Policy</h2>
-              <p className="text-gray-600 mb-4">
-                We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on our website.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">11. Contact Us</h2>
-              <p className="text-gray-600 mb-4">
-                If you have any questions about this Privacy Policy or our practices, please contact us:
-              </p>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <p className="text-blue-800 mb-2"><strong>Email:</strong> support@shopforpremium.com</p>
-                <p className="text-blue-800 mb-2"><strong>WhatsApp:</strong> +91 9876543210</p>
-                <p className="text-blue-800"><strong>Telegram:</strong> @shopforpremium</p>
-              </div>
-            </div>
-
-            <div className="border-t pt-8">
-              <p className="text-gray-500 text-sm">
-                Last updated: {new Date().toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </p>
+            <div className="text-sm text-gray-500 border-t pt-4">
+              <p>Last updated: {new Date().toLocaleDateString()}</p>
             </div>
           </div>
         </div>
