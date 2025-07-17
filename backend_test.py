@@ -580,10 +580,10 @@ class BackendTester:
                         print("✅ Order status update successful")
                         
                         # Test payment status update
-                        payment_status_update = {"payment_status": "confirmed"}
+                        from models import PaymentStatus
                         response3 = self.session.put(
                             f"{self.api_url}/orders/{order_id}/payment",
-                            json=payment_status_update,
+                            json="confirmed",  # Send the status value directly
                             timeout=10
                         )
                         
