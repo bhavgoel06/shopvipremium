@@ -941,7 +941,7 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
             "success": True,
             "message": "Crypto payment created successfully",
             "data": {
-                "payment_id": payment_response.get("id"),
+                "payment_id": payment_id,
                 "pay_address": payment_response.get("pay_address"),
                 "pay_amount": payment_response.get("pay_amount"),
                 "pay_currency": payment_response.get("pay_currency"),
