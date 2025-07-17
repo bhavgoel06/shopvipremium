@@ -103,7 +103,10 @@ async def import_products_from_json():
                     'subscription',
                     'discount'
                 ],
-                'duration_options': scraped_product.get('variants', []) or [
+                'duration_options': [
+                    variant.get('name', variant) if isinstance(variant, dict) else str(variant)
+                    for variant in scraped_product.get('variants', [])
+                ] if scraped_product.get('variants') else [
                     "1 month",
                     "3 months", 
                     "6 months",
