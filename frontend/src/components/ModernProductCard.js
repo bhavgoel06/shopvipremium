@@ -128,11 +128,11 @@ const ModernProductCard = ({ product }) => {
         {/* Price */}
         <div className="flex items-center mb-4">
           <span className="text-2xl font-bold text-gray-900">
-            {currency === 'USD' ? '$' : '₹'}{convertedDiscountedPrice}
+            {currency === 'USD' ? '$' : '₹'}{currency === 'USD' ? convertedDiscountedPrice.toFixed(2) : Math.round(convertedDiscountedPrice)}
           </span>
           {product.discount_percentage > 0 && (
             <span className="text-lg text-gray-500 line-through ml-2">
-              {currency === 'USD' ? '$' : '₹'}{convertedOriginalPrice}
+              {currency === 'USD' ? '$' : '₹'}{currency === 'USD' ? convertedOriginalPrice.toFixed(2) : Math.round(convertedOriginalPrice)}
             </span>
           )}
         </div>
