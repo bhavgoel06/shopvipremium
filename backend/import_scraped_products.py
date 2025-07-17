@@ -103,6 +103,12 @@ async def import_products_from_json():
                     'subscription',
                     'discount'
                 ],
+                'duration_options': scraped_product.get('variants', []) or [
+                    "1 month",
+                    "3 months", 
+                    "6 months",
+                    "1 year"
+                ],
                 'subscription_options': scraped_product.get('variants', []) or [
                     "1 month",
                     "3 months", 
