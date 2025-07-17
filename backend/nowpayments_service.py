@@ -6,6 +6,10 @@ import requests
 from typing import Dict, Optional, Any
 from datetime import datetime
 import logging
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +22,10 @@ class NowPaymentsService:
         self.ipn_secret = os.getenv("NOWPAYMENTS_IPN_SECRET")
         self.public_key = os.getenv("NOWPAYMENTS_PUBLIC_KEY")
         
+        print(f"Loading NOWPayments credentials: private_key={bool(self.private_key)}, ipn_secret={bool(self.ipn_secret)}, public_key={bool(self.public_key)}")
+        
         if not all([self.private_key, self.ipn_secret, self.public_key]):
+            print(f"Missing credentials - private_key: {self.private_key}, ipn_secret: {self.ipn_secret}, public_key: {self.public_key}")
             raise ValueError("Missing NOWPayments API credentials")
     
     def _get_headers(self) -> Dict[str, str]:
