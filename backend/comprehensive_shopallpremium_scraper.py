@@ -369,7 +369,7 @@ class DatabaseUpdater:
         print(f"   - Successfully updated: {updated_count}")
         print(f"   - Update rate: {(updated_count/total_products)*100:.1f}%")
         
-        await self.client.close()
+        self.client.close()
         return updated_count
 
 async def main():
