@@ -171,11 +171,6 @@ const ModernHomePage = () => {
         const bestsellerData = await bestsellerRes.json();
         if (bestsellerData.success) setBestsellerProducts(bestsellerData.data);
       }
-
-      if (adultRes.ok) {
-        const adultData = await adultRes.json();
-        if (adultData.success) setAdultProducts(adultData.data);
-      }
     } catch (error) {
       console.error('Error fetching home data:', error);
       // Don't show error toast for failed requests, just continue with empty data
