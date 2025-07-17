@@ -368,7 +368,7 @@ class BackendTester:
         expected_pricing = {
             "onlyfans": {"original": 3399, "discounted": 1599, "discount": 53, "search_term": "onlyfans accounts"},
             "netflix": {"original": 1199, "discounted": 809, "discount": 33, "search_term": "netflix premium 4k"},
-            "spotify": {"original": 739, "discounted": 45, "discount": 94, "search_term": "spotify premium individual"},
+            "spotify": {"original": 739, "discounted": 45, "discount": 94, "search_term": "spotify"},
             "chatgpt": {"original": 2049, "discounted": 1199, "discount": 41, "search_term": "chatgpt plus"}
         }
         
