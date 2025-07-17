@@ -322,6 +322,65 @@ class Database:
             "total_users": total_users,
             "today_visitors": today_visitors
         }
+    
+    # Order operations
+    async def create_order(self, order: OrderCreate) -> Order:
+        order_obj = Order(**order.dict())
+        order_obj.final_amount = order_obj.total_amount - order_obj.discount_amount
+        await self.db.orders.insert_one(order_obj.dict())
+        return order_obj
+    
+    async def get_order(self, order_id: str) -> Optional[Order]:
+        order = await self.db.orders.find_one({"id": order_id})
+        return Order(**order) if order else None
+    
+    async def get_orders(self, user_id: Optional[str] = None, limit: int = 50) -> List[Order]:
+        query = {}
+        if user_id:
+            query["user_id"] = user_id
+        
+        cursor = self.db.orders.find(query).sort("created_at", -1).limit(limit)
+        orders = await cursor.to_list(length=limit)
+        return [Order(**order) for order in orders]
+    
+    async def update_order_status(self, order_id: str, status: OrderStatus) -> Optional[Order]:
+        await self.db.orders.update_one(
+            {"id": order_id},
+            {"$set": {"status": status, "updated_at": datetime.utcnow()}}
+        )
+        return await self.get_order(order_id)
+    
+    async def update_order_payment_status(self, order_id: str, payment_status: PaymentStatus) -> Optional[Order]:
+        await self.db.orders.update_one(
+            {"id": order_id},
+            {"$set": {"payment_status": payment_status, "updated_at": datetime.utcnow()}}
+        )
+        return await self.get_order(order_id)
+    
+    # Payment operations
+    async def create_payment_transaction(self, payment: PaymentCreate) -> PaymentTransaction:
+        payment_obj = PaymentTransaction(**payment.dict())
+        await self.db.payment_transactions.insert_one(payment_obj.dict())
+        return payment_obj
+    
+    async def get_payment_transaction(self, payment_id: str) -> Optional[PaymentTransaction]:
+        payment = await self.db.payment_transactions.find_one({"payment_id": payment_id})
+        return PaymentTransaction(**payment) if payment else None
+    
+    async def get_payment_by_order(self, order_id: str) -> Optional[PaymentTransaction]:
+        payment = await self.db.payment_transactions.find_one({"order_id": order_id})
+        return PaymentTransaction(**payment) if payment else None
+    
+    async def update_payment_status(self, payment_id: str, status: PaymentStatus, gateway_response: Optional[Dict] = None) -> Optional[PaymentTransaction]:
+        update_data = {"status": status, "updated_at": datetime.utcnow()}
+        if gateway_response:
+            update_data["gateway_response"] = gateway_response
+        
+        await self.db.payment_transactions.update_one(
+            {"payment_id": payment_id},
+            {"$set": update_data}
+        )
+        return await self.get_payment_transaction(payment_id)
 
 # Global database instance
 db = Database()
