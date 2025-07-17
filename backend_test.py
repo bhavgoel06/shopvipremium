@@ -1205,7 +1205,11 @@ class BackendTester:
             ("Bestseller Products", self.test_bestseller_products),
             ("Product Search", self.test_product_search),
             ("Categories", self.test_categories_endpoint),
-            # New comprehensive tests for expanded catalog
+            # MAJOR FIXES TESTING (as requested in review)
+            ("🔧 PRODUCT VARIANTS FIXED", self.test_product_variants_fixed),
+            ("🗄️ DATABASE CONSISTENCY (99 products)", self.test_database_consistency_99_products),
+            ("🔞 ADULT CONTENT ACCESS VERIFICATION", self.test_adult_content_access_verification),
+            # Existing comprehensive tests
             ("Expanded Product Catalog (58+ products)", self.test_expanded_product_catalog),
             ("Adult Content Products", self.test_adult_content_products),
             ("Category Filtering (11 categories)", self.test_category_filtering),
@@ -1213,7 +1217,7 @@ class BackendTester:
             ("Reviews System (4-5 stars)", self.test_reviews_system),
             ("Stock Quantities", self.test_stock_quantities),
             ("Currency Conversion Data", self.test_currency_conversion_data),
-            # New comprehensive search and payment tests
+            # Search and payment tests
             ("Comprehensive Search Functionality", self.test_comprehensive_search_functionality),
             ("ShopAllPremium Pricing Verification", self.test_shopallpremium_pricing_verification),
             ("Crypto Currencies Endpoint", self.test_crypto_currencies_endpoint),
