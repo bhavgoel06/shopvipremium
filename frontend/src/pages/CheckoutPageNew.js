@@ -173,7 +173,7 @@ const CheckoutPage = () => {
     } catch (error) {
       console.error('Error placing order:', error);
       toast.error('Failed to place order. Please try again.');
-      navigate(`/order-failed?order_id=${orderId || 'unknown'}&error=${encodeURIComponent(error.message)}`);
+      navigate(`/order-failed?error=${encodeURIComponent(error.message)}`);
     } finally {
       setLoading(false);
     }
