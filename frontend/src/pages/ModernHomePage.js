@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import ProductCard from '../components/ProductCard';
+import ModernProductCard from '../components/ModernProductCard';
 import { Helmet } from 'react-helmet';
 import { useCurrency } from '../context/CurrencyContext';
 import { toast } from 'react-toastify';
