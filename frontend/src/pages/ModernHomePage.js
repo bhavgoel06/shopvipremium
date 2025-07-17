@@ -797,6 +797,7 @@ const ModernHomePage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 
