@@ -909,6 +909,12 @@ class BackendTester:
             ("Reviews System (4-5 stars)", self.test_reviews_system),
             ("Stock Quantities", self.test_stock_quantities),
             ("Currency Conversion Data", self.test_currency_conversion_data),
+            # New comprehensive search and payment tests
+            ("Comprehensive Search Functionality", self.test_comprehensive_search_functionality),
+            ("Crypto Currencies Endpoint", self.test_crypto_currencies_endpoint),
+            ("Crypto Payment Creation", self.test_crypto_payment_creation),
+            ("Payment Status Endpoint", self.test_payment_status_endpoint),
+            ("Order Management Endpoints", self.test_order_management_endpoints),
         ]
         
         passed = 0
