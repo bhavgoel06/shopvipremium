@@ -661,7 +661,8 @@ async def verify_all_products():
     
     # Check products with variants
     with_variants = await db.products.count_documents({
-        "duration_options": {"$exists": True, "$ne": [], "$size": {"$gte": 1}}
+        "duration_options": {"$exists": True, "$ne": []},
+        "$expr": {"$gte": [{"$size": "$duration_options"}, 1]}
     })
     
     # Check products with pricing
