@@ -85,14 +85,6 @@ const ModernHomePage = () => {
       count: '4+ services'
     },
     { 
-      name: 'Adult Content', 
-      slug: 'adult', 
-      icon: '🔞',
-      gradient: 'from-pink-500 to-red-700',
-      description: 'Premium adult subscriptions',
-      count: '11+ sites'
-    },
-    { 
       name: 'Education', 
       slug: 'education', 
       icon: '📚',
