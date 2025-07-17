@@ -120,6 +120,42 @@ backend:
           agent: "testing"
           comment: "✅ COMPREHENSIVE TESTING COMPLETE: Expanded catalog fully functional with 94.7% test success rate (18/19 tests passed). VERIFIED: 58 total products with adult content (11 products) properly accessible and categorized. All 11 categories working (adult, ott, software, vpn, education, social_media, gaming, health, membership, professional, financial). Pricing structure perfect with original_price vs discounted_price and accurate discount_percentage calculations. Reviews system working with 4-5 star ratings. Stock quantities properly set. Authentication system still working after database changes. Featured products and bestsellers endpoints functional. Product search and filtering working correctly. Backend provides proper data for USD/INR currency conversion. READY FOR UI/UX PHASE."
 
+  - task: "Fix product data and variants with shopallpremium.com reference"
+    implemented: false
+    working: false
+    file: "mega_product_seeder.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "User reported incorrect product variants. Need to update product seeder with correct data from shopallpremium.com which has been successfully crawled."
+
+  - task: "Nowpayments crypto payment integration"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Need to integrate Nowpayments crypto payment gateway with provided API keys. Integration playbook obtained."
+
+  - task: "Order confirmation and failure pages backend"
+    implemented: false
+    working: false
+    file: "server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Need to implement order tracking, confirmation, and failure handling endpoints for payment integration."
+
   - task: "Dual currency support backend endpoints"
     implemented: true
     working: true
