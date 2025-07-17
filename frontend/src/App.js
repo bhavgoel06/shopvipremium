@@ -78,6 +78,9 @@ function App() {
                   <Route path="/terms" element={<TermsPage />} />
                   <Route path="/privacy" element={<PrivacyPage />} />
                   <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/order-success" element={<OrderSuccess />} />
+                  <Route path="/order-cancelled" element={<OrderCancelled />} />
+                  <Route path="/order-failed" element={<OrderFailed />} />
                 </Routes>
               </main>
               <Footer />
