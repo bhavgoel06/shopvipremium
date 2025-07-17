@@ -187,6 +187,54 @@ backend:
           comment: "✅ TESTED: All authentication endpoints working perfectly. Registration creates users with bcrypt hashed passwords, login returns JWT tokens, /auth/me endpoint properly validates tokens. Invalid credentials correctly rejected with 401. Protected endpoints require authentication."
 
 frontend:
+  - task: "Fix search functionality"
+    implemented: false
+    working: false
+    file: "ProductsPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "User reported search not working - searched 'onlyfans' but no results found despite product being in database."
+
+  - task: "Order confirmation and failure pages"
+    implemented: false
+    working: false
+    file: "CheckoutPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "Need to create dedicated order confirmation/received pages and handle failed/cancelled payment scenarios."
+
+  - task: "Terms and Privacy Policy content update"
+    implemented: false
+    working: false
+    file: "TermsPage.js, PrivacyPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "User reported wrong terms/privacy content. Need to update with correct content from shopallpremium.com reference."
+
+  - task: "Design improvements to match mobbin standards"
+    implemented: false
+    working: false
+    file: "Multiple frontend files"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "main"
+          comment: "User requested design improvements to match mobbin standards for better UI/UX."
+
   - task: "Dual currency switcher implementation"
     implemented: true
     working: true
