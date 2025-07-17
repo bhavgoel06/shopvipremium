@@ -76,7 +76,7 @@ async def update_products_with_detailed_info():
     
     # Show a sample of updated products
     print("\n📝 Sample updated products:")
-    sample_products = await db.get_products({'page': 1, 'per_page': 3})
+    sample_products = await db.get_products(SearchFilters(page=1, per_page=3))
     for product in sample_products:
         print(f"\n- {product.name}")
         print(f"  Description: {product.description[:100]}...")
