@@ -976,6 +976,7 @@ class BackendTester:
             ("Currency Conversion Data", self.test_currency_conversion_data),
             # New comprehensive search and payment tests
             ("Comprehensive Search Functionality", self.test_comprehensive_search_functionality),
+            ("ShopAllPremium Pricing Verification", self.test_shopallpremium_pricing_verification),
             ("Crypto Currencies Endpoint", self.test_crypto_currencies_endpoint),
             ("Crypto Payment Creation", self.test_crypto_payment_creation),
             ("Payment Status Endpoint", self.test_payment_status_endpoint),
