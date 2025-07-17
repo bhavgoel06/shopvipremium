@@ -195,6 +195,15 @@ class Database:
         orders = await cursor.to_list(length=100)
         return [Order(**order) for order in orders]
     
+    async def get_orders(self, user_id: Optional[str] = None, limit: int = 50) -> List[Order]:
+        query = {}
+        if user_id:
+            query["user_id"] = user_id
+        
+        cursor = self.db.orders.find(query).sort("created_at", -1).limit(limit)
+        orders = await cursor.to_list(length=limit)
+        return [Order(**order) for order in orders]
+    
     async def update_order_status(self, order_id: str, status: OrderStatus) -> bool:
         result = await self.db.orders.update_one(
             {"id": order_id},
@@ -202,12 +211,26 @@ class Database:
         )
         return result.modified_count > 0
     
+    async def update_order_status(self, order_id: str, status: OrderStatus) -> Optional[Order]:
+        await self.db.orders.update_one(
+            {"id": order_id},
+            {"$set": {"status": status, "updated_at": datetime.utcnow()}}
+        )
+        return await self.get_order(order_id)
+    
     async def update_payment_status(self, order_id: str, payment_status: PaymentStatus) -> bool:
         result = await self.db.orders.update_one(
             {"id": order_id},
             {"$set": {"payment_status": payment_status, "updated_at": datetime.utcnow()}}
         )
         return result.modified_count > 0
+    
+    async def update_order_payment_status(self, order_id: str, payment_status: PaymentStatus) -> Optional[Order]:
+        await self.db.orders.update_one(
+            {"id": order_id},
+            {"$set": {"payment_status": payment_status, "updated_at": datetime.utcnow()}}
+        )
+        return await self.get_order(order_id)
     
     # Review operations
     async def create_review(self, review: ReviewCreate) -> Review:
