@@ -322,6 +322,290 @@ class BackendTester:
             print(f"❌ Product search error: {e}")
             return False
 
+    def test_comprehensive_search_functionality(self):
+        """Test comprehensive search functionality with specific queries"""
+        print("🔍 Testing comprehensive search functionality...")
+        search_queries = ["onlyfans", "netflix", "spotify", "adobe", "microsoft"]
+        
+        passed_searches = 0
+        total_searches = len(search_queries)
+        
+        for query in search_queries:
+            try:
+                # Test dedicated search endpoint
+                response = self.session.get(f"{self.api_url}/products/search?q={query}", timeout=10)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get('success') and isinstance(data.get('data'), list):
+                        results = data['data']
+                        print(f"   ✅ Search '{query}': {len(results)} results")
+                        passed_searches += 1
+                        
+                        # Also test search via products endpoint
+                        response2 = self.session.get(f"{self.api_url}/products?search={query}", timeout=10)
+                        if response2.status_code == 200:
+                            data2 = response2.json()
+                            if data2.get('success'):
+                                results2 = data2['data']
+                                print(f"      Products endpoint search: {len(results2)} results")
+                    else:
+                        print(f"   ❌ Search '{query}': Invalid response format")
+                else:
+                    print(f"   ❌ Search '{query}': Failed ({response.status_code})")
+            except Exception as e:
+                print(f"   ❌ Search '{query}': Error ({e})")
+        
+        success_rate = (passed_searches / total_searches) * 100
+        print(f"✅ Search functionality: {passed_searches}/{total_searches} queries working ({success_rate:.1f}%)")
+        return passed_searches >= 3  # At least 3 out of 5 searches should work
+
+    def test_crypto_currencies_endpoint(self):
+        """Test crypto currencies endpoint"""
+        print("💰 Testing crypto currencies endpoint...")
+        try:
+            response = self.session.get(f"{self.api_url}/payments/crypto/currencies", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success'):
+                    currencies = data.get('data', [])
+                    print(f"✅ Crypto currencies retrieved: {len(currencies)} currencies available")
+                    if currencies:
+                        print(f"   Sample currencies: {currencies[:3] if len(currencies) >= 3 else currencies}")
+                    return True
+                else:
+                    print(f"❌ Crypto currencies: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Crypto currencies failed: {response.status_code}")
+                try:
+                    error_data = response.json()
+                    print(f"   Error: {error_data.get('detail', 'Unknown error')}")
+                except:
+                    print(f"   Raw response: {response.text}")
+                return False
+        except Exception as e:
+            print(f"❌ Crypto currencies error: {e}")
+            return False
+
+    def test_create_test_order(self):
+        """Create a test order for payment testing"""
+        print("📦 Creating test order...")
+        if not self.auth_token:
+            print("❌ No auth token available for order creation")
+            return None
+            
+        try:
+            # Get a sample product first
+            response = self.session.get(f"{self.api_url}/products?per_page=1", timeout=10)
+            if response.status_code != 200:
+                print("❌ Failed to get products for order creation")
+                return None
+                
+            products_data = response.json()
+            if not products_data.get('success') or not products_data.get('data'):
+                print("❌ No products available for order creation")
+                return None
+                
+            product = products_data['data'][0]
+            
+            order_data = {
+                "user_id": "test-user-id",
+                "user_email": "sarah.johnson@premiumsubs.com",
+                "user_name": "Sarah Johnson",
+                "user_phone": "+1234567890",
+                "items": [
+                    {
+                        "product_id": product['id'],
+                        "product_name": product['name'],
+                        "duration": "1 month",
+                        "quantity": 1,
+                        "unit_price": product['discounted_price'],
+                        "total_price": product['discounted_price']
+                    }
+                ],
+                "total_amount": product['discounted_price'],
+                "discount_amount": 0.0,
+                "payment_method": "crypto",
+                "notes": "Test order for payment testing"
+            }
+            
+            headers = {"Authorization": f"Bearer {self.auth_token}"}
+            response = self.session.post(
+                f"{self.api_url}/orders",
+                json=order_data,
+                headers=headers,
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success'):
+                    order = data['data']
+                    print(f"✅ Test order created: {order['id']}")
+                    print(f"   Product: {order['items'][0]['product_name']}")
+                    print(f"   Amount: ${order['final_amount']}")
+                    return order['id']
+                else:
+                    print(f"❌ Order creation: Invalid response format")
+                    return None
+            else:
+                print(f"❌ Order creation failed: {response.status_code}")
+                try:
+                    error_data = response.json()
+                    print(f"   Error: {error_data.get('detail', 'Unknown error')}")
+                except:
+                    print(f"   Raw response: {response.text}")
+                return None
+        except Exception as e:
+            print(f"❌ Order creation error: {e}")
+            return None
+
+    def test_crypto_payment_creation(self):
+        """Test crypto payment creation"""
+        print("💳 Testing crypto payment creation...")
+        
+        # First create a test order
+        order_id = self.test_create_test_order()
+        if not order_id:
+            print("❌ Cannot test payment creation without order")
+            return False
+            
+        try:
+            payment_data = {
+                "order_id": order_id,
+                "crypto_currency": "btc",
+                "amount": 10.0,
+                "currency": "USD"
+            }
+            
+            response = self.session.post(
+                f"{self.api_url}/payments/crypto/create",
+                json=payment_data,
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success'):
+                    payment_info = data['data']
+                    print(f"✅ Crypto payment created successfully")
+                    print(f"   Payment ID: {payment_info.get('payment_id', 'N/A')}")
+                    print(f"   Pay Address: {payment_info.get('pay_address', 'N/A')}")
+                    print(f"   Pay Amount: {payment_info.get('pay_amount', 'N/A')}")
+                    print(f"   Pay Currency: {payment_info.get('pay_currency', 'N/A')}")
+                    return payment_info.get('payment_id')
+                else:
+                    print(f"❌ Crypto payment creation: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Crypto payment creation failed: {response.status_code}")
+                try:
+                    error_data = response.json()
+                    print(f"   Error: {error_data.get('detail', 'Unknown error')}")
+                except:
+                    print(f"   Raw response: {response.text}")
+                return False
+        except Exception as e:
+            print(f"❌ Crypto payment creation error: {e}")
+            return False
+
+    def test_payment_status_endpoint(self):
+        """Test payment status endpoint"""
+        print("📊 Testing payment status endpoint...")
+        
+        # Create a payment first
+        payment_id = self.test_crypto_payment_creation()
+        if not payment_id:
+            print("❌ Cannot test payment status without payment")
+            return False
+            
+        try:
+            response = self.session.get(f"{self.api_url}/payments/{payment_id}/status", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success'):
+                    status_info = data['data']
+                    print(f"✅ Payment status retrieved successfully")
+                    print(f"   Status: {status_info.get('payment_status', 'N/A')}")
+                    return True
+                else:
+                    print(f"❌ Payment status: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Payment status failed: {response.status_code}")
+                try:
+                    error_data = response.json()
+                    print(f"   Error: {error_data.get('detail', 'Unknown error')}")
+                except:
+                    print(f"   Raw response: {response.text}")
+                return False
+        except Exception as e:
+            print(f"❌ Payment status error: {e}")
+            return False
+
+    def test_order_management_endpoints(self):
+        """Test order management endpoints"""
+        print("📋 Testing order management endpoints...")
+        
+        # Create a test order
+        order_id = self.test_create_test_order()
+        if not order_id:
+            print("❌ Cannot test order management without order")
+            return False
+            
+        try:
+            # Test get order by ID
+            response = self.session.get(f"{self.api_url}/orders/{order_id}", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success'):
+                    order = data['data']
+                    print(f"✅ Order retrieval successful: {order['id']}")
+                    print(f"   Status: {order['status']}")
+                    print(f"   Payment Status: {order['payment_status']}")
+                    
+                    # Test order status update
+                    status_update = {"status": "processing"}
+                    response2 = self.session.put(
+                        f"{self.api_url}/orders/{order_id}/status",
+                        json=status_update,
+                        timeout=10
+                    )
+                    
+                    if response2.status_code == 200:
+                        print("✅ Order status update successful")
+                        
+                        # Test payment status update
+                        payment_status_update = {"payment_status": "confirmed"}
+                        response3 = self.session.put(
+                            f"{self.api_url}/orders/{order_id}/payment",
+                            json=payment_status_update,
+                            timeout=10
+                        )
+                        
+                        if response3.status_code == 200:
+                            print("✅ Payment status update successful")
+                            return True
+                        else:
+                            print(f"❌ Payment status update failed: {response3.status_code}")
+                            return False
+                    else:
+                        print(f"❌ Order status update failed: {response2.status_code}")
+                        return False
+                else:
+                    print(f"❌ Order retrieval: Invalid response format")
+                    return False
+            else:
+                print(f"❌ Order retrieval failed: {response.status_code}")
+                return False
+        except Exception as e:
+            print(f"❌ Order management error: {e}")
+            return False
+
     def test_expanded_product_catalog(self):
         """Test the expanded product catalog with 58 products"""
         print("📈 Testing expanded product catalog (58 products)...")
