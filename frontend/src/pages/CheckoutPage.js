@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
+import { useCurrency } from '../context/CurrencyContext';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = () => {
   const { items, getCartTotal, clearCart } = useCart();
+  const { currency, convertPrice } = useCurrency();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     firstName: '',
@@ -12,8 +16,63 @@ const CheckoutPage = () => {
     paymentMethod: 'card'
   });
   const [loading, setLoading] = useState(false);
+  const [cryptoCurrencies, setCryptoCurrencies] = useState([]);
+  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
+  const [usdTotal, setUsdTotal] = useState(0);
+
+  // Calculate USD total for crypto payments
+  useEffect(() => {
+    if (formData.paymentMethod === 'crypto') {
+      const totalInINR = getCartTotal();
+      const usdAmount = totalInINR / 85; // Rough INR to USD conversion
+      setUsdTotal(usdAmount);
+    }
+  }, [formData.paymentMethod, getCartTotal]);
+
+  // Fetch available cryptocurrencies
+  useEffect(() => {
+    if (formData.paymentMethod === 'crypto') {
+      fetchCryptoCurrencies();
+    }
+  }, [formData.paymentMethod]);
+
+  const fetchCryptoCurrencies = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/crypto/currencies`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          // Set common cryptocurrencies
+          setCryptoCurrencies([
+            { code: 'BTC', name: 'Bitcoin' },
+            { code: 'ETH', name: 'Ethereum' },
+            { code: 'USDT', name: 'Tether' },
+            { code: 'LTC', name: 'Litecoin' },
+            { code: 'XRP', name: 'Ripple' },
+            { code: 'ADA', name: 'Cardano' },
+            { code: 'DOT', name: 'Polkadot' },
+            { code: 'DOGE', name: 'Dogecoin' }
+          ]);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching crypto currencies:', error);
+      setCryptoCurrencies([
+        { code: 'BTC', name: 'Bitcoin' },
+        { code: 'ETH', name: 'Ethereum' },
+        { code: 'USDT', name: 'Tether' }
+      ]);
+    }
+  };
 
   const formatPrice = (price) => {
+    if (formData.paymentMethod === 'crypto') {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(price / 85); // Convert INR to USD
+    }
+    
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
@@ -32,9 +91,9 @@ const CheckoutPage = () => {
     setLoading(true);
 
     try {
-      // Create order
+      // Create order first
       const orderData = {
-        user_id: 'guest', // In a real app, this would be the logged-in user ID
+        user_id: 'guest',
         user_email: formData.email,
         user_name: `${formData.firstName} ${formData.lastName}`,
         user_phone: formData.phone,
@@ -48,6 +107,77 @@ const CheckoutPage = () => {
         })),
         total_amount: getCartTotal(),
         payment_method: formData.paymentMethod,
+        currency: formData.paymentMethod === 'crypto' ? 'USD' : 'INR',
+        notes: `Payment method: ${formData.paymentMethod}`
+      };
+
+      const orderResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      if (!orderResponse.ok) {
+        throw new Error('Failed to create order');
+      }
+
+      const orderResult = await orderResponse.json();
+      const orderId = orderResult.data.id;
+
+      // Handle different payment methods
+      if (formData.paymentMethod === 'crypto') {
+        // Create crypto payment
+        const cryptoPaymentData = {
+          order_id: orderId,
+          crypto_currency: selectedCrypto,
+          amount: usdTotal,
+          currency: 'USD'
+        };
+
+        const cryptoResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/crypto/create`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(cryptoPaymentData)
+        });
+
+        if (!cryptoResponse.ok) {
+          throw new Error('Failed to create crypto payment');
+        }
+
+        const cryptoResult = await cryptoResponse.json();
+        
+        if (cryptoResult.success) {
+          // Clear cart and redirect to payment
+          clearCart();
+          
+          // Redirect to NOWPayments or show payment info
+          if (cryptoResult.data.payment_url) {
+            window.location.href = cryptoResult.data.payment_url;
+          } else {
+            // Show payment details
+            navigate(`/order-success?order_id=${orderId}&payment_id=${cryptoResult.data.payment_id}`);
+          }
+        } else {
+          throw new Error(cryptoResult.message || 'Failed to process crypto payment');
+        }
+      } else {
+        // Handle card/UPI payments
+        toast.success('Order placed successfully!');
+        clearCart();
+        navigate(`/order-success?order_id=${orderId}`);
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      toast.error('Failed to place order. Please try again.');
+      navigate(`/order-failed?order_id=${orderId || 'unknown'}&error=${encodeURIComponent(error.message)}`);
+    } finally {
+      setLoading(false);
+    }
+  };
         notes: 'Order placed through website'
       };
 
