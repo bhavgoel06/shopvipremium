@@ -512,7 +512,7 @@ const ModernHomePage = () => {
                   className="group"
                 >
                   <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-2xl group-hover:border-blue-200 transition-all duration-500 group-hover:-translate-y-2">
-                    <ProductCard product={product} className="border-0 shadow-none rounded-3xl" />
+                    <ModernProductCard product={product} />
                   </div>
                 </motion.div>
               ))
