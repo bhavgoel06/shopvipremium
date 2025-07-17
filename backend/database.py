@@ -204,26 +204,12 @@ class Database:
         orders = await cursor.to_list(length=limit)
         return [Order(**order) for order in orders]
     
-    async def update_order_status(self, order_id: str, status: OrderStatus) -> bool:
-        result = await self.db.orders.update_one(
-            {"id": order_id},
-            {"$set": {"status": status, "updated_at": datetime.utcnow()}}
-        )
-        return result.modified_count > 0
-    
     async def update_order_status(self, order_id: str, status: OrderStatus) -> Optional[Order]:
         await self.db.orders.update_one(
             {"id": order_id},
             {"$set": {"status": status, "updated_at": datetime.utcnow()}}
         )
         return await self.get_order(order_id)
-    
-    async def update_payment_status(self, order_id: str, payment_status: PaymentStatus) -> bool:
-        result = await self.db.orders.update_one(
-            {"id": order_id},
-            {"$set": {"payment_status": payment_status, "updated_at": datetime.utcnow()}}
-        )
-        return result.modified_count > 0
     
     async def update_order_payment_status(self, order_id: str, payment_status: PaymentStatus) -> Optional[Order]:
         await self.db.orders.update_one(
