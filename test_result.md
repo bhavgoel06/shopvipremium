@@ -308,7 +308,13 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Fix product data and variants with shopallpremium.com reference"
+    - "Fix search functionality"
+    - "Nowpayments crypto payment integration"
+    - "Order confirmation and failure pages backend"
+    - "Order confirmation and failure pages"
+    - "Terms and Privacy Policy content update"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
