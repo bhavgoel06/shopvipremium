@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import ProductCard from '../components/ProductCard';
+import ModernProductCard from '../components/ModernProductCard';
 
 const ProductsPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
