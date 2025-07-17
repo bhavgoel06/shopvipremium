@@ -569,10 +569,10 @@ class BackendTester:
                     print(f"   Payment Status: {order['payment_status']}")
                     
                     # Test order status update
-                    status_update = {"status": "processing"}
+                    from models import OrderStatus
                     response2 = self.session.put(
                         f"{self.api_url}/orders/{order_id}/status",
-                        json=status_update,
+                        json="processing",  # Send the status value directly
                         timeout=10
                     )
                     
