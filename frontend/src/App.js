@@ -79,6 +79,7 @@ function App() {
               </main>
               <Footer />
               <WhatsAppButton />
+              <FloatingWhatsApp />
               <ToastContainer
                 position="top-right"
                 autoClose={3000}
