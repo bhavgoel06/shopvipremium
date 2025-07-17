@@ -141,4 +141,6 @@ async def add_reviews_to_products():
 
 if __name__ == "__main__":
     asyncio.run(update_products_with_detailed_info())
+    print("\n" + "="*50)
+    print("Running reviews update...")
     asyncio.run(add_reviews_to_products())
