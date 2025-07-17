@@ -189,7 +189,32 @@ const ModernHomePage = () => {
   const currentSlideData = heroSlides[currentSlide];
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <>
+      <Helmet>
+        <title>Shop For Premium - Access Premium Services at 70% Less Cost | Group Subscriptions</title>
+        <meta name="description" content="Get Netflix, Disney+, Spotify, Adobe & more premium subscriptions at fraction of original price. Trusted by 10,000+ users. Instant delivery, 30-day warranty." />
+        <meta name="keywords" content="premium subscriptions, group subscriptions, cheap netflix, discount spotify, adobe creative cloud, group plans, shared subscriptions" />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:title" content="Shop For Premium - Group Subscriptions at 70% Discount" />
+        <meta property="og:description" content="Access premium services like Netflix, Spotify, Adobe at fraction of cost. Secure, legal, instant delivery." />
+        <meta property="og:image" content="/logo-social.png" />
+        <meta property="og:url" content="https://shopforpremium.com" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Shop For Premium - Premium Subscriptions 70% Off" />
+        <meta name="twitter:description" content="Get Netflix, Spotify, Adobe & more at incredible discounts. Secure group subscriptions." />
+        <meta name="twitter:image" content="/logo-social.png" />
+        
+        {/* Additional Meta Tags */}
+        <meta name="author" content="Shop For Premium" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://shopforpremium.com" />
+      </Helmet>
+
+      <div className="min-h-screen bg-black text-white overflow-hidden">
       {/* Remove cursor follower completely */}
 
       {/* Hero Section */}
