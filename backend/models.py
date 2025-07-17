@@ -195,6 +195,35 @@ class OrderCreate(BaseModel):
     payment_method: str
     notes: Optional[str] = None
 
+# Payment Models
+class PaymentTransaction(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    order_id: str
+    payment_id: str  # External payment ID from gateway
+    payment_method: PaymentMethod
+    amount: float
+    currency: str
+    crypto_amount: Optional[float] = None
+    crypto_currency: Optional[str] = None
+    status: PaymentStatus = PaymentStatus.PENDING
+    gateway_response: Optional[Dict[str, Any]] = None
+    failure_reason: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+class PaymentCreate(BaseModel):
+    order_id: str
+    payment_method: PaymentMethod
+    amount: float
+    currency: str = "USD"
+    crypto_currency: Optional[str] = None
+
+class CryptoPaymentRequest(BaseModel):
+    order_id: str
+    crypto_currency: str
+    amount: float
+    currency: str = "USD"
+
 # Review Models
 class Review(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
