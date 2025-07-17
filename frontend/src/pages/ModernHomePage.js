@@ -720,12 +720,8 @@ const ModernHomePage = () => {
                 answer: "Most subscriptions are delivered instantly after payment. In some cases, it may take up to 30 minutes. You'll receive all login details via WhatsApp or email."
               },
               {
-                question: "Can I change or cancel my subscription?",
-                answer: "Yes, you can request changes or cancellations within the first 30 days. We offer flexible terms and will work with you to find the best solution."
-              },
-              {
                 question: "Do you offer refunds?",
-                answer: "Yes, we offer a 30-day money-back guarantee. If you're not satisfied with our service, we'll provide a full refund, no questions asked."
+                answer: "All sales are final and don't raise any dispute/chargeback, contact us to resolve any issues. Doing so will lead to report and ban from placing new orders."
               }
             ].map((faq, index) => (
               <motion.div
