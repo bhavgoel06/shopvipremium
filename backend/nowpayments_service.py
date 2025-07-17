@@ -59,9 +59,9 @@ class NowPaymentsService:
                 "pay_currency": order_data["crypto_currency"],
                 "order_id": order_data["order_id"],
                 "order_description": order_data.get("description", "Premium subscription order"),
-                "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://3d6e5ee0-b6bd-4eb7-887a-9b1edf9bfe34.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
-                "success_url": f"{os.getenv('FRONTEND_URL', 'https://3d6e5ee0-b6bd-4eb7-887a-9b1edf9bfe34.preview.emergentagent.com')}/order-success",
-                "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://3d6e5ee0-b6bd-4eb7-887a-9b1edf9bfe34.preview.emergentagent.com')}/order-cancelled"
+                "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
+                "success_url": f"{os.getenv('FRONTEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/order-success",
+                "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/order-cancelled"
             }
             
             response = requests.post(
