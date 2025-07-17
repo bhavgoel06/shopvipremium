@@ -151,15 +151,26 @@ const CheckoutPage = () => {
         const cryptoResult = await cryptoResponse.json();
         
         if (cryptoResult.success) {
-          // Clear cart and redirect to payment
+          // Clear cart
           clearCart();
           
-          // Redirect to NOWPayments or show payment info
+          // Check if we have a payment URL for redirection
           if (cryptoResult.data.payment_url) {
+            // Redirect to NOWPayments
             window.location.href = cryptoResult.data.payment_url;
+          } else if (cryptoResult.data.pay_address) {
+            // Show payment details and redirect to success page with payment info
+            const paymentParams = new URLSearchParams({
+              order_id: orderId,
+              payment_id: cryptoResult.data.payment_id,
+              pay_address: cryptoResult.data.pay_address,
+              pay_amount: cryptoResult.data.pay_amount,
+              pay_currency: cryptoResult.data.pay_currency
+            });
+            navigate(`/order-success?${paymentParams.toString()}`);
           } else {
-            // Show payment details
-            navigate(`/order-success?order_id=${orderId}&payment_id=${cryptoResult.data.payment_id}`);
+            // Fallback - just go to success page
+            navigate(`/order-success?order_id=${orderId}`);
           }
         } else {
           throw new Error(cryptoResult.message || 'Failed to process crypto payment');
