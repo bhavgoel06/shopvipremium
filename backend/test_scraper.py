@@ -67,7 +67,12 @@ def scrape_product_page(url):
         for price_str in price_elements:
             price_match = re.search(r'[\d,]+', price_str.replace('₹', '').replace('$', ''))
             if price_match:
-                prices.append(int(price_match.group().replace(',', '')))
+                try:
+                    price_val = int(price_match.group().replace(',', ''))
+                    if price_val > 0:  # Only add positive prices
+                        prices.append(price_val)
+                except ValueError:
+                    continue
         
         return {
             'name': product_name,
