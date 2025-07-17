@@ -325,7 +325,7 @@ class BackendTester:
     def test_comprehensive_search_functionality(self):
         """Test comprehensive search functionality with specific queries"""
         print("🔍 Testing comprehensive search functionality...")
-        search_queries = ["onlyfans", "netflix", "spotify", "adobe", "microsoft"]
+        search_queries = ["onlyfans", "netflix", "spotify", "chatgpt", "adobe"]
         
         passed_searches = 0
         total_searches = len(search_queries)
@@ -359,6 +359,70 @@ class BackendTester:
         success_rate = (passed_searches / total_searches) * 100
         print(f"✅ Search functionality: {passed_searches}/{total_searches} queries working ({success_rate:.1f}%)")
         return passed_searches >= 3  # At least 3 out of 5 searches should work
+
+    def test_shopallpremium_pricing_verification(self):
+        """Test that products have correct INR pricing matching shopallpremium.com"""
+        print("💰 Testing shopallpremium.com pricing verification...")
+        
+        # Expected pricing from shopallpremium.com (in INR)
+        expected_pricing = {
+            "onlyfans": {"original": 3399, "discounted": 1599, "discount": 53},
+            "netflix": {"original": 1199, "discounted": 809, "discount": 33},
+            "spotify": {"original": 739, "discounted": 45, "discount": 94},
+            "chatgpt": {"original": 2049, "discounted": 1199, "discount": 41}
+        }
+        
+        pricing_matches = 0
+        total_products = len(expected_pricing)
+        
+        for product_name, expected in expected_pricing.items():
+            try:
+                # Search for the product
+                response = self.session.get(f"{self.api_url}/products/search?q={product_name}", timeout=10)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get('success') and data.get('data'):
+                        products = data['data']
+                        
+                        # Find the specific product (case insensitive)
+                        found_product = None
+                        for product in products:
+                            if product_name.lower() in product.get('name', '').lower():
+                                found_product = product
+                                break
+                        
+                        if found_product:
+                            original_price = found_product.get('original_price', 0)
+                            discounted_price = found_product.get('discounted_price', 0)
+                            discount_percentage = found_product.get('discount_percentage', 0)
+                            
+                            print(f"   📦 {found_product['name']}:")
+                            print(f"      Expected: ₹{expected['original']} → ₹{expected['discounted']} ({expected['discount']}% off)")
+                            print(f"      Actual: ₹{original_price} → ₹{discounted_price} ({discount_percentage}% off)")
+                            
+                            # Check if pricing matches (allow 5% tolerance)
+                            original_match = abs(original_price - expected['original']) <= (expected['original'] * 0.05)
+                            discounted_match = abs(discounted_price - expected['discounted']) <= (expected['discounted'] * 0.05)
+                            discount_match = abs(discount_percentage - expected['discount']) <= 5
+                            
+                            if original_match and discounted_match and discount_match:
+                                print(f"      ✅ Pricing matches shopallpremium.com")
+                                pricing_matches += 1
+                            else:
+                                print(f"      ❌ Pricing does not match shopallpremium.com")
+                        else:
+                            print(f"   ❌ {product_name}: Product not found in search results")
+                    else:
+                        print(f"   ❌ {product_name}: Search failed or no results")
+                else:
+                    print(f"   ❌ {product_name}: Search endpoint failed ({response.status_code})")
+            except Exception as e:
+                print(f"   ❌ {product_name}: Error ({e})")
+        
+        success_rate = (pricing_matches / total_products) * 100
+        print(f"✅ Pricing verification: {pricing_matches}/{total_products} products match shopallpremium.com ({success_rate:.1f}%)")
+        return pricing_matches >= 2  # At least 2 out of 4 products should have correct pricing
 
     def test_crypto_currencies_endpoint(self):
         """Test crypto currencies endpoint"""
