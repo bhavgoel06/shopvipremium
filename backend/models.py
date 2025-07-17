@@ -337,3 +337,4 @@ class SearchFilters(BaseModel):
     sort_order: Optional[str] = "desc"
     page: int = 1
     per_page: int = 12
+    search: Optional[str] = None
