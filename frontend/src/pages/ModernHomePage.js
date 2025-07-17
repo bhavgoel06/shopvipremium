@@ -157,10 +157,9 @@ const ModernHomePage = () => {
   const fetchHomeData = async () => {
     try {
       setLoading(true);
-      const [featuredRes, bestsellerRes, adultRes] = await Promise.all([
+      const [featuredRes, bestsellerRes] = await Promise.all([
         fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/featured?limit=12`),
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/bestsellers?limit=8`),
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/category/adult?limit=8`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/bestsellers?limit=8`)
       ]);
 
       if (featuredRes.ok) {
