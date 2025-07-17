@@ -366,19 +366,20 @@ class BackendTester:
         
         # Expected pricing from shopallpremium.com (in INR)
         expected_pricing = {
-            "onlyfans": {"original": 3399, "discounted": 1599, "discount": 53},
-            "netflix": {"original": 1199, "discounted": 809, "discount": 33},
-            "spotify": {"original": 739, "discounted": 45, "discount": 94},
-            "chatgpt": {"original": 2049, "discounted": 1199, "discount": 41}
+            "onlyfans": {"original": 3399, "discounted": 1599, "discount": 53, "search_term": "onlyfans accounts"},
+            "netflix": {"original": 1199, "discounted": 809, "discount": 33, "search_term": "netflix premium 4k"},
+            "spotify": {"original": 739, "discounted": 45, "discount": 94, "search_term": "spotify premium individual"},
+            "chatgpt": {"original": 2049, "discounted": 1199, "discount": 41, "search_term": "chatgpt plus"}
         }
         
         pricing_matches = 0
         total_products = len(expected_pricing)
         
-        for product_name, expected in expected_pricing.items():
+        for product_key, expected in expected_pricing.items():
             try:
-                # Search for the product
-                response = self.session.get(f"{self.api_url}/products/search?q={product_name}", timeout=10)
+                # Search for the product using specific search term
+                search_term = expected.get("search_term", product_key)
+                response = self.session.get(f"{self.api_url}/products/search?q={search_term}", timeout=10)
                 
                 if response.status_code == 200:
                     data = response.json()
@@ -388,7 +389,11 @@ class BackendTester:
                         # Find the specific product (case insensitive)
                         found_product = None
                         for product in products:
-                            if product_name.lower() in product.get('name', '').lower():
+                            product_name = product.get('name', '').lower()
+                            if (product_key == "onlyfans" and "onlyfans" in product_name) or \
+                               (product_key == "netflix" and "netflix premium 4k" in product_name) or \
+                               (product_key == "spotify" and "spotify premium" in product_name and "individual" in product_name) or \
+                               (product_key == "chatgpt" and "chatgpt plus" in product_name):
                                 found_product = product
                                 break
                         
@@ -412,17 +417,17 @@ class BackendTester:
                             else:
                                 print(f"      ❌ Pricing does not match shopallpremium.com")
                         else:
-                            print(f"   ❌ {product_name}: Product not found in search results")
+                            print(f"   ❌ {product_key}: Specific product not found in search results")
                     else:
-                        print(f"   ❌ {product_name}: Search failed or no results")
+                        print(f"   ❌ {product_key}: Search failed or no results")
                 else:
-                    print(f"   ❌ {product_name}: Search endpoint failed ({response.status_code})")
+                    print(f"   ❌ {product_key}: Search endpoint failed ({response.status_code})")
             except Exception as e:
-                print(f"   ❌ {product_name}: Error ({e})")
+                print(f"   ❌ {product_key}: Error ({e})")
         
         success_rate = (pricing_matches / total_products) * 100
         print(f"✅ Pricing verification: {pricing_matches}/{total_products} products match shopallpremium.com ({success_rate:.1f}%)")
-        return pricing_matches >= 2  # At least 2 out of 4 products should have correct pricing
+        return pricing_matches >= 3  # At least 3 out of 4 products should have correct pricing
 
     def test_crypto_currencies_endpoint(self):
         """Test crypto currencies endpoint"""
