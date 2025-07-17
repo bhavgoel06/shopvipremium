@@ -655,7 +655,8 @@ async def verify_all_products():
     
     # Check products with features
     with_features = await db.products.count_documents({
-        "features": {"$exists": True, "$ne": [], "$size": {"$gte": 3}}
+        "features": {"$exists": True, "$ne": []},
+        "$expr": {"$gte": [{"$size": "$features"}, 3]}
     })
     
     # Check products with variants
