@@ -342,10 +342,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Fix product data and variants with shopallpremium.com reference"
-    - "Fix search functionality"
     - "Order confirmation and failure pages"
     - "Terms and Privacy Policy content update"
+    - "Design improvements to match mobbin standards"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
