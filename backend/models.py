@@ -372,3 +372,14 @@ class OrderStatusUpdate(BaseModel):
 
 class PaymentStatusUpdate(BaseModel):
     payment_status: PaymentStatus
+
+class SearchFilters(BaseModel):
+    category: Optional[str] = None
+    min_price: Optional[float] = None
+    max_price: Optional[float] = None
+    rating: Optional[int] = None
+    sort_by: Optional[str] = "created_at"
+    sort_order: Optional[str] = "desc"
+    page: int = 1
+    per_page: int = 12
+    search: Optional[str] = None
