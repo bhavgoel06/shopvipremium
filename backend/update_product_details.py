@@ -22,7 +22,8 @@ async def update_products_with_detailed_info():
         detailed_map[normalized_name] = product
     
     # Get all existing products from database
-    existing_products = await db.get_products({'page': 1, 'per_page': 200})
+    from models import SearchFilters
+    existing_products = await db.get_products(SearchFilters(page=1, per_page=200))
     
     updated_count = 0
     
