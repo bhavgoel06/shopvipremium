@@ -231,7 +231,8 @@ async def get_products(
     sort_by: str = "created_at",
     sort_order: str = "desc",
     page: int = 1,
-    per_page: int = 12
+    per_page: int = 12,
+    search: Optional[str] = None
 ):
     """Get products with filters and pagination"""
     try:
@@ -243,7 +244,8 @@ async def get_products(
             sort_by=sort_by,
             sort_order=sort_order,
             page=page,
-            per_page=per_page
+            per_page=per_page,
+            search=search
         )
         
         products = await db.get_products(filters)
