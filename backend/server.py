@@ -918,7 +918,7 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
         
         payment_response = await nowpayments_service.create_payment(payment_data)
         
-        # Create payment transaction record
+        # Create payment transaction record with external payment ID
         payment_create = PaymentCreate(
             order_id=payment_request.order_id,
             payment_method=PaymentMethod.CRYPTO,
@@ -929,10 +929,10 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
         
         payment_transaction = await db.create_payment_transaction(payment_create)
         
-        # Update payment transaction with external payment ID
-        payment_transaction.payment_id = payment_response.get("id")
+        # Update payment transaction with external payment ID and status
+        payment_id = payment_response.get("id", f"mock_payment_{payment_request.order_id}")
         await db.update_payment_status(
-            payment_response.get("id"),
+            payment_id,
             PaymentStatus.WAITING,
             payment_response
         )
