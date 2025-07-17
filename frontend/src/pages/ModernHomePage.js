@@ -409,54 +409,6 @@ const ModernHomePage = () => {
         </div>
       </section>
 
-      {/* Adult Content Section */}
-      <section className="relative py-24 bg-gradient-to-r from-red-900 via-pink-900 to-purple-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent mb-6">
-              Adult Content
-            </h2>
-            <p className="text-xl text-gray-200 max-w-2xl mx-auto mb-6">
-              Premium adult subscriptions with instant access
-            </p>
-            <div className="bg-yellow-900 bg-opacity-50 rounded-lg p-4 max-w-lg mx-auto">
-              <p className="text-yellow-200 text-sm">
-                <strong>⚠️ 18+ Only:</strong> Must be 18 or older to access adult content
-              </p>
-            </div>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {loading ? (
-              Array(8).fill(0).map((_, index) => (
-                <div key={index} className="bg-white/10 rounded-2xl p-6 animate-pulse">
-                  <div className="h-32 bg-white/20 rounded mb-4" />
-                  <div className="h-4 bg-white/20 rounded mb-2" />
-                  <div className="h-3 bg-white/20 rounded w-2/3" />
-                </div>
-              ))
-            ) : (
-              adultProducts.map((product, index) => (
-                <motion.div
-                  key={product.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <ModernProductCard product={product} />
-                </motion.div>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* Modern Product Showcase */}
       <section className="relative py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
