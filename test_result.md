@@ -232,14 +232,14 @@ frontend:
   - task: "Order confirmation and failure pages"
     implemented: false
     working: false
-    file: "CheckoutPage.js"
+    file: "OrderSuccess.js, OrderCancelled.js, OrderFailed.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
         - working: false
           agent: "main"
-          comment: "Need to create dedicated order confirmation/received pages and handle failed/cancelled payment scenarios."
+          comment: "Need to create dedicated order confirmation/received pages and handle failed/cancelled payment scenarios. Backend order management is ready."
 
   - task: "Terms and Privacy Policy content update"
     implemented: false
