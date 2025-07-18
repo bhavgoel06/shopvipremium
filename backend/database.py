@@ -188,7 +188,11 @@ class Database:
     
     async def get_order(self, order_id: str) -> Optional[Order]:
         order = await self.db.orders.find_one({"id": order_id})
-        return Order(**order) if order else None
+        if order:
+            # Remove MongoDB _id field before creating Pydantic model
+            order.pop('_id', None)
+            return Order(**order)
+        return None
     
     async def get_user_orders(self, user_id: str) -> List[Order]:
         cursor = self.db.orders.find({"user_id": user_id}).sort("created_at", -1)
