@@ -197,6 +197,8 @@ class Database:
     async def get_user_orders(self, user_id: str) -> List[Order]:
         cursor = self.db.orders.find({"user_id": user_id}).sort("created_at", -1)
         orders = await cursor.to_list(length=100)
+        for order in orders:
+            order.pop('_id', None)
         return [Order(**order) for order in orders]
     
     async def get_orders(self, user_id: Optional[str] = None, limit: int = 50) -> List[Order]:
@@ -206,6 +208,8 @@ class Database:
         
         cursor = self.db.orders.find(query).sort("created_at", -1).limit(limit)
         orders = await cursor.to_list(length=limit)
+        for order in orders:
+            order.pop('_id', None)
         return [Order(**order) for order in orders]
     
     async def update_order_status(self, order_id: str, status: OrderStatus) -> Optional[Order]:
