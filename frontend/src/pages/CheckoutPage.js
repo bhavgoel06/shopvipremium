@@ -317,23 +317,9 @@ const CheckoutPage = () => {
               </div>
 
               {formData.paymentMethod === 'crypto' && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Select Cryptocurrency
-                  </label>
-                  <select
-                    value={selectedCrypto}
-                    onChange={(e) => setSelectedCrypto(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    {cryptoCurrencies.map(crypto => (
-                      <option key={crypto.code} value={crypto.code}>
-                        {crypto.name} ({crypto.code})
-                      </option>
-                    ))}
-                  </select>
-                  <p className="text-sm text-gray-600 mt-2">
-                    Amount will be converted to USD for crypto payments
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                  <p className="text-sm text-blue-800">
+                    <span className="font-medium">Cryptocurrency Payment:</span> You'll be redirected to our secure payment page where you can choose from Bitcoin, Ethereum, Tether, and other cryptocurrencies.
                   </p>
                 </div>
               )}
