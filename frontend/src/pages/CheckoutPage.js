@@ -24,10 +24,10 @@ const CheckoutPage = () => {
   useEffect(() => {
     if (formData.paymentMethod === 'crypto') {
       const totalInINR = getCartTotal();
-      const usdAmount = totalInINR / 85; // Rough INR to USD conversion
+      const usdAmount = convertPrice(totalInINR);
       setUsdTotal(usdAmount);
     }
-  }, [formData.paymentMethod, getCartTotal]);
+  }, [formData.paymentMethod, getCartTotal, convertPrice]);
 
   // Fetch available cryptocurrencies
   useEffect(() => {
