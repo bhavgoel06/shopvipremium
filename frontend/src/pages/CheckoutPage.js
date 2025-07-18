@@ -16,8 +16,6 @@ const CheckoutPage = () => {
     paymentMethod: 'card'
   });
   const [loading, setLoading] = useState(false);
-  const [cryptoCurrencies, setCryptoCurrencies] = useState([]);
-  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
   const [usdTotal, setUsdTotal] = useState(0);
 
   // Calculate USD total for crypto payments
