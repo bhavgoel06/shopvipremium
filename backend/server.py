@@ -930,7 +930,7 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
         payment_transaction = await db.create_payment_transaction(payment_create)
         
         # Update payment transaction with external payment ID and status
-        payment_id = payment_response.get("payment_id", f"mock_payment_{payment_request.order_id}")
+        payment_id = payment_response.get("id", f"mock_payment_{payment_request.order_id}")
         await db.update_payment_status(
             payment_id,
             PaymentStatus.WAITING,
@@ -942,10 +942,10 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
             "message": "Crypto payment created successfully",
             "data": {
                 "payment_id": payment_id,
-                "pay_address": payment_response.get("pay_address"),
-                "pay_amount": payment_response.get("pay_amount"),
-                "pay_currency": payment_response.get("pay_currency"),
-                "payment_url": payment_response.get("invoice_url")
+                "invoice_url": payment_response.get("invoice_url"),
+                "order_id": payment_response.get("order_id"),
+                "price_amount": payment_response.get("price_amount"),
+                "price_currency": payment_response.get("price_currency")
             }
         }
     except HTTPException:
