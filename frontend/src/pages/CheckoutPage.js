@@ -27,42 +27,6 @@ const CheckoutPage = () => {
     }
   }, [formData.paymentMethod, getCartTotal, convertPrice]);
 
-  // Fetch available cryptocurrencies
-  useEffect(() => {
-    if (formData.paymentMethod === 'crypto') {
-      fetchCryptoCurrencies();
-    }
-  }, [formData.paymentMethod]);
-
-  const fetchCryptoCurrencies = async () => {
-    try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/crypto/currencies`);
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success) {
-          // Set common cryptocurrencies
-          setCryptoCurrencies([
-            { code: 'BTC', name: 'Bitcoin' },
-            { code: 'ETH', name: 'Ethereum' },
-            { code: 'USDT', name: 'Tether' },
-            { code: 'LTC', name: 'Litecoin' },
-            { code: 'XRP', name: 'Ripple' },
-            { code: 'ADA', name: 'Cardano' },
-            { code: 'DOT', name: 'Polkadot' },
-            { code: 'DOGE', name: 'Dogecoin' }
-          ]);
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching crypto currencies:', error);
-      setCryptoCurrencies([
-        { code: 'BTC', name: 'Bitcoin' },
-        { code: 'ETH', name: 'Ethereum' },
-        { code: 'USDT', name: 'Tether' }
-      ]);
-    }
-  };
-
   const formatPrice = (price) => {
     if (formData.paymentMethod === 'crypto') {
       return new Intl.NumberFormat('en-US', {
