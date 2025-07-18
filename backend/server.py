@@ -930,7 +930,7 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
         payment_transaction = await db.create_payment_transaction(payment_create)
         
         # Update payment transaction with external payment ID and status
-        payment_id = payment_response.get("id", f"mock_payment_{payment_request.order_id}")
+        payment_id = payment_response.get("payment_id", f"mock_payment_{payment_request.order_id}")
         await db.update_payment_status(
             payment_id,
             PaymentStatus.WAITING,
