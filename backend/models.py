@@ -220,7 +220,7 @@ class PaymentCreate(BaseModel):
 
 class CryptoPaymentRequest(BaseModel):
     order_id: str
-    crypto_currency: str
+    crypto_currency: Optional[str] = None
     amount: float
     currency: str = "USD"
 
