@@ -912,7 +912,6 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
             "order_id": payment_request.order_id,
             "amount": payment_request.amount,
             "price_currency": payment_request.currency,
-            "crypto_currency": payment_request.crypto_currency,
             "description": f"Order {payment_request.order_id} - Premium subscription"
         }
         
