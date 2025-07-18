@@ -155,6 +155,9 @@ backend:
         - working: true
           agent: "testing"
           comment: "✅ TESTED: Nowpayments crypto payment integration working with 95.8% success rate. All core payment endpoints functional: GET /api/payments/crypto/currencies (200+ cryptocurrencies), POST /api/payments/crypto/create (creates payments with proper Bitcoin addresses), GET /api/payments/{payment_id}/status (working), POST /api/payments/nowpayments/ipn (IPN callback handling implemented). Complete database operations for payments and orders working."
+        - working: true
+          agent: "testing"
+          comment: "🔧 CRITICAL FIX APPLIED: Fixed payment ID field mapping issue. NOWPayments API returns 'payment_id' field but code was looking for 'id' field, causing fallback to mock payments. Changed server.py line 933 from payment_response.get('id') to payment_response.get('payment_id'). Now crypto payments work end-to-end: ✅ Order creation, ✅ Real NOWPayments payment creation (returns real payment IDs like '4398784387'), ✅ Payment status tracking, ✅ All required fields present (payment_id, pay_address, pay_amount, pay_currency). This fixes the issue causing frontend redirects to failed page."
 
   - task: "Order confirmation and failure pages backend"
     implemented: true
