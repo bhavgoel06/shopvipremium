@@ -58,12 +58,11 @@ class NowPaymentsService:
             raise
     
     async def create_payment(self, order_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Create a new payment"""
+        """Create a new payment with hosted payment page"""
         try:
             payload = {
                 "price_amount": order_data["amount"],
                 "price_currency": order_data.get("price_currency", "USD"),
-                "pay_currency": order_data["crypto_currency"],
                 "order_id": order_data["order_id"],
                 "order_description": order_data.get("description", "Premium subscription order"),
                 "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
@@ -71,8 +70,9 @@ class NowPaymentsService:
                 "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/order-cancelled"
             }
             
+            # Use invoice endpoint for hosted payment page
             response = requests.post(
-                f"{self.base_url}/payment",
+                f"{self.base_url}/invoice",
                 json=payload,
                 headers=self._get_headers()
             )
