@@ -153,23 +153,21 @@ const CheckoutPage = () => {
           // Clear cart
           clearCart();
           
-          // Check if we have a payment URL for redirection
-          if (cryptoResult.data.payment_url) {
-            // Redirect to NOWPayments
-            window.location.href = cryptoResult.data.payment_url;
-          } else if (cryptoResult.data.pay_address) {
-            // Show payment details and redirect to success page with payment info
-            const paymentParams = new URLSearchParams({
-              order_id: orderId,
-              payment_id: cryptoResult.data.payment_id,
-              pay_address: cryptoResult.data.pay_address,
-              pay_amount: cryptoResult.data.pay_amount,
-              pay_currency: cryptoResult.data.pay_currency
-            });
-            navigate(`/order-success?${paymentParams.toString()}`);
+          // Check if we have an invoice URL for redirection
+          if (cryptoResult.data.invoice_url) {
+            // Redirect to NOWPayments hosted payment page
+            window.location.href = cryptoResult.data.invoice_url;
           } else {
-            // Fallback - just go to success page
-            navigate(`/order-success?order_id=${orderId}`);
+            // Fallback to success page with payment details
+            navigate('/order-success', {
+              state: {
+                orderId: orderResult.data.id,
+                paymentMethod: 'crypto',
+                paymentId: cryptoResult.data.payment_id,
+                amount: usdTotal,
+                currency: 'USD'
+              }
+            });
           }
         } else {
           throw new Error(cryptoResult.message || 'Failed to process crypto payment');
