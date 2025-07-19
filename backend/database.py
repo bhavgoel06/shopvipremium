@@ -376,5 +376,140 @@ class Database:
         
         return None
 
+    # Enhanced Admin Methods for WooCommerce-level functionality
+    async def get_orders(self, page: int = 1, per_page: int = 20, status_filter: Optional[str] = None) -> List[Dict]:
+        """Get orders with pagination and filtering"""
+        skip = (page - 1) * per_page
+        query = {}
+        if status_filter:
+            query["status"] = status_filter
+        
+        cursor = self.db.orders.find(query).sort("created_at", -1).skip(skip).limit(per_page)
+        orders = await cursor.to_list(length=per_page)
+        
+        # Remove _id field and format for frontend
+        for order in orders:
+            if "_id" in order:
+                order.pop("_id")
+        
+        return orders
+    
+    async def get_users(self, page: int = 1, per_page: int = 50) -> List[Dict]:
+        """Get users with pagination"""
+        skip = (page - 1) * per_page
+        cursor = self.db.users.find({}, {"password": 0}).sort("created_at", -1).skip(skip).limit(per_page)
+        users = await cursor.to_list(length=per_page)
+        
+        # Remove _id field
+        for user in users:
+            if "_id" in user:
+                user.pop("_id")
+        
+        return users
+    
+    async def update_product_stock(self, product_id: str, stock_quantity: int) -> Optional[Dict]:
+        """Update product stock quantity"""
+        result = await self.db.products.update_one(
+            {"id": product_id},
+            {"$set": {"stock_quantity": stock_quantity, "updated_at": datetime.utcnow()}}
+        )
+        if result.modified_count > 0:
+            product = await self.db.products.find_one({"id": product_id})
+            if product and "_id" in product:
+                product.pop("_id")
+            return product
+        return None
+    
+    async def delete_product(self, product_id: str) -> bool:
+        """Delete a product"""
+        result = await self.db.products.delete_one({"id": product_id})
+        return result.deleted_count > 0
+    
+    async def bulk_update_stock(self, update_data: Dict) -> int:
+        """Bulk update stock for all products"""
+        update_data["updated_at"] = datetime.utcnow()
+        result = await self.db.products.update_many({}, {"$set": update_data})
+        return result.modified_count
+    
+    async def get_stock_overview(self) -> Dict:
+        """Get comprehensive stock overview"""
+        pipeline = [
+            {
+                "$group": {
+                    "_id": None,
+                    "total_products": {"$sum": 1},
+                    "in_stock": {"$sum": {"$cond": [{"$gt": ["$stock_quantity", 0]}, 1, 0]}},
+                    "out_of_stock": {"$sum": {"$cond": [{"$eq": ["$stock_quantity", 0]}, 1, 0]}},
+                    "low_stock_count": {"$sum": {"$cond": [{"$and": [{"$gt": ["$stock_quantity", 0]}, {"$lte": ["$stock_quantity", 10]}]}, 1, 0]}},
+                    "total_stock_units": {"$sum": "$stock_quantity"}
+                }
+            }
+        ]
+        
+        result = await self.db.products.aggregate(pipeline).to_list(1)
+        if result:
+            data = result[0]
+            data.pop("_id", None)
+            return data
+        
+        return {
+            "total_products": 0,
+            "in_stock": 0,
+            "out_of_stock": 0,
+            "low_stock_count": 0,
+            "total_stock_units": 0
+        }
+    
+    async def get_low_stock_products(self, threshold: int = 10) -> List[Dict]:
+        """Get products with low stock"""
+        cursor = self.db.products.find(
+            {"stock_quantity": {"$lte": threshold, "$gt": 0}},
+            {"id": 1, "name": 1, "stock_quantity": 1, "category": 1, "discounted_price": 1, "image_url": 1}
+        )
+        products = await cursor.to_list(length=100)
+        
+        # Remove _id field
+        for product in products:
+            if "_id" in product:
+                product.pop("_id")
+        
+        return products
+    
+    async def get_dashboard_stats(self) -> Dict:
+        """Get comprehensive dashboard statistics"""
+        # Get product stats
+        total_products = await self.db.products.count_documents({})
+        
+        # Get order stats
+        total_orders = await self.db.orders.count_documents({})
+        
+        # Get user stats
+        total_users = await self.db.users.count_documents({})
+        
+        # Calculate total revenue (sum of all completed orders)
+        revenue_pipeline = [
+            {"$match": {"status": {"$in": ["completed", "confirmed"]}}},
+            {"$group": {"_id": None, "total_revenue": {"$sum": "$total_amount"}}}
+        ]
+        revenue_result = await self.db.orders.aggregate(revenue_pipeline).to_list(1)
+        total_revenue = revenue_result[0]["total_revenue"] if revenue_result else 0
+        
+        # Get recent orders (last 5)
+        recent_orders_cursor = self.db.orders.find({}).sort("created_at", -1).limit(5)
+        recent_orders = await recent_orders_cursor.to_list(5)
+        
+        # Remove _id field from recent orders
+        for order in recent_orders:
+            if "_id" in order:
+                order.pop("_id")
+        
+        return {
+            "totalRevenue": total_revenue,
+            "totalOrders": total_orders,
+            "totalProducts": total_products,
+            "totalUsers": total_users,
+            "recentOrders": recent_orders
+        }
+
 # Global database instance
 db = Database()
