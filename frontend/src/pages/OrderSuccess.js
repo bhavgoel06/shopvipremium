@@ -311,6 +311,24 @@ const OrderSuccess = () => {
                 <p className="text-gray-600 text-sm">
                   Contact us anytime if you need help with your order
                 </p>
+                <div className="mt-3 space-x-4">
+                  <a 
+                    href="https://wa.me/919876543210" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs text-green-600 hover:text-green-700"
+                  >
+                    📱 WhatsApp
+                  </a>
+                  <a 
+                    href="https://t.me/shopforpremium" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs text-blue-600 hover:text-blue-700"
+                  >
+                    📩 Telegram
+                  </a>
+                </div>
               </div>
             </div>
           </div>
