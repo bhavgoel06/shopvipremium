@@ -1,0 +1,17 @@
+{
+  "products": [],
+  "site_structure": {
+    "categories": [],
+    "navigation": [],
+    "hero_content": {},
+    "trust_elements": [],
+    "promotional_content": []
+  },
+  "scraping_info": {
+    "timestamp": 1752929154.023914,
+    "methods_used": [
+      "beautifulsoup"
+    ],
+    "success": true
+  }
+}
