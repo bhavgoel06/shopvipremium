@@ -376,7 +376,12 @@ class Database:
         
         return None
 
-    # Enhanced Admin Methods for WooCommerce-level functionality
+    async def get_product_by_id(self, product_id: str) -> Optional[Dict]:
+        """Get a single product by ID"""
+        product = await self.db.products.find_one({"id": product_id})
+        if product and "_id" in product:
+            product.pop("_id")
+        return product
     async def get_orders(self, page: int = 1, per_page: int = 20, status_filter: Optional[str] = None) -> List[Dict]:
         """Get orders with pagination and filtering"""
         skip = (page - 1) * per_page
