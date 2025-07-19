@@ -17,6 +17,13 @@ const WooCommerceAdminInterface = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [editingProduct, setEditingProduct] = useState(null);
+  const [paymentMethods, setPaymentMethods] = useState({
+    crypto: true,
+    upi: true,
+    cards: true,
+    netbanking: false,
+    wallets: false
+  });
   const [newProduct, setNewProduct] = useState({
     name: '',
     description: '',
