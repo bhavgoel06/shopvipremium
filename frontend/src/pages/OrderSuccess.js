@@ -293,6 +293,29 @@ const OrderSuccess = () => {
                 <p className="text-gray-600 text-sm">
                   Login credentials will be sent to your email address
                 </p>
+                <div className="mt-3">
+                  <p className="text-xs text-gray-500">
+                    For instant delivery, contact us on:
+                  </p>
+                  <div className="mt-1 space-x-3">
+                    <a 
+                      href="https://wa.me/919876543210" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-xs text-green-600 hover:text-green-700"
+                    >
+                      📱 WhatsApp
+                    </a>
+                    <a 
+                      href="https://t.me/shopforpremium" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-xs text-blue-600 hover:text-blue-700"
+                    >
+                      📩 Telegram
+                    </a>
+                  </div>
+                </div>
               </div>
               <div className="text-center">
                 <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
