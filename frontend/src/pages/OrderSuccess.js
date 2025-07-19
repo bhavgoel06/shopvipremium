@@ -68,6 +68,17 @@ const OrderSuccess = () => {
     setLoading(false);
   };
 
+  const startStatusPolling = () => {
+    // Start polling for status updates every 10 seconds
+    const interval = setInterval(fetchOrderStatus, 10000);
+    setStatusPolling(interval);
+    
+    // Clean up polling on unmount
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  };
+
   const fetchOrderStatus = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders/${orderId}/status`);
