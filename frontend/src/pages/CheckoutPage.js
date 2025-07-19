@@ -118,11 +118,9 @@ const CheckoutPage = () => {
           
           // Check if we have an invoice URL for redirection
           if (cryptoResult.data.invoice_url) {
-            console.log('Redirecting to:', cryptoResult.data.invoice_url);
             // Redirect to NOWPayments hosted payment page
             window.location.href = cryptoResult.data.invoice_url;
           } else {
-            console.log('No invoice URL, going to success page');
             // Fallback to success page with payment details
             navigate('/order-success', {
               state: {
