@@ -58,7 +58,7 @@ class NowPaymentsService:
             raise
     
     async def create_payment(self, order_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Create a new payment with hosted payment page"""
+        """Create a new payment with hosted payment page and specific currencies"""
         try:
             payload = {
                 "price_amount": order_data["amount"],
@@ -67,7 +67,20 @@ class NowPaymentsService:
                 "order_description": order_data.get("description", "Premium subscription order"),
                 "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
                 "success_url": f"{os.getenv('FRONTEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/order-success",
-                "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/order-cancelled"
+                "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://4e692b72-c7d7-48a0-bbf9-32a02d788f50.preview.emergentagent.com')}/order-cancelled",
+                # Specify allowed currencies
+                "available_currencies": [
+                    "btc",    # Bitcoin
+                    "eth",    # Ethereum  
+                    "usdt",   # Tether (ERC-20)
+                    "usdttrc", # Tether (TRC-20)
+                    "usdcmatic", # USDC (Polygon)
+                    "ltc",    # Litecoin
+                    "bnb",    # Binance Coin
+                    "sol",    # Solana
+                    "trx",    # TRON
+                    "xrp"     # Ripple
+                ]
             }
             
             # Use invoice endpoint for hosted payment page
