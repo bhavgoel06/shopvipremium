@@ -1478,6 +1478,7 @@ const WooCommerceAdminInterface = () => {
       case 'orders': return renderOrders();
       case 'users': return renderUsers();
       case 'add-product': return renderAddProduct();
+      case 'content': return renderContentManager();
       case 'settings': return renderSettings();
       default: return renderDashboard();
     }
