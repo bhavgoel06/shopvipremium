@@ -24,6 +24,30 @@ const WooCommerceAdminInterface = () => {
     netbanking: false,
     wallets: false
   });
+  const [contentData, setContentData] = useState({
+    hero_section: {
+      title: "WELCOME TO PREMIUM SHOP",
+      subtitle: "World's #1 Premium Account Shop",
+      description: "Don't miss out on special items at extraordinary sale prices!",
+      cta_primary: "Shop Now",
+      cta_secondary: "Learn More"
+    },
+    promo_banner: {
+      enabled: true,
+      title: "⚡ ChatGPT Plus Offer!",
+      description: "Now on Shop For Premium. Only ₹589 or $12/month",
+      countdown_hours: 1,
+      cta_text: "SHOP NOW!",
+      cta_link: "/products?search=chatgpt"
+    },
+    site_settings: {
+      site_title: "Shop For Premium - Premium Account Shop",
+      site_description: "World's Best OTT Subscriptions at unbeatable prices",
+      contact_email: "support@shopforpremium.com",
+      whatsapp_number: "+91-9876543210",
+      telegram_handle: "@shopforpremium"
+    }
+  });
   const [newProduct, setNewProduct] = useState({
     name: '',
     description: '',
