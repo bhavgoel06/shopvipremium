@@ -1076,6 +1076,35 @@ async def get_order_status(order_id: str):
         logger.error(f"Error getting order status: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+@app.get("/api/payments/{payment_id}/order")
+async def get_order_by_payment_id(payment_id: str):
+    """Find order by NOWPayments payment ID"""
+    try:
+        # Find payment record by external payment ID
+        payment = await db.db.payments.find_one({"payment_id": payment_id})
+        if not payment:
+            # Try to find by gateway response containing this ID
+            payment = await db.db.payments.find_one({"gateway_response.id": payment_id})
+        
+        if payment:
+            payment.pop('_id', None)
+            return {
+                "success": True,
+                "data": {
+                    "order_id": payment["order_id"],
+                    "payment_id": payment_id,
+                    "status": payment.get("status", "pending")
+                }
+            }
+        else:
+            return {
+                "success": False,
+                "message": "Payment not found"
+            }
+    except Exception as e:
+        logger.error(f"Error finding order by payment ID: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 @app.post("/api/payments/nowpayments/ipn")
 async def handle_nowpayments_ipn(request: Request):
     """Handle NOWPayments IPN callback"""
