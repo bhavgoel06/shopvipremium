@@ -262,10 +262,13 @@ const WooCommerceAdminInterface = () => {
   };
 
   const formatPrice = (price) => {
+    // Ensure price is a number and format as INR
+    const numPrice = typeof price === 'string' ? parseFloat(price) : price;
     return new Intl.NumberFormat('en-IN', {
       style: 'currency',
       currency: 'INR',
-    }).format(price);
+      maximumFractionDigits: 0, // No decimal places for INR
+    }).format(numPrice || 0);
   };
 
   const getStatusColor = (status) => {
