@@ -70,7 +70,7 @@ const AdminDashboard = () => {
     );
   }
 
-  return <ModernAdminInterface />;
+  return <WooCommerceAdminInterface />;
 };
 
 export default AdminDashboard;
