@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import PromoBanner from './components/PromoBanner';
 import HomePage from './pages/HomePage';
 import ModernHomePage from './pages/ModernHomePage';
 import ProductsPage from './pages/ProductsPage';
