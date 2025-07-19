@@ -25,28 +25,44 @@ const Header = () => {
 
   const categories = [
     { 
-      name: 'OTT Platforms', 
+      name: 'Streaming', 
       slug: 'ott', 
       icon: '📺',
       gradient: 'from-red-500 to-red-700',
-      description: 'Netflix, Disney+, Amazon Prime',
-      count: '17+ platforms'
+      description: 'Netflix, Disney+, Amazon Prime, Hotstar',
+      count: '25+ platforms'
+    },
+    { 
+      name: 'Music', 
+      slug: 'music', 
+      icon: '🎵',
+      gradient: 'from-purple-500 to-purple-700',
+      description: 'Spotify, Apple Music, YouTube Music',
+      count: '15+ services'
+    },
+    { 
+      name: 'VPNs', 
+      slug: 'vpn', 
+      icon: '🔒',
+      gradient: 'from-green-500 to-green-700',
+      description: 'NordVPN, ExpressVPN, Surfshark',
+      count: '10+ services'
     },
     { 
       name: 'Software & Tools', 
       slug: 'software', 
       icon: '💻',
       gradient: 'from-blue-500 to-blue-700',
-      description: 'Adobe, Microsoft, Canva',
-      count: '10+ tools'
+      description: 'Adobe, Microsoft, Canva Pro',
+      count: '20+ tools'
     },
     { 
-      name: 'VPN & Security', 
-      slug: 'vpn', 
-      icon: '🔒',
-      gradient: 'from-green-500 to-green-700',
-      description: 'NordVPN, ExpressVPN',
-      count: '4+ services'
+      name: 'Extras', 
+      slug: 'professional', 
+      icon: '⭐',
+      gradient: 'from-yellow-500 to-yellow-700',
+      description: 'LinkedIn Premium, Grammarly',
+      count: '12+ extras'
     },
     { 
       name: 'Adult Content', 
