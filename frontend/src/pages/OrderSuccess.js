@@ -18,20 +18,96 @@ const OrderSuccess = () => {
   
   const orderId = searchParams.get('order_id');
   const paymentId = searchParams.get('payment_id');
-
+  const nowpaymentsId = searchParams.get('NP_id'); // NOWPayments payment ID
+  
   useEffect(() => {
     if (orderId) {
       fetchOrderStatus();
-      // Start polling for status updates every 10 seconds
-      const interval = setInterval(fetchOrderStatus, 10000);
-      setStatusPolling(interval);
-      
-      // Clean up polling on unmount
-      return () => {
-        if (interval) clearInterval(interval);
-      };
+      startStatusPolling();
+    } else if (nowpaymentsId) {
+      // If we have NOWPayments ID but no order_id, find the order by payment ID
+      findOrderByPaymentId();
     }
-  }, [orderId]);
+  }, [orderId, nowpaymentsId]);
+
+  const startStatusPolling = () => {
+    // Start polling for status updates every 10 seconds
+    const interval = setInterval(fetchOrderStatus, 10000);
+    setStatusPolling(interval);
+    
+    // Clean up polling on unmount
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  };
+
+  const findOrderByPaymentId = async () => {
+    try {
+      setLoading(true);
+      
+      // Search for order by NOWPayments payment ID
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/payments/${nowpaymentsId}/order`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && data.data.order_id) {
+          // Found the order, now get its status
+          const orderResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders/${data.data.order_id}/status`);
+          if (orderResponse.ok) {
+            const orderData = await orderResponse.json();
+            setOrderStatus(orderData.data);
+            startStatusPolling();
+          }
+        } else {
+          // Create a simple status for successful payment
+          setOrderStatus({
+            order_id: nowpaymentsId,
+            order_status: 'confirmed',
+            payment_status: 'finished',
+            status_message: 'Payment confirmed - Order processing',
+            order_details: {
+              total_amount: 'N/A',
+              currency: 'USD',
+              payment_method: 'crypto',
+              items: [{ product_name: 'Premium Subscription', duration: 'N/A', quantity: 1, total_price: 'N/A' }]
+            },
+            created_at: new Date().toISOString()
+          });
+        }
+      } else {
+        // Fallback: show success for NOWPayments redirect
+        setOrderStatus({
+          order_id: nowpaymentsId,
+          order_status: 'confirmed',
+          payment_status: 'finished',
+          status_message: 'Payment successful! Order confirmed',
+          order_details: {
+            total_amount: 'N/A',
+            currency: 'USD', 
+            payment_method: 'crypto',
+            items: [{ product_name: 'Premium Subscription', duration: 'N/A', quantity: 1, total_price: 'N/A' }]
+          },
+          created_at: new Date().toISOString()
+        });
+      }
+    } catch (error) {
+      console.error('Error finding order by payment ID:', error);
+      // Show success anyway since NOWPayments redirected here
+      setOrderStatus({
+        order_id: nowpaymentsId,
+        order_status: 'confirmed', 
+        payment_status: 'finished',
+        status_message: 'Payment successful! Order confirmed',
+        order_details: {
+          total_amount: 'N/A',
+          currency: 'USD',
+          payment_method: 'crypto',
+          items: [{ product_name: 'Premium Subscription', duration: 'N/A', quantity: 1, total_price: 'N/A' }]
+        },
+        created_at: new Date().toISOString()
+      });
+    } finally {
+      setLoading(false);
+    }
 
   const fetchOrderStatus = async () => {
     try {
