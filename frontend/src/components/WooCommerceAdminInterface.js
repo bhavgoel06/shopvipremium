@@ -97,6 +97,13 @@ const WooCommerceAdminInterface = () => {
       color: 'from-indigo-500 to-purple-500'
     },
     { 
+      id: 'content', 
+      name: 'Content Manager', 
+      icon: '📝', 
+      description: 'Edit Site Content',
+      color: 'from-teal-500 to-cyan-500'
+    },
+    { 
       id: 'settings', 
       name: 'Settings', 
       icon: '⚙️', 
