@@ -1218,6 +1218,259 @@ const WooCommerceAdminInterface = () => {
     </div>
   );
 
+  const renderContentManager = () => (
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-gray-800">Content Management</h2>
+        <button
+          onClick={saveContentData}
+          disabled={loading}
+          className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 disabled:opacity-50 transition-all shadow-lg"
+        >
+          {loading ? 'Saving...' : '💾 Save All Changes'}
+        </button>
+      </div>
+
+      {/* Hero Section Management */}
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <h3 className="text-lg font-semibold mb-6 text-gray-800 flex items-center">
+          <span className="text-2xl mr-3">🎯</span>
+          Homepage Hero Section
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Main Title</label>
+            <input
+              type="text"
+              value={contentData.hero_section.title}
+              onChange={(e) => handleContentUpdate('hero_section', 'title', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+            <input
+              type="text"
+              value={contentData.hero_section.subtitle}
+              onChange={(e) => handleContentUpdate('hero_section', 'subtitle', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <textarea
+              value={contentData.hero_section.description}
+              onChange={(e) => handleContentUpdate('hero_section', 'description', e.target.value)}
+              rows={3}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Primary Button Text</label>
+            <input
+              type="text"
+              value={contentData.hero_section.cta_primary}
+              onChange={(e) => handleContentUpdate('hero_section', 'cta_primary', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Secondary Button Text</label>
+            <input
+              type="text"
+              value={contentData.hero_section.cta_secondary}
+              onChange={(e) => handleContentUpdate('hero_section', 'cta_secondary', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Promo Banner Management */}
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <h3 className="text-lg font-semibold mb-6 text-gray-800 flex items-center">
+          <span className="text-2xl mr-3">🔥</span>
+          Promotional Banner
+        </h3>
+        
+        <div className="space-y-6">
+          <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div>
+              <p className="font-medium">Enable Promotional Banner</p>
+              <p className="text-sm text-gray-600">Show promotional banner at top of site</p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                checked={contentData.promo_banner.enabled}
+                onChange={(e) => handleContentUpdate('promo_banner', 'enabled', e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Banner Title</label>
+              <input
+                type="text"
+                value={contentData.promo_banner.title}
+                onChange={(e) => handleContentUpdate('promo_banner', 'title', e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">CTA Button Text</label>
+              <input
+                type="text"
+                value={contentData.promo_banner.cta_text}
+                onChange={(e) => handleContentUpdate('promo_banner', 'cta_text', e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Banner Description</label>
+              <input
+                type="text"
+                value={contentData.promo_banner.description}
+                onChange={(e) => handleContentUpdate('promo_banner', 'description', e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">CTA Link</label>
+              <input
+                type="text"
+                value={contentData.promo_banner.cta_link}
+                onChange={(e) => handleContentUpdate('promo_banner', 'cta_link', e.target.value)}
+                placeholder="/products?search=chatgpt"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Countdown Hours</label>
+              <input
+                type="number"
+                value={contentData.promo_banner.countdown_hours}
+                onChange={(e) => handleContentUpdate('promo_banner', 'countdown_hours', parseInt(e.target.value))}
+                min="1"
+                max="24"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Site Settings */}
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <h3 className="text-lg font-semibold mb-6 text-gray-800 flex items-center">
+          <span className="text-2xl mr-3">🌐</span>
+          Site Settings
+        </h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Site Title</label>
+            <input
+              type="text"
+              value={contentData.site_settings.site_title}
+              onChange={(e) => handleContentUpdate('site_settings', 'site_title', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Contact Email</label>
+            <input
+              type="email"
+              value={contentData.site_settings.contact_email}
+              onChange={(e) => handleContentUpdate('site_settings', 'contact_email', e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Site Description</label>
+            <textarea
+              value={contentData.site_settings.site_description}
+              onChange={(e) => handleContentUpdate('site_settings', 'site_description', e.target.value)}
+              rows={3}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp Number</label>
+            <input
+              type="text"
+              value={contentData.site_settings.whatsapp_number}
+              onChange={(e) => handleContentUpdate('site_settings', 'whatsapp_number', e.target.value)}
+              placeholder="+91-9876543210"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Telegram Handle</label>
+            <input
+              type="text"
+              value={contentData.site_settings.telegram_handle}
+              onChange={(e) => handleContentUpdate('site_settings', 'telegram_handle', e.target.value)}
+              placeholder="@shopforpremium"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Preview Section */}
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border border-blue-200">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+          <span className="text-2xl mr-3">👁️</span>
+          Live Preview
+        </h3>
+        <p className="text-gray-600 mb-4">Changes will be reflected on your website after saving.</p>
+        
+        {/* Mini preview */}
+        <div className="bg-white rounded-lg p-6 shadow-lg">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{contentData.hero_section.title}</h1>
+            <h2 className="text-lg text-gray-700 mb-2">{contentData.hero_section.subtitle}</h2>
+            <p className="text-gray-600 mb-4">{contentData.hero_section.description}</p>
+            <div className="space-x-4">
+              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                {contentData.hero_section.cta_primary}
+              </button>
+              <button className="border border-blue-500 text-blue-500 px-4 py-2 rounded-lg">
+                {contentData.hero_section.cta_secondary}
+              </button>
+            </div>
+          </div>
+          
+          {contentData.promo_banner.enabled && (
+            <div className="mt-4 bg-red-500 text-white p-3 rounded-lg text-center">
+              <strong>{contentData.promo_banner.title}</strong> - {contentData.promo_banner.description}
+              <button className="ml-4 bg-white text-red-500 px-3 py-1 rounded text-sm font-bold">
+                {contentData.promo_banner.cta_text}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   const renderTab = () => {
     switch (activeTab) {
       case 'dashboard': return renderDashboard();
