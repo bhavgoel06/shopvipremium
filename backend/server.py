@@ -835,6 +835,37 @@ async def get_low_stock_products(
         logger.error(f"Error getting low stock products: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+@app.post("/api/admin/content")
+async def save_content_data(content_data: dict):
+    """Save content management data"""
+    try:
+        success = await db.save_content_data(content_data)
+        if success:
+            return {
+                "success": True,
+                "message": "Content data saved successfully",
+                "data": content_data
+            }
+        else:
+            raise HTTPException(status_code=500, detail="Failed to save content data")
+    except Exception as e:
+        logger.error(f"Error saving content data: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/content")
+async def get_content_data():
+    """Get content management data"""
+    try:
+        content = await db.get_content_data()
+        return {
+            "success": True,
+            "message": "Content data retrieved successfully",
+            "data": content or {}
+        }
+    except Exception as e:
+        logger.error(f"Error getting content data: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # Newsletter Routes
 @app.post("/api/newsletter", response_model=ProductResponse)
 async def subscribe_newsletter(newsletter: NewsletterCreate):
