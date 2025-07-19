@@ -62,6 +62,7 @@ function App() {
           <Router>
             <div className="App min-h-screen bg-gray-50">
               <ScrollToTop />
+              <PromoBanner />
               <Header />
               <main className="min-h-screen">
                 <Routes>
