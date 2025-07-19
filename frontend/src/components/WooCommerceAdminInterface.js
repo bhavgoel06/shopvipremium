@@ -564,6 +564,7 @@ const WooCommerceAdminInterface = () => {
                   </td>
                   <td className="py-4 px-6">
                     <p className="font-medium text-green-600">{formatPrice(order.total_amount)}</p>
+                    <p className="text-xs text-gray-500">INR</p>
                   </td>
                   <td className="py-4 px-6">
                     <select
