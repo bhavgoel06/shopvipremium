@@ -1026,6 +1026,15 @@ const WooCommerceAdminInterface = () => {
       </div>
     </div>
   );
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case 'dashboard': return renderDashboard();
+      case 'products': return renderProducts();
+      case 'orders': return renderOrders();
+      case 'users': return renderUsers();
+      case 'add-product': return renderAddProduct();
+      case 'settings': return renderSettings();
       default: return renderDashboard();
     }
   };
