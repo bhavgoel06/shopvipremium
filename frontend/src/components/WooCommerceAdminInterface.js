@@ -794,13 +794,245 @@ const WooCommerceAdminInterface = () => {
       case 'orders': return renderOrders();
       case 'users': return renderUsers();
       case 'add-product': return renderAddProduct();
-      case 'settings': return (
-        <div className="text-center py-20">
-          <div className="text-6xl mb-4">⚙️</div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">Settings Panel</h3>
-          <p className="text-gray-600">Advanced settings coming soon...</p>
+  const renderSettings = () => (
+    <div className="space-y-6">
+      <h2 className="text-2xl font-bold text-gray-800">Settings & Configuration</h2>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Store Settings */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <span className="text-2xl mr-3">🏪</span>
+            Store Settings
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Store Name</label>
+              <input
+                type="text"
+                defaultValue="Shop For Premium"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Store Description</label>
+              <textarea
+                defaultValue="Premium digital subscriptions at unbeatable prices"
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Contact Email</label>
+              <input
+                type="email"
+                defaultValue="support@shopforpremium.com"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <button className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors">
+              Save Store Settings
+            </button>
+          </div>
         </div>
-      );
+
+        {/* Payment Settings */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <span className="text-2xl mr-3">💳</span>
+            Payment Settings
+          </h3>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div>
+                <p className="font-medium">Nowpayments (Crypto)</p>
+                <p className="text-sm text-gray-600">Bitcoin, Ethereum, USDT, etc.</p>
+              </div>
+              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Active</span>
+            </div>
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div>
+                <p className="font-medium">UPI Payments</p>
+                <p className="text-sm text-gray-600">PhonePe, Google Pay, Paytm</p>
+              </div>
+              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Active</span>
+            </div>
+            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div>
+                <p className="font-medium">Card Payments</p>
+                <p className="text-sm text-gray-600">Visa, Mastercard, Rupay</p>
+              </div>
+              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Active</span>
+            </div>
+            <button className="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600 transition-colors">
+              Configure Payment Methods
+            </button>
+          </div>
+        </div>
+
+        {/* Contact & Support */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <span className="text-2xl mr-3">📞</span>
+            Contact & Support
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">WhatsApp Number</label>
+              <input
+                type="text"
+                defaultValue="+91 9876543210"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Telegram Handle</label>
+              <input
+                type="text"
+                defaultValue="@shopforpremium"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Support Hours</label>
+              <input
+                type="text"
+                defaultValue="24/7 Available"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <button className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition-colors">
+              Update Contact Info
+            </button>
+          </div>
+        </div>
+
+        {/* SEO Settings */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <span className="text-2xl mr-3">🔍</span>
+            SEO Settings
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
+              <input
+                type="text"
+                defaultValue="Shop For Premium - Best Digital Subscriptions"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+              <textarea
+                defaultValue="Get premium digital subscriptions at unbeatable prices. Netflix, Spotify, Adobe, VPN and more with instant delivery and 24/7 support."
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Keywords</label>
+              <input
+                type="text"
+                defaultValue="premium subscriptions, digital products, netflix, spotify, adobe"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <button className="w-full bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600 transition-colors">
+              Update SEO Settings
+            </button>
+          </div>
+        </div>
+
+        {/* Security Settings */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <span className="text-2xl mr-3">🔐</span>
+            Security Settings
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Admin Password</label>
+              <input
+                type="password"
+                defaultValue="admin123"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+              <p className="text-xs text-gray-500 mt-1">⚠️ Change default password for security</p>
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Two-Factor Authentication</p>
+                <p className="text-sm text-gray-600">Add extra security to admin login</p>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              </label>
+            </div>
+            <button className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+              Update Security Settings
+            </button>
+          </div>
+        </div>
+
+        {/* Data Management */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <span className="text-2xl mr-3">📊</span>
+            Data Management
+          </h3>
+          <div className="space-y-4">
+            <button className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition-colors">
+              📥 Export All Products
+            </button>
+            <button className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition-colors">
+              📥 Export All Orders
+            </button>
+            <button className="w-full bg-purple-500 text-white py-3 rounded-lg hover:bg-purple-600 transition-colors">
+              📥 Export Customer Data
+            </button>
+            <button className="w-full bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600 transition-colors">
+              📊 Generate Analytics Report
+            </button>
+            <hr className="my-4" />
+            <button className="w-full bg-red-100 text-red-700 py-3 rounded-lg hover:bg-red-200 transition-colors border border-red-300">
+              ⚠️ Backup Database
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* System Information */}
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <h3 className="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+          <span className="text-2xl mr-3">ℹ️</span>
+          System Information
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <p className="text-2xl font-bold text-blue-600">{dashboardStats.totalProducts}</p>
+            <p className="text-sm text-gray-600">Total Products</p>
+          </div>
+          <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <p className="text-2xl font-bold text-green-600">{dashboardStats.totalOrders}</p>
+            <p className="text-sm text-gray-600">Total Orders</p>
+          </div>
+          <div className="text-center p-4 bg-gray-50 rounded-lg">
+            <p className="text-2xl font-bold text-purple-600">{dashboardStats.totalUsers}</p>
+            <p className="text-sm text-gray-600">Total Users</p>
+          </div>
+        </div>
+        <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+          <p className="text-sm text-gray-700">
+            <strong>Platform:</strong> FastAPI + React + MongoDB<br />
+            <strong>Version:</strong> 2.0.0<br />
+            <strong>Last Updated:</strong> {new Date().toLocaleDateString()}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
       default: return renderDashboard();
     }
   };
