@@ -542,7 +542,7 @@ const WooCommerceAdminInterface = () => {
               <tr>
                 <th className="text-left py-4 px-6 font-semibold text-gray-700">Order ID</th>
                 <th className="text-left py-4 px-6 font-semibold text-gray-700">Customer</th>
-                <th className="text-left py-4 px-6 font-semibold text-gray-700">Amount</th>
+                <th className="text-left py-4 px-6 font-semibold text-gray-700">Amount (₹)</th>
                 <th className="text-left py-4 px-6 font-semibold text-gray-700">Status</th>
                 <th className="text-left py-4 px-6 font-semibold text-gray-700">Date</th>
                 <th className="text-left py-4 px-6 font-semibold text-gray-700">Actions</th>
