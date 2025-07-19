@@ -1,17 +1,200 @@
 {
-  "products": [],
-  "site_structure": {
-    "categories": [],
-    "navigation": [],
-    "hero_content": {},
-    "trust_elements": [],
-    "promotional_content": []
+  "scraping_timestamp": 1752929225.128171,
+  "selenium_results": [],
+  "requests_results": {
+    "https://shopallpremium.com/shop/": {
+      "url": "https://shopallpremium.com/shop/",
+      "title": "No title",
+      "potential_products": [
+        "7",
+        "9",
+        "1",
+        "5",
+        "7",
+        "1",
+        "8",
+        "20",
+        "8"
+      ],
+      "navigation_links": [],
+      "promotional_content": [],
+      "form_data": {},
+      "script_content": []
+    },
+    "https://shopallpremium.com/": {
+      "url": "https://shopallpremium.com/",
+      "title": "No title",
+      "potential_products": [
+        "5",
+        "0",
+        "4",
+        "2",
+        "0",
+        "4",
+        "1",
+        "9",
+        "3",
+        "1",
+        "3",
+        "4",
+        "0",
+        "6",
+        "9",
+        "2",
+        "6",
+        "5",
+        "7",
+        "4",
+        "8",
+        "3",
+        "4",
+        "8",
+        "2",
+        "7",
+        "2",
+        "5",
+        "4"
+      ],
+      "navigation_links": [],
+      "promotional_content": [],
+      "form_data": {},
+      "script_content": []
+    },
+    "https://shopallpremium.com/products/": {
+      "url": "https://shopallpremium.com/products/",
+      "title": "No title",
+      "potential_products": [
+        "2",
+        "5",
+        "49",
+        "1",
+        "2",
+        "2",
+        "8",
+        "5",
+        "2"
+      ],
+      "navigation_links": [],
+      "promotional_content": [],
+      "form_data": {},
+      "script_content": []
+    },
+    "https://shopallpremium.com/wc-api/": {
+      "url": "https://shopallpremium.com/wc-api/",
+      "title": "No title",
+      "potential_products": [
+        "7",
+        "8",
+        "5",
+        "0",
+        "7",
+        "0",
+        "22",
+        "02",
+        "2"
+      ],
+      "navigation_links": [],
+      "promotional_content": [],
+      "form_data": {},
+      "script_content": []
+    }
   },
-  "scraping_info": {
-    "timestamp": 1752929154.023914,
-    "methods_used": [
-      "beautifulsoup"
-    ],
-    "success": true
-  }
+  "sample_products": [
+    {
+      "name": "Netflix Premium 4K UHD (1 Month)",
+      "category": "streaming",
+      "original_price": 649,
+      "discounted_price": 199,
+      "description": "Netflix Premium subscription with 4K streaming, multiple screens, and offline downloads.",
+      "features": [
+        "4K Ultra HD",
+        "Watch on 4 screens",
+        "Download & watch offline",
+        "No ads"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&h=300&fit=crop",
+      "stock_quantity": 100,
+      "discount_percentage": 69
+    },
+    {
+      "name": "Spotify Premium Individual (3 Months)",
+      "category": "music",
+      "original_price": 399,
+      "discounted_price": 299,
+      "description": "Ad-free music streaming with offline downloads and unlimited skips.",
+      "features": [
+        "Ad-free music",
+        "Offline listening",
+        "Unlimited skips",
+        "High quality audio"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
+      "stock_quantity": 100,
+      "discount_percentage": 25
+    },
+    {
+      "name": "Disney+ Hotstar Super (1 Year)",
+      "category": "streaming",
+      "original_price": 1499,
+      "discounted_price": 799,
+      "description": "Complete entertainment with Disney+ content, live sports, and Indian shows.",
+      "features": [
+        "Disney+ Originals",
+        "Live Sports",
+        "Indian Content",
+        "Multiple devices"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1489599314773-1b98e69cced3?w=400&h=300&fit=crop",
+      "stock_quantity": 100,
+      "discount_percentage": 47
+    },
+    {
+      "name": "Amazon Prime Video (1 Year)",
+      "category": "streaming",
+      "original_price": 1499,
+      "discounted_price": 899,
+      "description": "Prime Video subscription with exclusive shows, movies, and faster delivery.",
+      "features": [
+        "Prime Originals",
+        "Free delivery",
+        "Prime Music",
+        "Exclusive deals"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1560472355-536de3962603?w=400&h=300&fit=crop",
+      "stock_quantity": 100,
+      "discount_percentage": 40
+    },
+    {
+      "name": "NordVPN 2-Year Plan",
+      "category": "vpn",
+      "original_price": 11600,
+      "discounted_price": 6999,
+      "description": "Secure VPN with 5400+ servers worldwide and advanced security features.",
+      "features": [
+        "5400+ servers",
+        "No-logs policy",
+        "Kill switch",
+        "6 devices"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
+      "stock_quantity": 100,
+      "discount_percentage": 40
+    },
+    {
+      "name": "Adobe Creative Cloud (1 Year)",
+      "category": "software",
+      "original_price": 52999,
+      "discounted_price": 24999,
+      "description": "Complete Adobe Creative Suite including Photoshop, Illustrator, Premiere Pro.",
+      "features": [
+        "20+ apps",
+        "100GB cloud storage",
+        "Premium fonts",
+        "Regular updates"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
+      "stock_quantity": 50,
+      "discount_percentage": 53
+    }
+  ]
 }
