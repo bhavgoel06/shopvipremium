@@ -836,29 +836,91 @@ const WooCommerceAdminInterface = () => {
             Payment Settings
           </h3>
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div>
-                <p className="font-medium">Nowpayments (Crypto)</p>
-                <p className="text-sm text-gray-600">Bitcoin, Ethereum, USDT, etc.</p>
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border">
+              <div className="flex items-center space-x-3">
+                <span className="text-2xl">₿</span>
+                <div>
+                  <p className="font-medium text-gray-900">Nowpayments (Crypto)</p>
+                  <p className="text-sm text-gray-600">Bitcoin, Ethereum, USDT, and 200+ cryptocurrencies</p>
+                </div>
               </div>
-              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Active</span>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" defaultChecked className="sr-only peer" onChange={(e) => console.log('Crypto payments:', e.target.checked ? 'Enabled' : 'Disabled')} />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              </label>
             </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div>
-                <p className="font-medium">UPI Payments</p>
-                <p className="text-sm text-gray-600">PhonePe, Google Pay, Paytm</p>
+
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border">
+              <div className="flex items-center space-x-3">
+                <span className="text-2xl">📱</span>
+                <div>
+                  <p className="font-medium text-gray-900">UPI Payments</p>
+                  <p className="text-sm text-gray-600">PhonePe, Google Pay, Paytm, and other UPI apps</p>
+                </div>
               </div>
-              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Active</span>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" defaultChecked className="sr-only peer" onChange={(e) => console.log('UPI payments:', e.target.checked ? 'Enabled' : 'Disabled')} />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+              </label>
             </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <div>
-                <p className="font-medium">Card Payments</p>
-                <p className="text-sm text-gray-600">Visa, Mastercard, Rupay</p>
+
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border">
+              <div className="flex items-center space-x-3">
+                <span className="text-2xl">💳</span>
+                <div>
+                  <p className="font-medium text-gray-900">Card Payments</p>
+                  <p className="text-sm text-gray-600">Visa, Mastercard, Rupay, and other debit/credit cards</p>
+                </div>
               </div>
-              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Active</span>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" defaultChecked className="sr-only peer" onChange={(e) => console.log('Card payments:', e.target.checked ? 'Enabled' : 'Disabled')} />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+              </label>
             </div>
-            <button className="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600 transition-colors">
-              Configure Payment Methods
+
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border">
+              <div className="flex items-center space-x-3">
+                <span className="text-2xl">🏦</span>
+                <div>
+                  <p className="font-medium text-gray-900">Net Banking</p>
+                  <p className="text-sm text-gray-600">Direct bank transfers and IMPS</p>
+                </div>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" onChange={(e) => console.log('Net Banking:', e.target.checked ? 'Enabled' : 'Disabled')} />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+              </label>
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border">
+              <div className="flex items-center space-x-3">
+                <span className="text-2xl">💰</span>
+                <div>
+                  <p className="font-medium text-gray-900">Digital Wallets</p>
+                  <p className="text-sm text-gray-600">Paytm Wallet, Mobikwik, FreeCharge</p>
+                </div>
+              </div>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" className="sr-only peer" onChange={(e) => console.log('Digital Wallets:', e.target.checked ? 'Enabled' : 'Disabled')} />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-600"></div>
+              </label>
+            </div>
+
+            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+              <h4 className="font-medium text-blue-900 mb-2">💡 Payment Method Tips:</h4>
+              <ul className="text-sm text-blue-800 space-y-1">
+                <li>• Crypto payments have lowest fees and instant confirmation</li>
+                <li>• UPI is most popular in India with instant transfers</li>
+                <li>• Enable multiple methods for better conversion rates</li>
+                <li>• Test each method before going live</li>
+              </ul>
+            </div>
+
+            <button 
+              onClick={() => alert('✅ Payment settings saved successfully!')}
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg font-medium"
+            >
+              💾 Save Payment Settings
             </button>
           </div>
         </div>
