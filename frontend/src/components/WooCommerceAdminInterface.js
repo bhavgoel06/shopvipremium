@@ -787,13 +787,6 @@ const WooCommerceAdminInterface = () => {
     </div>
   );
 
-  const renderTab = () => {
-    switch (activeTab) {
-      case 'dashboard': return renderDashboard();
-      case 'products': return renderProducts();
-      case 'orders': return renderOrders();
-      case 'users': return renderUsers();
-      case 'add-product': return renderAddProduct();
   const renderSettings = () => (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-gray-800">Settings & Configuration</h2>
