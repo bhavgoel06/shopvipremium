@@ -153,6 +153,51 @@ const WooCommerceAdminInterface = () => {
     // await updatePaymentSettings(paymentMethods);
   };
 
+  const handleContentUpdate = (section, field, value) => {
+    setContentData(prev => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [field]: value
+      }
+    }));
+  };
+
+  const saveContentData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/api/admin/content`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contentData),
+      });
+
+      if (response.ok) {
+        alert('✅ Content updated successfully!');
+      } else {
+        alert('❌ Failed to update content');
+      }
+    } catch (error) {
+      alert('❌ Error updating content');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchContentData = async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/admin/content`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && data.data) {
+          setContentData(prev => ({ ...prev, ...data.data }));
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching content data:', error);
+    }
+  };
+
   const fetchDashboardStats = async () => {
     try {
       const response = await fetch(`${API_URL}/api/admin/dashboard-stats`);
