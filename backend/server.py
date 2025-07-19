@@ -907,12 +907,22 @@ async def create_crypto_payment(payment_request: CryptoPaymentRequest):
         if not order:
             raise HTTPException(status_code=404, detail="Order not found")
         
-        # Create payment in NOWPayments
+        # Create payment in NOWPayments with detailed order description
+        order_description = f"Order {payment_request.order_id}"
+        if order.items:
+            product_names = [item.product_name for item in order.items]
+            if len(product_names) == 1:
+                order_description = f"{product_names[0]} - Premium Subscription"
+            else:
+                order_description = f"{len(product_names)} Products: {', '.join(product_names[:2])}"
+                if len(product_names) > 2:
+                    order_description += f" and {len(product_names)-2} more"
+        
         payment_data = {
             "order_id": payment_request.order_id,
             "amount": payment_request.amount,
             "price_currency": payment_request.currency,
-            "description": f"Order {payment_request.order_id} - Premium subscription"
+            "description": order_description
         }
         
         payment_response = await nowpayments_service.create_payment(payment_data)
