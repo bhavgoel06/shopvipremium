@@ -1024,12 +1024,12 @@ async def get_order_status(order_id: str):
                         
                         # Update order status based on payment status
                         if payment_status == "finished":
-                            await db.orders.update_one(
+                            await db.db.orders.update_one(
                                 {"id": order_id},
                                 {"$set": {"status": "confirmed", "payment_status": "completed"}}
                             )
                         elif payment_status in ["failed", "expired"]:
-                            await db.orders.update_one(
+                            await db.db.orders.update_one(
                                 {"id": order_id},
                                 {"$set": {"status": "cancelled", "payment_status": "failed"}}
                             )
