@@ -988,6 +988,94 @@ async def get_payment_status(payment_id: str):
         logger.error(f"Error getting payment status: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+@app.get("/api/orders/{order_id}/status")
+async def get_order_status(order_id: str):
+    """Get order status with payment details for real-time tracking"""
+    try:
+        # Get order details
+        order = await db.get_order(order_id)
+        if not order:
+            raise HTTPException(status_code=404, detail="Order not found")
+        
+        # Get payment details
+        payment = await db.payments.find_one({"order_id": order_id})
+        payment_status = "pending"
+        payment_details = {}
+        
+        if payment:
+            payment.pop('_id', None)
+            payment_status = payment.get("status", "pending")
+            
+            # If payment exists, get latest status from NOWPayments
+            if payment.get("payment_id") and payment.get("payment_id").startswith("555"):  # Real NOWPayments ID
+                try:
+                    from nowpayments_service import nowpayments_service
+                    latest_status = await nowpayments_service.get_payment_status(payment["payment_id"])
+                    payment_status = latest_status.get("payment_status", payment_status)
+                    payment_details = latest_status
+                    
+                    # Update local record if status changed
+                    if payment_status != payment.get("status"):
+                        await db.update_payment_status(
+                            payment["payment_id"],
+                            PaymentStatus(payment_status),
+                            latest_status
+                        )
+                        
+                        # Update order status based on payment status
+                        if payment_status == "finished":
+                            await db.orders.update_one(
+                                {"id": order_id},
+                                {"$set": {"status": "confirmed", "payment_status": "completed"}}
+                            )
+                        elif payment_status in ["failed", "expired"]:
+                            await db.orders.update_one(
+                                {"id": order_id},
+                                {"$set": {"status": "cancelled", "payment_status": "failed"}}
+                            )
+                        
+                except Exception as e:
+                    logger.error(f"Error getting NOWPayments status: {e}")
+        
+        # Determine overall order status
+        if payment_status == "finished":
+            overall_status = "confirmed"
+            status_message = "Payment confirmed - Order processing"
+        elif payment_status == "confirming":
+            overall_status = "confirming"
+            status_message = "Payment being confirmed - Please wait"
+        elif payment_status in ["failed", "expired"]:
+            overall_status = "failed"
+            status_message = "Payment failed"
+        elif payment_status == "waiting":
+            overall_status = "waiting_payment"
+            status_message = "Waiting for payment confirmation"
+        else:
+            overall_status = "pending"
+            status_message = "Order pending"
+        
+        return {
+            "success": True,
+            "data": {
+                "order_id": order_id,
+                "order_status": overall_status,
+                "payment_status": payment_status,
+                "status_message": status_message,
+                "order_details": {
+                    "total_amount": order.total_amount,
+                    "currency": getattr(order, 'currency', 'INR'),
+                    "payment_method": order.payment_method,
+                    "items": [item.dict() for item in order.items]
+                },
+                "payment_details": payment_details,
+                "created_at": order.created_at.isoformat() if hasattr(order.created_at, 'isoformat') else str(order.created_at)
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting order status: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 @app.post("/api/payments/nowpayments/ipn")
 async def handle_nowpayments_ipn(request: Request):
     """Handle NOWPayments IPN callback"""
