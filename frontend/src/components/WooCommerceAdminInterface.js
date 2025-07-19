@@ -101,6 +101,27 @@ const WooCommerceAdminInterface = () => {
     }
   };
 
+  const handlePaymentMethodToggle = (method, enabled) => {
+    setPaymentMethods(prev => ({
+      ...prev,
+      [method]: enabled
+    }));
+    
+    // Show confirmation
+    const methodNames = {
+      crypto: 'Cryptocurrency',
+      upi: 'UPI Payments',
+      cards: 'Card Payments',
+      netbanking: 'Net Banking',
+      wallets: 'Digital Wallets'
+    };
+    
+    console.log(`${methodNames[method]}: ${enabled ? 'Enabled' : 'Disabled'}`);
+    
+    // You can add API call here to save to backend
+    // await updatePaymentSettings(paymentMethods);
+  };
+
   const fetchDashboardStats = async () => {
     try {
       const response = await fetch(`${API_URL}/api/admin/dashboard-stats`);
