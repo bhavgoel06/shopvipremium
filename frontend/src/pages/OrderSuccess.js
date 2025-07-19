@@ -291,7 +291,7 @@ const OrderSuccess = () => {
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Check Your Email</h3>
                 <p className="text-gray-600 text-sm">
-                  Login credentials will be sent to your email within 30 minutes
+                  Login credentials will be sent to your email address
                 </p>
               </div>
               <div className="text-center">
