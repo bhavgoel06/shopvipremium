@@ -511,5 +511,30 @@ class Database:
             "recentOrders": recent_orders
         }
 
+    async def save_content_data(self, content_data):
+        """Save content management data"""
+        try:
+            content_data["updated_at"] = datetime.utcnow()
+            await self.db.content_management.replace_one(
+                {"type": "site_content"}, 
+                {**content_data, "type": "site_content"}, 
+                upsert=True
+            )
+            return True
+        except Exception as e:
+            print(f"Error saving content data: {e}")
+            return False
+
+    async def get_content_data(self):
+        """Get content management data"""
+        try:
+            content = await self.db.content_management.find_one({"type": "site_content"})
+            if content and "_id" in content:
+                content.pop("_id")
+            return content
+        except Exception as e:
+            print(f"Error getting content data: {e}")
+            return None
+
 # Global database instance
 db = Database()
