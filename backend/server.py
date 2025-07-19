@@ -998,7 +998,7 @@ async def get_order_status(order_id: str):
             raise HTTPException(status_code=404, detail="Order not found")
         
         # Get payment details
-        payment = await db.payments.find_one({"order_id": order_id})
+        payment = await db.db.payments.find_one({"order_id": order_id})
         payment_status = "pending"
         payment_details = {}
         
