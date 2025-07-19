@@ -382,6 +382,15 @@ class Database:
         if product and "_id" in product:
             product.pop("_id")
         return product
+
+    async def add_product(self, product_data: Dict) -> bool:
+        """Add a new product"""
+        try:
+            result = await self.db.products.insert_one(product_data)
+            return result.inserted_id is not None
+        except Exception as e:
+            print(f"Error adding product: {e}")
+            return False
     async def get_orders(self, page: int = 1, per_page: int = 20, status_filter: Optional[str] = None) -> List[Dict]:
         """Get orders with pagination and filtering"""
         skip = (page - 1) * per_page
