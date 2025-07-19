@@ -101,8 +101,8 @@ class AdminEndpointsTester:
                     stats = data.get('data', {})
                     print(f"✅ Dashboard stats retrieved successfully")
                     
-                    # Check for expected statistics
-                    expected_fields = ['total_revenue', 'total_orders', 'total_products', 'total_users']
+                    # Check for expected statistics (using camelCase as returned by API)
+                    expected_fields = ['totalRevenue', 'totalOrders', 'totalProducts', 'totalUsers']
                     found_fields = []
                     
                     for field in expected_fields:
@@ -111,10 +111,10 @@ class AdminEndpointsTester:
                             print(f"   {field}: {stats[field]}")
                     
                     # Check for recent orders
-                    if 'recent_orders' in stats:
-                        recent_orders = stats['recent_orders']
-                        print(f"   recent_orders: {len(recent_orders)} orders")
-                        found_fields.append('recent_orders')
+                    if 'recentOrders' in stats:
+                        recent_orders = stats['recentOrders']
+                        print(f"   recentOrders: {len(recent_orders)} orders")
+                        found_fields.append('recentOrders')
                     
                     success_rate = len(found_fields) / len(expected_fields + ['recent_orders']) * 100
                     print(f"   📈 Stats completeness: {len(found_fields)}/{len(expected_fields + ['recent_orders'])} fields ({success_rate:.1f}%)")
