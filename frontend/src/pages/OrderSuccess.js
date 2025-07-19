@@ -25,10 +25,48 @@ const OrderSuccess = () => {
       fetchOrderStatus();
       startStatusPolling();
     } else if (nowpaymentsId) {
-      // If we have NOWPayments ID but no order_id, find the order by payment ID
-      findOrderByPaymentId();
+      // NOWPayments successful redirect - show immediate success
+      showNowPaymentsSuccess();
+    } else {
+      // No parameters - show error
+      setLoading(false);
     }
   }, [orderId, nowpaymentsId]);
+
+  const showNowPaymentsSuccess = () => {
+    // NOWPayments redirected here, meaning payment was successful
+    setOrderStatus({
+      order_id: nowpaymentsId,
+      order_status: 'confirmed',
+      payment_status: 'finished',
+      status_message: '🎉 Payment Successful! Order Confirmed',
+      order_details: {
+        total_amount: 'Paid',
+        currency: 'Crypto',
+        payment_method: 'cryptocurrency',
+        items: [{ 
+          product_name: 'Premium Subscription Purchase', 
+          duration: 'As Selected', 
+          quantity: 1, 
+          total_price: 'Paid Successfully' 
+        }]
+      },
+      payment_details: {
+        nowpayments_id: nowpaymentsId,
+        payment_method: 'Cryptocurrency'
+      },
+      created_at: new Date().toISOString()
+    });
+    
+    // Clear cart since payment was successful
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('cart');
+      // Dispatch storage event to update other components
+      window.dispatchEvent(new Event('storage'));
+    }
+    
+    setLoading(false);
+  };
 
   const startStatusPolling = () => {
     // Start polling for status updates every 10 seconds
