@@ -113,15 +113,16 @@ const CheckoutPage = () => {
         const cryptoResult = await cryptoResponse.json();
         
         if (cryptoResult.success) {
-          // Clear cart
-          clearCart();
-          
           // Check if we have an invoice URL for redirection
           if (cryptoResult.data.invoice_url) {
+            // DON'T clear cart until after successful payment
+            // User will see cart contents until they complete payment
+            
             // Redirect to NOWPayments hosted payment page
             window.location.href = cryptoResult.data.invoice_url;
           } else {
             // Fallback to success page with payment details
+            clearCart(); // Only clear cart if not redirecting
             navigate('/order-success', {
               state: {
                 orderId: orderResult.data.id,
