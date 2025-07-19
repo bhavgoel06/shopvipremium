@@ -116,10 +116,10 @@ class AdminEndpointsTester:
                         print(f"   recentOrders: {len(recent_orders)} orders")
                         found_fields.append('recentOrders')
                     
-                    success_rate = len(found_fields) / len(expected_fields + ['recent_orders']) * 100
-                    print(f"   📈 Stats completeness: {len(found_fields)}/{len(expected_fields + ['recent_orders'])} fields ({success_rate:.1f}%)")
+                    success_rate = len(found_fields) / len(expected_fields + ['recentOrders']) * 100
+                    print(f"   📈 Stats completeness: {len(found_fields)}/{len(expected_fields + ['recentOrders'])} fields ({success_rate:.1f}%)")
                     
-                    return len(found_fields) >= 3  # At least 3 key stats should be present
+                    return len(found_fields) >= 4  # At least 4 key stats should be present
                 else:
                     print(f"❌ Dashboard stats: Invalid response format")
                     return False
