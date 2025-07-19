@@ -880,6 +880,171 @@ async def get_analytics_stats():
         logger.error(f"Error getting analytics stats: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+# Advanced Admin Routes for WooCommerce-level functionality
+@app.get("/api/orders")
+async def get_all_orders(
+    page: int = Query(1, ge=1),
+    per_page: int = Query(20, ge=1, le=100),
+    status: Optional[str] = None
+):
+    """Get all orders with pagination and filtering"""
+    try:
+        orders = await db.get_orders(page=page, per_page=per_page, status_filter=status)
+        return {
+            "success": True,
+            "message": "Orders retrieved successfully",
+            "data": orders
+        }
+    except Exception as e:
+        logger.error(f"Error getting orders: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.put("/api/admin/order-status")
+async def update_order_status(
+    order_id: str,
+    status: str,
+    current_user_id: str = Depends(verify_token)
+):
+    """Update order status"""
+    try:
+        updated_order = await db.update_order_status(order_id, status)
+        if updated_order:
+            return {
+                "success": True,
+                "message": "Order status updated successfully",
+                "data": updated_order
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Order not found")
+    except Exception as e:
+        logger.error(f"Error updating order status: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/users")
+async def get_all_users(
+    page: int = Query(1, ge=1),
+    per_page: int = Query(50, ge=1, le=100)
+):
+    """Get all users with pagination"""
+    try:
+        users = await db.get_users(page=page, per_page=per_page)
+        return {
+            "success": True,
+            "message": "Users retrieved successfully",
+            "data": users
+        }
+    except Exception as e:
+        logger.error(f"Error getting users: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.put("/api/admin/product-stock")
+async def update_product_stock(
+    product_id: str,
+    stock_quantity: int,
+    current_user_id: str = Depends(verify_token)
+):
+    """Update product stock quantity"""
+    try:
+        result = await db.update_product_stock(product_id, stock_quantity)
+        if result:
+            return {
+                "success": True,
+                "message": "Product stock updated successfully",
+                "data": result
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Product not found")
+    except Exception as e:
+        logger.error(f"Error updating product stock: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.delete("/api/admin/product/{product_id}")
+async def delete_product_admin(
+    product_id: str,
+    current_user_id: str = Depends(verify_token)
+):
+    """Delete a product (Admin only)"""
+    try:
+        result = await db.delete_product(product_id)
+        if result:
+            return {
+                "success": True,
+                "message": "Product deleted successfully",
+                "data": {"deleted": True}
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Product not found")
+    except Exception as e:
+        logger.error(f"Error deleting product: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/admin/bulk-stock-update")
+async def bulk_stock_update(
+    action: str,
+    current_user_id: str = Depends(verify_token)
+):
+    """Bulk stock update operations"""
+    try:
+        if action == "mark_all_out_of_stock":
+            result = await db.bulk_update_stock({"stock_quantity": 0})
+        elif action == "reset_all_stock":
+            result = await db.bulk_update_stock({"stock_quantity": 100})
+        else:
+            raise HTTPException(status_code=400, detail="Invalid action")
+        
+        return {
+            "success": True,
+            "message": f"Bulk {action} completed successfully",
+            "data": {"updated_count": result}
+        }
+    except Exception as e:
+        logger.error(f"Error in bulk stock update: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/stock-overview")
+async def get_stock_overview():
+    """Get comprehensive stock overview"""
+    try:
+        overview = await db.get_stock_overview()
+        return {
+            "success": True,
+            "message": "Stock overview retrieved successfully",
+            "data": overview
+        }
+    except Exception as e:
+        logger.error(f"Error getting stock overview: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/low-stock-products")
+async def get_low_stock_products_admin(
+    threshold: int = Query(10, ge=1)
+):
+    """Get products with low stock"""
+    try:
+        products = await db.get_low_stock_products(threshold)
+        return {
+            "success": True,
+            "message": f"Found {len(products)} low stock products",
+            "data": products
+        }
+    except Exception as e:
+        logger.error(f"Error getting low stock products: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/dashboard-stats")
+async def get_dashboard_stats():
+    """Get comprehensive dashboard statistics"""
+    try:
+        stats = await db.get_dashboard_stats()
+        return {
+            "success": True,
+            "message": "Dashboard stats retrieved successfully",
+            "data": stats
+        }
+    except Exception as e:
+        logger.error(f"Error getting dashboard stats: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # Payment Routes
 @app.get("/api/payments/crypto/currencies")
 async def get_crypto_currencies():
