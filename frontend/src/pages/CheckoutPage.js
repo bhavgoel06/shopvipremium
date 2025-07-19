@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = () => {
   const { items, getCartTotal, clearCart } = useCart();
-  const { currency, convertPrice } = useCurrency();
+  const { currency, convertPrice, exchangeRate } = useCurrency();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
