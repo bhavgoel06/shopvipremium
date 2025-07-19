@@ -22,10 +22,11 @@ const CheckoutPage = () => {
   useEffect(() => {
     if (formData.paymentMethod === 'crypto') {
       const totalInINR = getCartTotal();
-      const usdAmount = convertPrice(totalInINR);
+      // Always convert INR to USD for crypto payments regardless of current currency setting
+      const usdAmount = totalInINR / exchangeRate;
       setUsdTotal(usdAmount);
     }
-  }, [formData.paymentMethod, getCartTotal, convertPrice]);
+  }, [formData.paymentMethod, getCartTotal, exchangeRate]);
 
   const formatPrice = (price) => {
     if (formData.paymentMethod === 'crypto') {
