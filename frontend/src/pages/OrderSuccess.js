@@ -1,33 +1,118 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircleIcon, ShieldCheckIcon, TruckIcon, EnvelopeIcon } from '@heroicons/react/24/solid';
+import { 
+  CheckCircleIcon, 
+  ClockIcon, 
+  CreditCardIcon,
+  ShieldCheckIcon, 
+  TruckIcon, 
+  EnvelopeIcon,
+  ExclamationTriangleIcon
+} from '@heroicons/react/24/solid';
 
 const OrderSuccess = () => {
   const [searchParams] = useSearchParams();
-  const [orderDetails, setOrderDetails] = useState(null);
+  const [orderStatus, setOrderStatus] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [statusPolling, setStatusPolling] = useState(null);
   
   const orderId = searchParams.get('order_id');
   const paymentId = searchParams.get('payment_id');
 
   useEffect(() => {
     if (orderId) {
-      fetchOrderDetails();
+      fetchOrderStatus();
+      // Start polling for status updates every 10 seconds
+      const interval = setInterval(fetchOrderStatus, 10000);
+      setStatusPolling(interval);
+      
+      // Clean up polling on unmount
+      return () => {
+        if (interval) clearInterval(interval);
+      };
     }
   }, [orderId]);
 
-  const fetchOrderDetails = async () => {
+  const fetchOrderStatus = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders/${orderId}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders/${orderId}/status`);
       if (response.ok) {
         const data = await response.json();
-        setOrderDetails(data.data);
+        setOrderStatus(data.data);
+        
+        // Stop polling if order is confirmed or failed
+        if (data.data.order_status === 'confirmed' || data.data.order_status === 'failed') {
+          if (statusPolling) {
+            clearInterval(statusPolling);
+            setStatusPolling(null);
+          }
+        }
       }
     } catch (error) {
-      console.error('Error fetching order details:', error);
+      console.error('Error fetching order status:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'confirmed':
+        return <CheckCircleIcon className="w-8 h-8 text-green-500" />;
+      case 'confirming':
+        return <ClockIcon className="w-8 h-8 text-blue-500 animate-spin" />;
+      case 'waiting_payment':
+        return <CreditCardIcon className="w-8 h-8 text-yellow-500" />;
+      case 'failed':
+        return <ExclamationTriangleIcon className="w-8 h-8 text-red-500" />;
+      default:
+        return <ClockIcon className="w-8 h-8 text-gray-500" />;
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'confirmed':
+        return 'bg-green-100 text-green-800';
+      case 'confirming':
+        return 'bg-blue-100 text-blue-800';
+      case 'waiting_payment':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'failed':
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <ClockIcon className="w-12 h-12 text-blue-500 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">Loading order details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!orderStatus) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <ExclamationTriangleIcon className="w-12 h-12 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">Order Not Found</h2>
+          <p className="text-gray-600 mb-4">We couldn't find your order details.</p>
+          <Link 
+            to="/products"
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+          >
+            Continue Shopping
+          </Link>
+        </div>
+      </div>
+    );
+  }
   };
 
   if (loading) {
