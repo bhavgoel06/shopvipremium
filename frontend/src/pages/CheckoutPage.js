@@ -112,8 +112,6 @@ const CheckoutPage = () => {
 
         const cryptoResult = await cryptoResponse.json();
         
-        console.log('Crypto payment result:', cryptoResult);
-        
         if (cryptoResult.success) {
           // Clear cart
           clearCart();
