@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import ModernAdminInterface from '../components/ModernAdminInterface';
+import WooCommerceAdminInterface from '../components/WooCommerceAdminInterface';
 
 const AdminDashboard = () => {
   const { isAuthenticated, user } = useAuth();
