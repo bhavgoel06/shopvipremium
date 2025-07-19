@@ -111,6 +111,7 @@ const WooCommerceAdminInterface = () => {
       const response = await fetch(`${API_URL}/api/products?per_page=100`);
       const data = await response.json();
       if (data.success) {
+        console.log('Products data sample:', data.data[0]); // Debug log
         setProducts(data.data);
       }
     } catch (error) {
