@@ -79,7 +79,7 @@ const Footer = () => {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold">Shop For Premium</h3>
+                  <h3 className="text-xl font-bold">Shop VIP Premium</h3>
                   <p className="text-sm text-gray-400">Get More, Pay Less</p>
                 </div>
               </div>
