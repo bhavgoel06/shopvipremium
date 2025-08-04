@@ -376,7 +376,7 @@ const OrderSuccess = () => {
           
           {orderStatus.order_status === 'confirmed' && (
             <a 
-              href="mailto:support@shopforpremium.com"
+              href="mailto:support@shopvippremium.com"
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
             >
               Contact Support
