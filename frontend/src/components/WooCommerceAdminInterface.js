@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import SecureAdminLogin from '../components/SecureAdminLogin';
+import SecureAdminLogin from './SecureAdminLogin';
 
 const WooCommerceAdminInterface = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
