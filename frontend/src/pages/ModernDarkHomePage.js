@@ -361,7 +361,7 @@ const ModernDarkHomePage = () => {
 
       {/* Footer */}
       <footer className="bg-gray-900 border-t border-gray-700 text-center py-8 px-4">
-        <p className="text-gray-400">&copy; 2025 Shop For Premium. All Rights Reserved.</p>
+        <p className="text-gray-400">&copy; 2025 Shop VIP Premium. All Rights Reserved.</p>
       </footer>
     </div>
   );
