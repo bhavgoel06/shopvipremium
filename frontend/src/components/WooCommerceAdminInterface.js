@@ -40,7 +40,7 @@ const WooCommerceAdminInterface = () => {
     promo_banner: {
       enabled: true,
       title: "⚡ ChatGPT Plus Offer!",
-      description: "Now on Shop For Premium. Only ₹589 or $12/month",
+      description: "Now on Shop VIP Premium. Only ₹589 or $12/month",
       countdown_hours: 1,
       cta_text: "SHOP NOW!",
       cta_link: "/products?search=chatgpt"
