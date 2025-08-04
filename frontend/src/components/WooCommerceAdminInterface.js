@@ -333,54 +333,6 @@ const WooCommerceAdminInterface = () => {
     }
   };
 
-  const handleAddProduct = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    try {
-      const productData = {
-        name: newProduct.name,
-        description: newProduct.description,
-        short_description: newProduct.description.substring(0, 100),
-        category: newProduct.category,
-        original_price: parseFloat(newProduct.original_price),
-        discounted_price: parseFloat(newProduct.discounted_price),
-        duration_options: ["1 month", "3 months", "6 months", "1 year"],
-        features: ["Premium access", "24/7 support", "Instant delivery", "No ads"],
-        image_url: newProduct.image_url,
-        stock_quantity: parseInt(newProduct.stock_quantity),
-        seo_title: `${newProduct.name} - Premium Subscription`,
-        seo_description: `Get ${newProduct.name} at discounted price. Premium subscription with instant delivery.`,
-        seo_keywords: [newProduct.name.toLowerCase(), "premium", "subscription", newProduct.category]
-      };
-
-      const response = await fetch(`${API_URL}/api/admin/products`, {
-        method: 'POST',
-        headers: authHeaders,
-        body: JSON.stringify(productData),
-      });
-
-      if (response.ok) {
-        alert('✅ Product added successfully!');
-        // Clear form after successful add
-        setNewProduct({
-          name: '', description: '', category: 'ott', 
-          original_price: '', discounted_price: '', stock_quantity: 100,
-          image_url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&h=300&fit=crop'
-        });
-        fetchAllData();
-      } else {
-        const errorData = await response.json();
-        alert(`❌ Failed to add product: ${errorData.detail || 'Unknown error'}`);
-      }
-    } catch (error) {
-      alert('❌ Error adding product. Please check your connection.');
-      console.error('Add product error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const updateProductStock = async (productId, newStock) => {
     try {
       const response = await fetch(`${API_URL}/api/admin/product-stock`, {
