@@ -67,7 +67,7 @@ const RegisterPage = () => {
             </svg>
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Join Shop For Premium
+            Join Shop VIP Premium
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Create your account and start saving on premium subscriptions
