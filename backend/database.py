@@ -550,5 +550,30 @@ class Database:
             print(f"Error getting content data: {e}")
             return None
 
+    async def create_category(self, category_data: dict) -> bool:
+        """Create a new category"""
+        try:
+            result = await self.db.categories.insert_one(category_data)
+            return result.inserted_id is not None
+        except Exception as e:
+            print(f"Error creating category: {e}")
+            return False
+
+    async def get_categories(self) -> List[Dict]:
+        """Get all categories"""
+        try:
+            cursor = self.db.categories.find({})
+            categories = await cursor.to_list(length=100)
+            
+            # Remove _id field
+            for category in categories:
+                if "_id" in category:
+                    category.pop("_id")
+            
+            return categories
+        except Exception as e:
+            print(f"Error getting categories: {e}")
+            return []
+
 # Global database instance
 db = Database()
