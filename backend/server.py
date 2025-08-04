@@ -22,6 +22,65 @@ from database import db
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
+# Admin credentials and security
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "VIP@dm1n2025!"  # Strong password - change this!
+JWT_SECRET_KEY = secrets.token_urlsafe(32)
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_HOURS = 8
+
+# JWT token functions
+def create_admin_token():
+    payload = {
+        "sub": ADMIN_USERNAME,
+        "exp": datetime.utcnow() + timedelta(hours=JWT_EXPIRATION_HOURS),
+        "iat": datetime.utcnow(),
+        "admin": True
+    }
+    return jwt.encode(payload, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
+
+def verify_admin_token(credentials: HTTPAuthorizationCredentials = Depends(HTTPBearer())):
+    try:
+        payload = jwt.decode(credentials.credentials, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+        if payload.get("admin") != True:
+            raise HTTPException(status_code=401, detail="Invalid admin token")
+        return payload
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Token has expired")
+    except jwt.JWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+# Admin authentication routes
+@app.post("/api/admin/login")
+async def admin_login(credentials: dict):
+    """Secure admin login with JWT token"""
+    username = credentials.get("username")
+    password = credentials.get("password")
+    
+    if username != ADMIN_USERNAME or password != ADMIN_PASSWORD:
+        raise HTTPException(
+            status_code=401, 
+            detail="Invalid admin credentials"
+        )
+    
+    token = create_admin_token()
+    return {
+        "success": True,
+        "message": "Login successful",
+        "token": token,
+        "expires_in": JWT_EXPIRATION_HOURS * 3600  # seconds
+    }
+
+@app.post("/api/admin/verify")
+async def verify_admin_session(admin_data: dict = Depends(verify_admin_token)):
+    """Verify admin session is valid"""
+    return {
+        "success": True,
+        "message": "Valid admin session",
+        "admin": admin_data.get("sub"),
+        "expires": admin_data.get("exp")
+    }
+
 # Create FastAPI app
 app = FastAPI(
     title="Premium Subscription Shop API",
