@@ -169,7 +169,7 @@ const Header = () => {
                 rel="noopener noreferrer"
                 className="underline hover:text-blue-800 ml-1 font-semibold"
               >
-                @shopforpremium
+                @shopvippremium
               </a>
               &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🔥 Custom orders available • Best prices guaranteed • Instant delivery
             </span>
