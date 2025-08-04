@@ -265,7 +265,7 @@ const ModernDarkHomePage = () => {
       {/* Why Choose Us */}
       <section className="bg-gray-800 py-20 px-4">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-16">Why Choose Shop For Premium?</h2>
+          <h2 className="text-4xl font-bold mb-16">Why Choose Shop VIP Premium?</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div
