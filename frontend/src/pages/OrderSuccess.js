@@ -307,7 +307,7 @@ const OrderSuccess = () => {
                       📱 WhatsApp
                     </a>
                     <a 
-                      href="https://t.me/shopforpremium" 
+                      href="https://t.me/shopvippremium" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="inline-flex items-center text-xs text-blue-600 hover:text-blue-700"
