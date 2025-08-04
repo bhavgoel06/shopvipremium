@@ -84,6 +84,14 @@ const WooCommerceAdminInterface = () => {
     'Content-Type': 'application/json'
   };
 
+  // Load data when component mounts and user is authenticated - MUST be before any conditional returns
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchAllData();
+      fetchContentData();
+    }
+  }, [isAuthenticated]);
+
   // If not authenticated, show login screen
   if (!isAuthenticated) {
     return <SecureAdminLogin onLoginSuccess={handleLoginSuccess} />;
