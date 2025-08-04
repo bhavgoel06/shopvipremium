@@ -97,6 +97,37 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Admin authentication routes
+@app.post("/api/admin/login")
+async def admin_login(credentials: dict):
+    """Secure admin login with JWT token"""
+    username = credentials.get("username")
+    password = credentials.get("password")
+    
+    if username != ADMIN_USERNAME or password != ADMIN_PASSWORD:
+        raise HTTPException(
+            status_code=401, 
+            detail="Invalid admin credentials"
+        )
+    
+    token = create_admin_token()
+    return {
+        "success": True,
+        "message": "Login successful",
+        "token": token,
+        "expires_in": JWT_EXPIRATION_HOURS * 3600  # seconds
+    }
+
+@app.post("/api/admin/verify")
+async def verify_admin_session(admin_data: dict = Depends(verify_admin_token)):
+    """Verify admin session is valid"""
+    return {
+        "success": True,
+        "message": "Valid admin session",
+        "admin": admin_data.get("sub"),
+        "expires": admin_data.get("exp")
+    }
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
