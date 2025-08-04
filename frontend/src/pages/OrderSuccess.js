@@ -295,7 +295,7 @@ const OrderSuccess = () => {
                 </p>
                 <div className="mt-3">
                   <p className="text-xs text-gray-500">
-                    For instant delivery, contact our support team:
+                    For instant delivery, contact our VIP support team:
                   </p>
                   <div className="mt-1 space-x-3">
                     <a 
