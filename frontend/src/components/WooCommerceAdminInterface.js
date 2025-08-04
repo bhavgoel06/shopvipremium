@@ -65,6 +65,30 @@ const WooCommerceAdminInterface = () => {
 
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
+  const handleLoginSuccess = (token) => {
+    setAdminToken(token);
+    setIsAuthenticated(true);
+    fetchAllData();
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('vip_admin_token');
+    localStorage.removeItem('vip_admin_expires');
+    setIsAuthenticated(false);
+    setAdminToken(null);
+    setActiveTab('dashboard');
+  };
+
+  const authHeaders = {
+    'Authorization': `Bearer ${adminToken}`,
+    'Content-Type': 'application/json'
+  };
+
+  // If not authenticated, show login screen
+  if (!isAuthenticated) {
+    return <SecureAdminLogin onLoginSuccess={handleLoginSuccess} />;
+  }
+
   const adminTabs = [
     { 
       id: 'dashboard', 
