@@ -133,7 +133,7 @@ const Header = () => {
                     <span className="hidden lg:inline">WhatsApp</span>
                   </a>
                   <a 
-                    href="https://t.me/shopforpremium" 
+                    href="https://t.me/shopvippremium" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-blue-600 transition-colors text-xs flex items-center gap-1"
