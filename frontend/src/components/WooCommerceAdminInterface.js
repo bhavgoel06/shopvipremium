@@ -246,7 +246,12 @@ const WooCommerceAdminInterface = () => {
 
       if (response.ok) {
         alert('✅ Product added successfully!');
-        clearFormAfterAdd(); // Clear form after successful add
+        // Clear form after successful add
+        setNewProduct({
+          name: '', description: '', category: 'ott', 
+          original_price: '', discounted_price: '', stock_quantity: 100,
+          image_url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&h=300&fit=crop'
+        });
         fetchAllData();
       } else {
         const errorData = await response.json();
@@ -255,6 +260,32 @@ const WooCommerceAdminInterface = () => {
     } catch (error) {
       alert('❌ Error adding product. Please check your connection.');
       console.error('Add product error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteProduct = async (productId) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/api/admin/products/${productId}`, {
+        method: 'DELETE',
+        headers: authHeaders,
+      });
+      
+      if (response.ok) {
+        setProducts(prev => prev.filter(p => p.id !== productId));
+        setShowDeleteConfirm(null);
+        alert('✅ Product deleted successfully!');
+        fetchProducts();
+        fetchDashboardStats();
+      } else {
+        const errorData = await response.json();
+        alert(`❌ Failed to delete product: ${errorData.detail || 'Unknown error'}`);
+      }
+    } catch (error) {
+      alert('❌ Error deleting product. Please try again.');
+      console.error('Delete error:', error);
     } finally {
       setLoading(false);
     }
