@@ -41,11 +41,11 @@ const WooCommerceAdminInterface = () => {
       cta_link: "/products?search=chatgpt"
     },
     site_settings: {
-      site_title: "Shop For Premium - Premium Account Shop",
-      site_description: "World's Best OTT Subscriptions at unbeatable prices",
-      contact_email: "support@shopforpremium.com",
+      site_title: "Shop VIP Premium - Premium Account Shop",
+      site_description: "World's Best VIP Subscriptions at unbeatable prices",
+      contact_email: "support@shopvippremium.com",
       whatsapp_number: "+91-9876543210",
-      telegram_handle: "@shopforpremium"
+      telegram_handle: "@shopvippremium"
     }
   });
   const [newProduct, setNewProduct] = useState({
