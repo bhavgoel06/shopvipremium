@@ -5,14 +5,51 @@ import { XMarkIcon, FireIcon, ClockIcon } from '@heroicons/react/24/solid';
 const PromoBanner = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour in seconds
+  const [bannerConfig, setBannerConfig] = useState({
+    enabled: true,
+    title: "⚡ ChatGPT Plus Offer!",
+    description: "Now on Shop VIP Premium. Only ₹589 or $12/month",
+    countdown_hours: 1,
+    cta_text: "SHOP NOW!",
+    cta_link: "/products?search=chatgpt"
+  });
+
+  // Load banner configuration on component mount
+  useEffect(() => {
+    const loadBannerConfig = () => {
+      // Try to get config from localStorage (admin settings)
+      const savedConfig = localStorage.getItem('shopvip_promo_banner_config');
+      if (savedConfig) {
+        try {
+          const config = JSON.parse(savedConfig);
+          setBannerConfig(config);
+          setTimeLeft(config.countdown_hours * 3600); // Convert hours to seconds
+        } catch (error) {
+          console.error('Error parsing banner config:', error);
+        }
+      }
+    };
+
+    loadBannerConfig();
+
+    // Listen for updates from admin panel
+    const handleStorageChange = (e) => {
+      if (e.key === 'shopvip_promo_banner_config') {
+        loadBannerConfig();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => prev > 0 ? prev - 1 : 3600); // Reset after countdown
+      setTimeLeft((prev) => prev > 0 ? prev - 1 : bannerConfig.countdown_hours * 3600); // Reset after countdown
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [bannerConfig.countdown_hours]);
 
   const formatTime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
@@ -21,7 +58,8 @@ const PromoBanner = () => {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  if (!isVisible) return null;
+  // Don't render if disabled in admin or dismissed by user
+  if (!bannerConfig.enabled || !isVisible) return null;
 
   return (
     <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-3 px-4 relative overflow-hidden">
