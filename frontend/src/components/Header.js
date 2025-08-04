@@ -164,7 +164,7 @@ const Header = () => {
             <span className="text-sm font-medium">
               🎯 Looking for any other software/subscription/product/license key? Contact us on Telegram for instant support: 
               <a 
-                href="https://t.me/shopforpremium" 
+                href="https://t.me/shopvippremium" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="underline hover:text-blue-800 ml-1 font-semibold"
