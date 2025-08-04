@@ -179,9 +179,9 @@ const ModernDarkHomePage = () => {
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-red-100 text-red-800 px-4 py-2 rounded-full mb-4">
               <TagIcon className="w-5 h-5 mr-2" />
-              <span className="font-semibold">TOP SELLING</span>
+              <span className="font-semibold">VIP COLLECTION</span>
             </div>
-            <h2 className="text-4xl font-bold mb-6">Our Premium Products</h2>
+            <h2 className="text-4xl font-bold mb-6">Our VIP Premium Products</h2>
             <p className="text-xl text-gray-400">Hand-picked subscriptions with the biggest savings</p>
           </div>
 
