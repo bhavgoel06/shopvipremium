@@ -96,7 +96,7 @@ const ProfessionalLogo = ({ className = '', size = 'medium' }) => {
       {/* Brand Text */}
       <div className="flex flex-col">
         <span className={`font-bold text-gray-900 ${currentSize.text} leading-tight`}>
-          Shop For Premium
+          Shop VIP Premium
         </span>
         <span className="text-xs text-gray-600 font-medium tracking-wide">
           Get More, Pay Less
