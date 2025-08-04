@@ -93,15 +93,11 @@ const PromoBanner = () => {
           <div className="hidden md:flex items-center justify-center space-x-6 w-full">
             <div className="flex items-center space-x-2">
               <FireIcon className="w-6 h-6 animate-pulse" />
-              <span className="font-bold text-lg">⚡ ChatGPT Plus Offer!</span>
+              <span className="font-bold text-lg">{bannerConfig.title}</span>
             </div>
             
             <div className="text-sm">
-              Now on Shop VIP Premium. Unlock fast, advanced AI features with priority access.
-            </div>
-            
-            <div className="font-bold">
-              Only <span className="text-yellow-300">₹589</span> or <span className="text-yellow-300">$12/month</span>
+              {bannerConfig.description}
             </div>
             
             <div className="flex items-center space-x-1">
@@ -110,10 +106,10 @@ const PromoBanner = () => {
             </div>
             
             <Link
-              to="/products?search=chatgpt"
+              to={bannerConfig.cta_link}
               className="bg-white text-red-600 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-colors animate-pulse"
             >
-              SHOP NOW!
+              {bannerConfig.cta_text}
             </Link>
           </div>
           
