@@ -70,7 +70,7 @@ const ModernDarkHomePage = () => {
             </div>
             
             <div className="text-sm">
-              Now on Shop For Premium. Only <span className="font-bold text-yellow-300">₹589</span> or <span className="font-bold text-yellow-300">$12/month</span>
+              Now on Shop VIP Premium. Only <span className="font-bold text-yellow-300">₹589</span> or <span className="font-bold text-yellow-300">$12/month</span>
             </div>
             
             <div className="flex items-center space-x-1">
