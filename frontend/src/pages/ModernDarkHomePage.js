@@ -93,7 +93,7 @@ const ModernDarkHomePage = () => {
         <nav className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              Shop For Premium
+              Shop VIP Premium
             </Link>
             <ul className="flex space-x-8">
               <li><Link to="/" className="text-gray-300 hover:text-purple-400 font-semibold transition-colors">Home</Link></li>
