@@ -286,10 +286,18 @@ const WooCommerceAdminInterface = () => {
         const data = await response.json();
         if (data.success && data.data) {
           setContentData(prev => ({ ...prev, ...data.data }));
+          
+          // Initialize localStorage with current banner config
+          if (data.data.promo_banner) {
+            localStorage.setItem('shopvip_promo_banner_config', JSON.stringify(data.data.promo_banner));
+          }
         }
       }
     } catch (error) {
       console.error('Error fetching content data:', error);
+      // Initialize with default config if fetch fails
+      const defaultBannerConfig = contentData.promo_banner;
+      localStorage.setItem('shopvip_promo_banner_config', JSON.stringify(defaultBannerConfig));
     }
   };
 
