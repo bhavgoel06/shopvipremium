@@ -57,9 +57,9 @@ def test_nowpayments_api():
             "pay_currency": "btc",
             "order_id": "test_order_123",
             "order_description": "Test payment for debugging",
-            "ipn_callback_url": "https://1ae160f8-6a16-4ede-86e1-49789e2612e0.preview.emergentagent.com/api/payments/nowpayments/ipn",
-            "success_url": "https://1ae160f8-6a16-4ede-86e1-49789e2612e0.preview.emergentagent.com/order-success",
-            "cancel_url": "https://1ae160f8-6a16-4ede-86e1-49789e2612e0.preview.emergentagent.com/order-cancelled"
+            "ipn_callback_url": "https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com/api/payments/nowpayments/ipn",
+            "success_url": "https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com/order-success",
+            "cancel_url": "https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com/order-cancelled"
         }
         
         print(f"   Request URL: {base_url}/payment")
