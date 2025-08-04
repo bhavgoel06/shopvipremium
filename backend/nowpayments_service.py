@@ -70,19 +70,12 @@ class NowPaymentsService:
                 "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com')}/order-cancelled"
             }
             
-            # Debug logging
-            logger.info(f"Creating payment with payload: {payload}")
-            logger.info(f"Using headers: {self._get_headers()}")
-            
             # Use invoice endpoint for hosted payment page
             response = requests.post(
                 f"{self.base_url}/invoice",
                 json=payload,
                 headers=self._get_headers()
             )
-            
-            logger.info(f"Response status: {response.status_code}")
-            logger.info(f"Response text: {response.text}")
             
             response.raise_for_status()
             return response.json()
