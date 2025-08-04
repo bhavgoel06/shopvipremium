@@ -1492,9 +1492,9 @@ const WooCommerceAdminInterface = () => {
           <div className="flex justify-between items-center py-6">
             <div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Shop For Premium Admin
+                Shop VIP Premium Admin
               </h1>
-              <p className="text-gray-600 mt-1">Professional E-commerce Management Dashboard</p>
+              <p className="text-gray-600 mt-1">VIP E-commerce Management Dashboard</p>
             </div>
             <div className="flex items-center gap-4">
               <button
