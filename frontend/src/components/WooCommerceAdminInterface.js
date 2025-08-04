@@ -146,10 +146,6 @@ const WooCommerceAdminInterface = () => {
     }
   ];
 
-  useEffect(() => {
-    fetchAllData();
-  }, []);
-
   const fetchAllData = async () => {
     setLoading(true);
     try {
