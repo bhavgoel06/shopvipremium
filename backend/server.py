@@ -956,8 +956,120 @@ async def create_contact(contact: ContactCreate):
         logger.error(f"Error creating contact: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
-# Analytics Routes
-@app.get("/api/admin/analytics", response_model=ProductResponse)
+# Secure admin routes - require authentication
+@app.delete("/api/admin/products/{product_id}")
+async def delete_product_secure(
+    product_id: str,
+    admin_data: dict = Depends(verify_admin_token)
+):
+    """Delete a product (Secure Admin Only)"""
+    try:
+        result = await db.delete_product(product_id)
+        if result:
+            return {
+                "success": True,
+                "message": "Product deleted successfully",
+                "data": {"deleted": True, "product_id": product_id}
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Product not found")
+    except Exception as e:
+        logger.error(f"Error deleting product: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.put("/api/admin/products/{product_id}")
+async def update_product_secure(
+    product_id: str,
+    product_data: dict,
+    admin_data: dict = Depends(verify_admin_token)
+):
+    """Update a product (Secure Admin Only)"""
+    try:
+        # Calculate discount percentage if prices provided
+        if 'original_price' in product_data and 'discounted_price' in product_data:
+            original = float(product_data['original_price'])
+            discounted = float(product_data['discounted_price'])
+            if original > 0:
+                discount_percentage = round(((original - discounted) / original) * 100)
+                product_data['discount_percentage'] = discount_percentage
+        
+        # Add updated timestamp
+        product_data['updated_at'] = datetime.utcnow()
+        
+        result = await db.update_product(product_id, product_data)
+        if result:
+            return {
+                "success": True,
+                "message": "Product updated successfully",
+                "data": result
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Product not found")
+    except Exception as e:
+        logger.error(f"Error updating product: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.post("/api/admin/categories")
+async def create_category(
+    category_data: dict,
+    admin_data: dict = Depends(verify_admin_token)
+):
+    """Create a new product category (Secure Admin Only)"""
+    try:
+        category = {
+            "id": category_data.get("slug", category_data.get("name", "").lower().replace(" ", "-")),
+            "name": category_data.get("name"),
+            "description": category_data.get("description", ""),
+            "icon": category_data.get("icon", "📦"),
+            "color": category_data.get("color", "blue"),
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow()
+        }
+        
+        # Save to database (you'll need to add this method to database.py)
+        result = await db.create_category(category)
+        
+        return {
+            "success": True,
+            "message": "Category created successfully",
+            "data": category
+        }
+    except Exception as e:
+        logger.error(f"Error creating category: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.get("/api/admin/categories")
+async def get_categories(admin_data: dict = Depends(verify_admin_token)):
+    """Get all categories (Secure Admin Only)"""
+    try:
+        categories = await db.get_categories()
+        
+        # Default categories if none exist
+        if not categories:
+            default_categories = [
+                {"id": "ott", "name": "Streaming", "description": "OTT Platforms", "icon": "📺", "color": "red"},
+                {"id": "music", "name": "Music", "description": "Music Streaming", "icon": "🎵", "color": "purple"},
+                {"id": "vpn", "name": "VPNs", "description": "VPN & Security", "icon": "🔒", "color": "green"},
+                {"id": "software", "name": "Software", "description": "Software & Tools", "icon": "💻", "color": "blue"},
+                {"id": "professional", "name": "Professional", "description": "Professional Tools", "icon": "⭐", "color": "yellow"},
+                {"id": "education", "name": "Education", "description": "Learning Platforms", "icon": "📚", "color": "indigo"},
+                {"id": "gaming", "name": "Gaming", "description": "Gaming Services", "icon": "🎮", "color": "pink"},
+                {"id": "health", "name": "Health", "description": "Health & Fitness", "icon": "💪", "color": "teal"}
+            ]
+            return {
+                "success": True,
+                "message": "Default categories retrieved",
+                "data": default_categories
+            }
+        
+        return {
+            "success": True,
+            "message": "Categories retrieved successfully",
+            "data": categories
+        }
+    except Exception as e:
+        logger.error(f"Error getting categories: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
 async def get_analytics_stats():
     """Get analytics statistics (Admin only)"""
     try:
