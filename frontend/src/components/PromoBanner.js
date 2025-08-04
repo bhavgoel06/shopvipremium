@@ -35,7 +35,7 @@ const PromoBanner = () => {
               <span className="font-bold text-lg">⚡ ChatGPT Plus Offer!</span>
             </div>
             <div className="text-sm">
-              Now on Shop For Premium. Only <span className="font-bold">₹589</span> or <span className="font-bold">$12/month</span>
+              Now on Shop VIP Premium. Only <span className="font-bold">₹589</span> or <span className="font-bold">$12/month</span>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1">
