@@ -65,6 +65,11 @@ const WooCommerceAdminInterface = () => {
 
   const API_URL = process.env.REACT_APP_BACKEND_URL;
 
+  // All hooks must be called before any conditional returns
+  useEffect(() => {
+    fetchAllData();
+  }, []);
+
   const handleLoginSuccess = (token) => {
     setAdminToken(token);
     setIsAuthenticated(true);
