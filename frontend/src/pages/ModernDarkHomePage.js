@@ -120,11 +120,11 @@ const ModernDarkHomePage = () => {
           >
             <div className="inline-flex items-center bg-red-500 text-white px-4 py-2 rounded-full mb-6 animate-pulse">
               <FireIcon className="w-5 h-5 mr-2" />
-              <span className="font-semibold">UP TO 70% OFF!</span>
+              <span className="font-semibold">VIP DEALS - UP TO 70% OFF!</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Your One-Stop Shop for
+              Your VIP Shop for
               <br />
               <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                 Premium Subscriptions
@@ -132,7 +132,7 @@ const ModernDarkHomePage = () => {
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Instant delivery, unbeatable prices, and 24/7 support. Get your favorite subscriptions today!
+              VIP treatment, instant delivery, unbeatable prices, and 24/7 premium support. Get your favorite subscriptions today!
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
