@@ -1489,6 +1489,18 @@ const WooCommerceAdminInterface = () => {
     }
   };
 
+  // Show login screen if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <SecureAdminLogin 
+        onLoginSuccess={(token) => {
+          setIsAuthenticated(true);
+          setAdminToken(token);
+        }}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
