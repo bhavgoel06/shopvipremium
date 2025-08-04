@@ -59,7 +59,7 @@ const PromoBanner = () => {
             </div>
             
             <div className="text-sm">
-              Now on Shop For Premium. Unlock fast, advanced AI features with priority access.
+              Now on Shop VIP Premium. Unlock fast, advanced AI features with priority access.
             </div>
             
             <div className="font-bold">
