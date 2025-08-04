@@ -12,6 +12,7 @@ import json
 import jwt
 import bcrypt
 import uuid
+import secrets
 
 # Import models and database
 from models import *
