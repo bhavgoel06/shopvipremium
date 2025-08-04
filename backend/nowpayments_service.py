@@ -66,7 +66,7 @@ class NowPaymentsService:
                 "order_id": order_data["order_id"],
                 "order_description": order_data.get("description", "Premium subscription order"),
                 "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
-                "success_url": f"{os.getenv('FRONTEND_URL', 'https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com')}/order-success?order_id={order_data['order_id']}&payment_id={{payment_id}}",
+                "success_url": f"{os.getenv('FRONTEND_URL', 'https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com')}/order-success?order_id={order_data['order_id']}",
                 "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://98062ab2-f9ce-49cb-ae18-69639324882c.preview.emergentagent.com')}/order-cancelled"
             }
             
