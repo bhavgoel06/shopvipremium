@@ -48,7 +48,7 @@ const RegisterPage = () => {
         email: formData.email,
         password: formData.password
       });
-      toast.success('Registration successful! Welcome to Shop For Premium!');
+      toast.success('Registration successful! Welcome to Shop VIP Premium!');
       navigate('/');
     } catch (error) {
       toast.error(error.message || 'Registration failed. Please try again.');
