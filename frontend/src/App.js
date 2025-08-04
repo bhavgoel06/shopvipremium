@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import PromoBanner from './components/PromoBanner';
 import HomePage from './pages/HomePage';
 import ModernHomePage from './pages/ModernHomePage';
+import ModernDarkHomePage from './pages/ModernDarkHomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CategoryPage from './pages/CategoryPage';
@@ -30,6 +31,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 import ScrollToTop from './components/ScrollToTop';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import './App.css';
+import './styles/modern-dark-theme.css';
 
 function App() {
   const [loading, setLoading] = useState(true);
