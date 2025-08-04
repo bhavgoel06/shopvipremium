@@ -59,35 +59,6 @@ const ModernDarkHomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* Promotional Banner */}
-      <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black opacity-10"></div>
-        <div className="relative z-10 container mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-4">
-            <div className="flex items-center space-x-2">
-              <FireIcon className="w-6 h-6 animate-pulse" />
-              <span className="font-bold text-lg">⚡ ChatGPT Plus Offer!</span>
-            </div>
-            
-            <div className="text-sm">
-              Now on Shop VIP Premium. Only <span className="font-bold text-yellow-300">₹589</span> or <span className="font-bold text-yellow-300">$12/month</span>
-            </div>
-            
-            <div className="flex items-center space-x-1">
-              <ClockIcon className="w-4 h-4" />
-              <span className="text-sm">Offer ends in: <span className="font-mono font-bold text-yellow-300">{formatTime(timeLeft)}</span></span>
-            </div>
-            
-            <Link
-              to="/products?search=chatgpt"
-              className="bg-white text-purple-600 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-colors animate-pulse"
-            >
-              SHOP NOW!
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* Header */}
       <header className="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
         <nav className="container mx-auto px-4 py-4">
