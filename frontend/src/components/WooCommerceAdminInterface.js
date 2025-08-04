@@ -259,6 +259,15 @@ const WooCommerceAdminInterface = () => {
       });
 
       if (response.ok) {
+        // Save banner configuration to localStorage for real-time frontend updates
+        localStorage.setItem('shopvip_promo_banner_config', JSON.stringify(contentData.promo_banner));
+        
+        // Trigger storage event for other windows/tabs
+        window.dispatchEvent(new StorageEvent('storage', {
+          key: 'shopvip_promo_banner_config',
+          newValue: JSON.stringify(contentData.promo_banner)
+        }));
+        
         alert('✅ Content updated successfully!');
       } else {
         alert('❌ Failed to update content');
