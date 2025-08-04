@@ -157,6 +157,13 @@ const WooCommerceAdminInterface = () => {
     }
   };
 
+  // Load data when component mounts and user is authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchAllData();
+    }
+  }, [isAuthenticated]);
+
   const handlePaymentMethodToggle = (method, enabled) => {
     setPaymentMethods(prev => ({
       ...prev,
