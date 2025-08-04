@@ -179,32 +179,6 @@ const WooCommerceAdminInterface = () => {
     console.log(`${methodNames[method]}: ${enabled ? 'Enabled' : 'Disabled'}`);
   };
 
-  const deleteProduct = async (productId) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${API_URL}/api/admin/products/${productId}`, {
-        method: 'DELETE',
-        headers: authHeaders,
-      });
-      
-      if (response.ok) {
-        setProducts(prev => prev.filter(p => p.id !== productId));
-        setShowDeleteConfirm(null);
-        alert('✅ Product deleted successfully!');
-        fetchProducts();
-        fetchDashboardStats();
-      } else {
-        const errorData = await response.json();
-        alert(`❌ Failed to delete product: ${errorData.detail || 'Unknown error'}`);
-      }
-    } catch (error) {
-      alert('❌ Error deleting product. Please try again.');
-      console.error('Delete error:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const clearFormAfterAdd = () => {
     setNewProduct({
       name: '',
