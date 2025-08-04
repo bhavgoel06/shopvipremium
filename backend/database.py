@@ -570,10 +570,34 @@ class Database:
                 if "_id" in category:
                     category.pop("_id")
             
+            # If no categories exist, return default categories
+            if not categories:
+                default_categories = [
+                    {"id": "ott", "name": "Streaming", "description": "OTT Platforms", "icon": "📺", "color": "red"},
+                    {"id": "music", "name": "Music", "description": "Music Streaming", "icon": "🎵", "color": "purple"},
+                    {"id": "vpn", "name": "VPNs", "description": "VPN & Security", "icon": "🔒", "color": "green"},
+                    {"id": "software", "name": "Software", "description": "Software & Tools", "icon": "💻", "color": "blue"},
+                    {"id": "professional", "name": "Professional", "description": "Professional Tools", "icon": "⭐", "color": "yellow"},
+                    {"id": "education", "name": "Education", "description": "Learning Platforms", "icon": "📚", "color": "indigo"},
+                    {"id": "gaming", "name": "Gaming", "description": "Gaming Services", "icon": "🎮", "color": "pink"},
+                    {"id": "health", "name": "Health", "description": "Health & Fitness", "icon": "💪", "color": "teal"},
+                    {"id": "adult", "name": "Adult", "description": "Adult Content", "icon": "🔞", "color": "gray"},
+                    {"id": "membership", "name": "Membership", "description": "Membership Services", "icon": "👥", "color": "orange"},
+                    {"id": "financial", "name": "Financial", "description": "Financial Services", "icon": "💰", "color": "emerald"}
+                ]
+                return default_categories
+            
             return categories
         except Exception as e:
             print(f"Error getting categories: {e}")
-            return []
+            # Return default categories on error
+            return [
+                {"id": "ott", "name": "Streaming", "description": "OTT Platforms", "icon": "📺", "color": "red"},
+                {"id": "software", "name": "Software", "description": "Software & Tools", "icon": "💻", "color": "blue"},
+                {"id": "education", "name": "Education", "description": "Learning Platforms", "icon": "📚", "color": "indigo"},
+                {"id": "vpn", "name": "VPNs", "description": "VPN & Security", "icon": "🔒", "color": "green"},
+                {"id": "adult", "name": "Adult", "description": "Adult Content", "icon": "🔞", "color": "gray"}
+            ]
 
 # Global database instance
 db = Database()
