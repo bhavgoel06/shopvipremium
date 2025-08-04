@@ -124,7 +124,7 @@ const Header = () => {
                 {/* Contact Buttons */}
                 <div className="flex items-center space-x-2">
                   <a 
-                    href="https://wa.me/919876543210?text=Hello%20Shop%20For%20Premium%21%20I%20need%20help%20with%20my%20order." 
+                    href="https://wa.me/919876543210?text=Hello%20Shop%20VIP%20Premium%21%20I%20need%20help%20with%20my%20order." 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-green-500 text-white px-2 py-1 rounded-lg hover:bg-green-600 transition-colors text-xs flex items-center gap-1"
