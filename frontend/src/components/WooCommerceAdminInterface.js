@@ -161,6 +161,7 @@ const WooCommerceAdminInterface = () => {
   useEffect(() => {
     if (isAuthenticated) {
       fetchAllData();
+      fetchContentData();
     }
   }, [isAuthenticated]);
 
