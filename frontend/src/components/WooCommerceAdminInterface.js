@@ -177,9 +177,87 @@ const WooCommerceAdminInterface = () => {
     };
     
     console.log(`${methodNames[method]}: ${enabled ? 'Enabled' : 'Disabled'}`);
+  };
+
+  const deleteProduct = async (productId) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}/api/admin/products/${productId}`, {
+        method: 'DELETE',
+        headers: authHeaders,
+      });
+      
+      if (response.ok) {
+        setProducts(prev => prev.filter(p => p.id !== productId));
+        setShowDeleteConfirm(null);
+        alert('✅ Product deleted successfully!');
+        fetchProducts();
+        fetchDashboardStats();
+      } else {
+        const errorData = await response.json();
+        alert(`❌ Failed to delete product: ${errorData.detail || 'Unknown error'}`);
+      }
+    } catch (error) {
+      alert('❌ Error deleting product. Please try again.');
+      console.error('Delete error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const clearFormAfterAdd = () => {
+    setNewProduct({
+      name: '',
+      description: '',
+      category: 'ott',
+      original_price: '',
+      discounted_price: '',
+      stock_quantity: 100,
+      image_url: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&h=300&fit=crop'
+    });
+  };
+
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     
-    // You can add API call here to save to backend
-    // await updatePaymentSettings(paymentMethods);
+    try {
+      const productData = {
+        name: newProduct.name,
+        description: newProduct.description,
+        short_description: newProduct.description.substring(0, 100),
+        category: newProduct.category,
+        original_price: parseFloat(newProduct.original_price),
+        discounted_price: parseFloat(newProduct.discounted_price),
+        duration_options: ["1 month", "3 months", "6 months", "1 year"],
+        features: ["Premium access", "24/7 support", "Instant delivery", "No ads"],
+        image_url: newProduct.image_url,
+        stock_quantity: parseInt(newProduct.stock_quantity),
+        seo_title: `${newProduct.name} - Premium Subscription`,
+        seo_description: `Get ${newProduct.name} at discounted price. Premium subscription with instant delivery.`,
+        seo_keywords: [newProduct.name.toLowerCase(), "premium", "subscription", newProduct.category]
+      };
+
+      const response = await fetch(`${API_URL}/api/admin/products`, {
+        method: 'POST',
+        headers: authHeaders,
+        body: JSON.stringify(productData),
+      });
+
+      if (response.ok) {
+        alert('✅ Product added successfully!');
+        clearFormAfterAdd(); // Clear form after successful add
+        fetchAllData();
+      } else {
+        const errorData = await response.json();
+        alert(`❌ Failed to add product: ${errorData.detail || 'Unknown error'}`);
+      }
+    } catch (error) {
+      alert('❌ Error adding product. Please check your connection.');
+      console.error('Add product error:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleContentUpdate = (section, field, value) => {
