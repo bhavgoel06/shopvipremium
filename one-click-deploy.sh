@@ -30,7 +30,7 @@ print_status "Detected Server IP: $SERVER_IP"
 
 print_status "Step 1/8: System Updates & Dependencies"
 apt update && apt upgrade -y
-apt install -y curl wget gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release
+apt install -y curl wget gnupg software-properties-common apt-transport-https ca-certificates lsb-release
 
 print_status "Step 2/8: Installing Node.js 20 & Yarn"
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
