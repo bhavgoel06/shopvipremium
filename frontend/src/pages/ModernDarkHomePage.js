@@ -245,8 +245,8 @@ const ModernDarkHomePage = () => {
               className="p-8"
             >
               <BoltIcon className="w-16 h-16 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold mb-4">Instant Delivery</h3>
-              <p className="text-gray-400">Get your subscription details immediately after payment confirmation.</p>
+              <h3 className="text-2xl font-bold mb-4">Immediate Access</h3>
+              <p className="text-gray-400">Get access to your digital toolkit resources immediately after account setup.</p>
             </motion.div>
 
             <motion.div
