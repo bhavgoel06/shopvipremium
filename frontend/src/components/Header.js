@@ -171,7 +171,7 @@ const Header = () => {
               >
                 @shopvippremium
               </a>
-              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🔥 Custom orders available • Best prices guaranteed • Instant delivery
+              &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;🔥 Custom packages available • Professional pricing • Immediate access
             </span>
           </div>
         </div>
