@@ -310,7 +310,7 @@ const ModernDarkHomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Save Big on Premium Subscriptions?
+              Ready to Enhance Your Digital Workspace?
             </h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
               Join over 8,500+ customers who trust us for their premium account needs. 
