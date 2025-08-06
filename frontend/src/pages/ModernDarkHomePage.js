@@ -125,7 +125,7 @@ const ModernDarkHomePage = () => {
             <div className="flex flex-wrap justify-center items-center gap-8 text-sm opacity-90">
               <div className="flex items-center">
                 <CheckCircleIcon className="w-5 h-5 mr-2 text-green-400" />
-                Instant Delivery
+                Immediate Access
               </div>
               <div className="flex items-center">
                 <CheckCircleIcon className="w-5 h-5 mr-2 text-green-400" />
