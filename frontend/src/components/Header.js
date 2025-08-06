@@ -118,7 +118,7 @@ const Header = () => {
                 <span className="hidden md:inline">📞 24/7 Support Available</span>
               </div>
               <div className="flex items-center space-x-4">
-                <span>⚡ Instant Delivery</span>
+                <span>⚡ Immediate Access</span>
                 <span className="hidden md:inline">🔒 Secure Payments</span>
                 
                 {/* Contact Buttons */}
