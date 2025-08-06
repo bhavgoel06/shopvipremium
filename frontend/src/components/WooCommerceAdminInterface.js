@@ -1171,7 +1171,7 @@ const WooCommerceAdminInterface = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
               <textarea
-                defaultValue="Get premium digital subscriptions at unbeatable prices. Netflix, Spotify, Adobe, VPN and more with instant delivery and 24/7 support."
+                defaultValue="Access curated digital productivity tools and utilities for modern professionals. Comprehensive workspace resources with immediate access and 24/7 technical support."
                 rows={3}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               />
