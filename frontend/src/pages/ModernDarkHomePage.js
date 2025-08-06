@@ -95,15 +95,15 @@ const ModernDarkHomePage = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Your VIP Shop for
+              Your Digital Workspace
               <br />
               <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Premium Subscriptions
+                Toolkit
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              VIP treatment, instant delivery, unbeatable prices, and 24/7 premium support. Get your favorite subscriptions today!
+              Essential tools for freelancers and creators. Professional resources, immediate access, and 24/7 expert support for your digital projects.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
