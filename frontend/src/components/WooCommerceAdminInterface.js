@@ -208,7 +208,7 @@ const WooCommerceAdminInterface = () => {
         original_price: parseFloat(newProduct.original_price),
         discounted_price: parseFloat(newProduct.discounted_price),
         duration_options: ["1 month", "3 months", "6 months", "1 year"],
-        features: ["Premium access", "24/7 support", "Instant delivery", "No ads"],
+        features: ["Professional access", "24/7 support", "Immediate setup", "Technical resources"],
         image_url: newProduct.image_url,
         stock_quantity: parseInt(newProduct.stock_quantity),
         seo_title: `${newProduct.name} - Premium Subscription`,
