@@ -138,7 +138,7 @@ const HomePage = () => {
   const features = [
     {
       icon: '⚡',
-      title: 'Instant Delivery',
+      title: 'Immediate Access',
       description: 'Get your subscription details instantly via WhatsApp or email'
     },
     {
