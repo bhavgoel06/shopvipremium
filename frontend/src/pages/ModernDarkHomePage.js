@@ -314,7 +314,7 @@ const ModernDarkHomePage = () => {
             </h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
               Join over 8,500+ customers who trust us for their premium account needs. 
-              Instant delivery, 24/7 support, and unbeatable prices guaranteed.
+              Immediate Access, 24/7 support, and professional resources guaranteed.
             </p>
             
             <Link
