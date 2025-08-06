@@ -153,7 +153,7 @@ const HomePage = () => {
     },
     {
       icon: '🎯',
-      title: 'Genuine Accounts',
+      title: 'Verified Resources',
       description: 'All subscriptions are 100% genuine and legally obtained'
     },
     {
