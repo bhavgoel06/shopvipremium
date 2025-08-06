@@ -46,8 +46,8 @@ const WooCommerceAdminInterface = () => {
       cta_link: "/products?search=chatgpt"
     },
     site_settings: {
-      site_title: "Shop VIP Premium - Premium Account Shop",
-      site_description: "World's Best VIP Subscriptions at unbeatable prices",
+      site_title: "Shop VIP Premium - Digital Workspace Toolkit",
+      site_description: "We provide curated access to digital productivity tools and freelancer utility bundles via a subscription model",
       contact_email: "support@shopvippremium.com",
       whatsapp_number: "+91-9876543210",
       telegram_handle: "@shopvippremium"
