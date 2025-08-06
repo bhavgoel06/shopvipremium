@@ -176,8 +176,8 @@ const ModernHomePage = () => {
   return (
     <>
       <Helmet>
-        <title>Shop For Premium - Access Premium Services at 70% Less Cost | Group Subscriptions</title>
-        <meta name="description" content="Get Netflix, Disney+, Spotify, Adobe & more premium subscriptions at fraction of original price. Trusted by 10,000+ users. Instant delivery, 30-day warranty." />
+        <title>Digital Workspace Toolkit - Essential Tools for Creators | Professional Utilities</title>
+        <meta name="description" content="Access curated digital productivity tools and utilities for creators, freelancers, and professionals. Comprehensive workspace resources with immediate access and 24/7 support." />
         <meta name="keywords" content="premium subscriptions, group subscriptions, cheap netflix, discount spotify, adobe creative cloud, group plans, shared subscriptions" />
         
         {/* Open Graph Tags */}
