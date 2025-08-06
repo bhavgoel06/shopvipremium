@@ -181,8 +181,8 @@ const ModernHomePage = () => {
         <meta name="keywords" content="premium subscriptions, group subscriptions, cheap netflix, discount spotify, adobe creative cloud, group plans, shared subscriptions" />
         
         {/* Open Graph Tags */}
-        <meta property="og:title" content="Shop For Premium - Group Subscriptions at 70% Discount" />
-        <meta property="og:description" content="Access premium services like Netflix, Spotify, Adobe at fraction of cost. Secure, legal, instant delivery." />
+        <meta property="og:title" content="Digital Workspace Toolkit - Professional Utilities for Creators" />
+        <meta property="og:description" content="Access curated productivity tools and digital utilities for modern professionals. Comprehensive workspace resources with technical support." />
         <meta property="og:image" content="/logo-social.png" />
         <meta property="og:url" content="https://shopforpremium.com" />
         <meta property="og:type" content="website" />
