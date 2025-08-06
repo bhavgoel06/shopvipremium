@@ -212,7 +212,7 @@ const WooCommerceAdminInterface = () => {
         image_url: newProduct.image_url,
         stock_quantity: parseInt(newProduct.stock_quantity),
         seo_title: `${newProduct.name} - Premium Subscription`,
-        seo_description: `Get ${newProduct.name} at discounted price. Premium subscription with instant delivery.`,
+        seo_description: `Access ${newProduct.name} professional toolkit. Digital utility with immediate setup and 24/7 technical support.`,
         seo_keywords: [newProduct.name.toLowerCase(), "premium", "subscription", newProduct.category]
       };
 
