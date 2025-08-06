@@ -85,7 +85,7 @@ const Footer = () => {
               </div>
               <p className="text-gray-400 mb-4">
                 Your trusted source for premium subscriptions at unbeatable prices. 
-                We offer genuine accounts with instant delivery and 24/7 support.
+                We deliver digital toolkits and utilities with immediate access and 24/7 support.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
