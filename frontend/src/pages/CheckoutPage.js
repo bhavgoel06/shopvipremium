@@ -334,17 +334,32 @@ const CheckoutPage = () => {
             </div>
 
             <div className="border-t border-gray-200 pt-4 mt-6">
-              <div className="flex justify-between items-center text-lg font-semibold text-gray-900">
-                <span>Total:</span>
-                <span className="text-2xl">
-                  {formatPrice(getCartTotal())}
-                </span>
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg" key={priceKey}>
+                <div className="flex justify-between items-center text-lg font-semibold text-gray-900 mb-2">
+                  <span>Total Amount:</span>
+                  <span className="text-2xl">
+                    {getDisplayPrice()}
+                  </span>
+                </div>
+                
+                {formData.paymentMethod === 'crypto' && (
+                  <div className="text-sm text-blue-600 font-medium">
+                    🚀 Crypto payments processed in USD only
+                  </div>
+                )}
+                
+                {formData.paymentMethod === 'card' && (
+                  <div className="text-sm text-gray-600">
+                    💳 Card payments: INR/USD equivalent (Rate: 1 USD = ₹90)
+                  </div>
+                )}
+                
+                {formData.paymentMethod === 'upi' && (
+                  <div className="text-sm text-green-600 font-medium">
+                    📱 UPI payments in INR only
+                  </div>
+                )}
               </div>
-              {formData.paymentMethod === 'crypto' && (
-                <p className="text-sm text-gray-600 mt-2">
-                  Crypto payment amount: {pricing.formatted.usd}
-                </p>
-              )}
             </div>
           </div>
         </div>
