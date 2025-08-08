@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = () => {
   const { items, getCartTotal, clearCart } = useCart();
-  const { currency, convertPrice, exchangeRate } = useCurrency();
+  const { currency, formatPrice, exchangeRate } = useCurrency();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -16,30 +16,47 @@ const CheckoutPage = () => {
     paymentMethod: 'card'
   });
   const [loading, setLoading] = useState(false);
-  const [usdTotal, setUsdTotal] = useState(0);
+  const [priceKey, setPriceKey] = useState(0);
 
-  // Calculate USD total for crypto payments
+  // Force re-render when currency changes
   useEffect(() => {
-    if (formData.paymentMethod === 'crypto') {
-      const totalInINR = getCartTotal();
-      // Always convert INR to USD for crypto payments regardless of current currency setting
-      const usdAmount = totalInINR / exchangeRate;
-      setUsdTotal(usdAmount);
-    }
-  }, [formData.paymentMethod, getCartTotal, exchangeRate]);
+    setPriceKey(prev => prev + 1);
+  }, [currency, formData.paymentMethod]);
 
-  const formatPrice = (price) => {
-    if (formData.paymentMethod === 'crypto') {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(price / 85); // Convert INR to USD
-    }
+  const calculatePricing = () => {
+    const totalINR = getCartTotal();
+    const totalUSD = totalINR / exchangeRate;
     
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-    }).format(price);
+    return {
+      inr: Math.round(totalINR),
+      usd: Math.round(totalUSD * 100) / 100,
+      formatted: {
+        inr: new Intl.NumberFormat('en-IN', {
+          style: 'currency',
+          currency: 'INR',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(totalINR),
+        usd: new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(totalUSD)
+      }
+    };
+  };
+
+  const pricing = calculatePricing();
+
+  const getDisplayPrice = () => {
+    if (formData.paymentMethod === 'crypto') {
+      return pricing.formatted.usd;
+    } else if (formData.paymentMethod === 'card') {
+      return `${pricing.formatted.inr} / ${pricing.formatted.usd}`;
+    } else {
+      return formatPrice(pricing.inr);
+    }
   };
 
   const handleInputChange = (e) => {
