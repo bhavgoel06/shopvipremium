@@ -31,9 +31,15 @@ const ProductCard = ({ product, className = '' }) => {
     e.preventDefault();
     e.stopPropagation();
     
-    const defaultDuration = product.duration_options[0];
-    addToCart(product, defaultDuration);
-    toast.success(`${product.name} added to cart!`);
+    // Check if product has duration options, use default if not
+    const defaultDuration = product.duration_options?.[0] || '1 Month';
+    try {
+      addToCart(product, defaultDuration);
+      toast.success(`${product.name} added to cart!`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast.error('Failed to add product to cart');
+    }
   };
 
   const handleImageLoad = () => {
