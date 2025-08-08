@@ -239,7 +239,7 @@ setup_backend() {
         print_error "requirements.txt not found"
     fi
     
-    # Create .env file with production settings
+    # Create .env file with all improvements
     cat > .env << EOF
 # Database Configuration
 MONGO_URL="mongodb://localhost:27017"
@@ -258,6 +258,14 @@ ENVIRONMENT="production"
 DEBUG="false"
 HOST="0.0.0.0"
 PORT="$BACKEND_PORT"
+
+# Currency Configuration
+EXCHANGE_RATE="90"
+
+# AI Tech Theme Configuration
+THEME="ai-tech"
+ENABLE_DUAL_CURRENCY="true"
+ENABLE_CRYPTO_USD="true"
 EOF
     
     # Set proper permissions for .env
