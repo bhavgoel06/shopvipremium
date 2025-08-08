@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const ProductDetailPage = () => {
   const { slug } = useParams();
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
