@@ -7,12 +7,18 @@ import { toast } from 'react-toastify';
 const ProductDetailPage = () => {
   const { slug } = useParams();
   const { addToCart } = useCart();
-  const { formatPrice } = useCurrency();
+  const { formatPrice, currency } = useCurrency();
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDuration, setSelectedDuration] = useState('');
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [priceKey, setPriceKey] = useState(0);
+
+  // Force re-render when currency changes
+  useEffect(() => {
+    setPriceKey(prev => prev + 1);
+  }, [currency]);
 
   useEffect(() => {
     fetchProduct();
