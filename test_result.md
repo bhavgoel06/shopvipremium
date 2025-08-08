@@ -387,10 +387,12 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Dual currency switcher implementation"
     - "Order confirmation and failure pages"
     - "Terms and Privacy Policy content update"
     - "Design improvements to match mobbin standards"
-  stuck_tasks: []
+  stuck_tasks: 
+    - "Dual currency switcher implementation"
   test_all: false
   test_priority: "high_first"
 
