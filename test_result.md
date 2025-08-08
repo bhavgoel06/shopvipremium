@@ -312,9 +312,9 @@ frontend:
 
   - task: "Dual currency switcher implementation"
     implemented: true
-    working: true
+    working: false
     file: "CurrencyContext.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -324,6 +324,9 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✅ TESTED: Currency switcher working perfectly. Switches between USD/INR instantly, persists across page navigation, updates product prices correctly with proper formatting ($2.40 vs ₹199). Tested on homepage, products page, and mobile view."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE CONFIRMED: Currency conversion is BROKEN. User report verified - currency button changes from '🇮🇳 INR' to '🇺🇸 USD' when clicked, but product prices DO NOT update immediately. Prices remain in INR (₹749, ₹494) even after switching to USD. The CurrencyContext state changes but product cards are not re-rendering with converted prices. This matches exactly what user reported in screenshot."
 
   - task: "Login/Register pages"
     implemented: true
