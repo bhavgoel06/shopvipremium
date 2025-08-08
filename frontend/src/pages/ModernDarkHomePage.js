@@ -13,7 +13,8 @@ import {
   FireIcon,
   TagIcon,
   BoltIcon,
-  HeartIcon
+  HeartIcon,
+  RocketLaunchIcon
 } from '@heroicons/react/24/solid';
 
 const ModernDarkHomePage = () => {
