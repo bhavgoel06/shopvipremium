@@ -278,6 +278,7 @@ setup_frontend() {
 REACT_APP_BACKEND_URL=https://$DOMAIN/api
 GENERATE_SOURCEMAP=false
 REACT_APP_NOWPAYMENTS_PUBLIC_KEY="$NOWPAYMENTS_PUBLIC_KEY"
+FAST_REFRESH=false
 EOF
     
     # Install dependencies using Yarn
