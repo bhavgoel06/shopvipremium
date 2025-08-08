@@ -78,14 +78,8 @@ const ModernDarkHomePage = () => {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-40 right-10 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-        </div>
-        
+      {/* Hero Section with AI/Tech Styling */}
+      <section className="relative py-20 px-4 text-center">
         <div className="relative z-10 max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -98,49 +92,48 @@ const ModernDarkHomePage = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Your Digital Workspace
-              <br />
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                Toolkit
-              </span>
+              <span className="ai-text-glow">Shop VIP Premium</span>
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Essential tools for freelancers and creators. Professional resources, immediate access, and 24/7 expert support for your digital projects.
+              🚀 Next-Gen Digital Workspace Solutions | AI-Powered Premium Tools | 
+              <span className="text-cyan-400 font-semibold"> 90+ Professional Utilities</span>
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Link 
                 to="/products"
-                className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl"
+                className="ai-neon-button text-lg px-8 py-4 flex items-center gap-3"
               >
-                🛒 Shop Now
+                <RocketLaunchIcon className="w-6 h-6" />
+                Explore Premium Tools
               </Link>
               <Link 
                 to="/about"
-                className="border-2 border-purple-400 hover:bg-purple-400 hover:text-gray-900 text-purple-400 px-10 py-4 rounded-full font-bold text-lg transition-all duration-300"
+                className="ai-glass-card px-8 py-4 text-white font-semibold hover:text-cyan-300 transition-colors flex items-center gap-3"
               >
-                Learn More
+                <PlayIcon className="w-5 h-5" />
+                Watch Demo
               </Link>
             </div>
             
             {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center items-center gap-8 text-sm opacity-90">
               <div className="flex items-center">
-                <CheckCircleIcon className="w-5 h-5 mr-2 text-green-400" />
-                Immediate Access
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="ml-2">99.9% Uptime</span>
               </div>
               <div className="flex items-center">
-                <CheckCircleIcon className="w-5 h-5 mr-2 text-green-400" />
-                24/7 Customer Support
+                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                <span className="ml-2">24/7 AI Support</span>
               </div>
               <div className="flex items-center">
-                <CheckCircleIcon className="w-5 h-5 mr-2 text-green-400" />
-                Secure Payments
+                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                <span className="ml-2">Instant Delivery</span>
               </div>
               <div className="flex items-center">
-                <CheckCircleIcon className="w-5 h-5 mr-2 text-green-400" />
-                8,500+ Happy Customers
+                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                <span className="ml-2">Crypto Ready</span>
               </div>
             </div>
           </motion.div>
