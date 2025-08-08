@@ -1,0 +1,63 @@
+{
+  "name": "shopvippremium",
+  "version": "1.0.0",
+  "description": "Shop VIP Premium - E-Commerce Platform for Premium Subscriptions",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "chmod +x master-deploy.sh && sudo bash master-deploy.sh",
+    "dev": "concurrently \"cd backend && source venv/bin/activate && uvicorn server:app --reload --host 0.0.0.0 --port 8001\" \"cd frontend && yarn start\"",
+    "build": "cd frontend && yarn build",
+    "test": "cd backend && python -m pytest && cd ../frontend && yarn test --watchAll=false",
+    "seed-db": "cd backend && source venv/bin/activate && python mega_product_seeder.py",
+    "backup-db": "mongodump --db shopvippremium_db --out backup/$(date +%Y-%m-%d)",
+    "restore-db": "mongorestore --db shopvippremium_db",
+    "logs": "pm2 logs shopvippremium-backend",
+    "status": "pm2 status && sudo systemctl status nginx mongod",
+    "restart": "pm2 restart shopvippremium-backend && sudo systemctl restart nginx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/shopvippremium.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "premium-subscriptions",
+    "cryptocurrency",
+    "react",
+    "fastapi",
+    "mongodb",
+    "nowpayments",
+    "vps-deployment"
+  ],
+  "author": "Shop VIP Premium",
+  "license": "MIT",
+  "homepage": "https://shopvippremium.com",
+  "engines": {
+    "node": ">=20.0.0",
+    "python": ">=3.11.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {},
+  "deployment": {
+    "platform": "VPS",
+    "os": "Ubuntu 20.04/22.04",
+    "domain": "shopvippremium.com",
+    "ssl": "Let's Encrypt",
+    "database": "MongoDB",
+    "process_manager": "PM2",
+    "web_server": "Nginx"
+  },
+  "features": [
+    "99+ Premium Products",
+    "Crypto Payment Integration",
+    "WooCommerce-level Admin",
+    "Dual Currency Support",
+    "SSL Certificate Automation",
+    "Performance Optimization",
+    "Security Hardening",
+    "Mobile Responsive",
+    "SEO Optimized"
+  ]
+}
