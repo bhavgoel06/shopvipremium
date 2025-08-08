@@ -4,7 +4,7 @@ const CurrencyContext = createContext();
 
 export const CurrencyProvider = ({ children }) => {
   const [currency, setCurrency] = useState('INR');
-  const [exchangeRate, setExchangeRate] = useState(83); // 1 USD = 83 INR (approximate)
+  const [exchangeRate, setExchangeRate] = useState(90); // 1 USD = 90 INR (fixed rate)
 
   useEffect(() => {
     const savedCurrency = localStorage.getItem('currency');
