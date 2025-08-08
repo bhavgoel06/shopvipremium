@@ -65,9 +65,9 @@ class NowPaymentsService:
                 "price_currency": order_data.get("price_currency", "USD"),
                 "order_id": order_data["order_id"],
                 "order_description": order_data.get("description", "Premium subscription order"),
-                "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://811cfcd2-789d-4044-8d9d-64213b6c998f.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
-                "success_url": f"{os.getenv('FRONTEND_URL', 'https://811cfcd2-789d-4044-8d9d-64213b6c998f.preview.emergentagent.com')}/order-success?order_id={order_data['order_id']}",
-                "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://811cfcd2-789d-4044-8d9d-64213b6c998f.preview.emergentagent.com')}/order-cancelled"
+                "ipn_callback_url": f"{os.getenv('BACKEND_URL', 'https://47861eef-78f8-45e8-993e-d1e8d42b995e.preview.emergentagent.com')}/api/payments/nowpayments/ipn",
+                "success_url": f"{os.getenv('FRONTEND_URL', 'https://47861eef-78f8-45e8-993e-d1e8d42b995e.preview.emergentagent.com')}/order-success?order_id={order_data['order_id']}",
+                "cancel_url": f"{os.getenv('FRONTEND_URL', 'https://47861eef-78f8-45e8-993e-d1e8d42b995e.preview.emergentagent.com')}/order-cancelled"
             }
             
             # Use invoice endpoint for hosted payment page
