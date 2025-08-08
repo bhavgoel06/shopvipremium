@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useCurrency } from '../context/CurrencyContext';
+import '../styles/ai-tech-theme.css';
 import { 
   PlayIcon, 
   MusicalNoteIcon, 
