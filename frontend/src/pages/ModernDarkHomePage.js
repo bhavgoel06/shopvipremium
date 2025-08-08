@@ -57,14 +57,6 @@ const ModernDarkHomePage = () => {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      maximumFractionDigits: 0,
-    }).format(price || 0);
-  };
-
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
