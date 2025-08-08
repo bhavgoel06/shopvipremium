@@ -58,13 +58,6 @@ const ProductDetailPage = () => {
     toast.success(`${product.name} added to cart!`);
   };
 
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-    }).format(price);
-  };
-
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
