@@ -199,7 +199,7 @@ const ModernDarkHomePage = () => {
                       <span className="text-sm text-gray-400 ml-2">({product.review_count || '100+'})</span>
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-4" key={priceKey}>
                       <div className="flex items-center justify-center space-x-2">
                         <span className="text-2xl font-bold text-purple-400">{formatPrice(product.discounted_price)}</span>
                         <span className="text-lg text-gray-500 line-through">{formatPrice(product.original_price)}</span>
