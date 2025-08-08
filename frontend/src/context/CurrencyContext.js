@@ -16,6 +16,10 @@ export const CurrencyProvider = ({ children }) => {
   const switchCurrency = (newCurrency) => {
     setCurrency(newCurrency);
     localStorage.setItem('currency', newCurrency);
+    // Force a small delay to ensure state update propagates
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('currencyChanged', { detail: newCurrency }));
+    }, 10);
   };
 
   const formatPrice = (priceInINR) => {
@@ -24,20 +28,24 @@ export const CurrencyProvider = ({ children }) => {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
       }).format(priceInUSD);
     } else {
       return new Intl.NumberFormat('en-IN', {
         style: 'currency',
         currency: 'INR',
-      }).format(priceInINR);
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(Math.round(priceInINR));
     }
   };
 
   const convertPrice = (priceInINR) => {
     if (currency === 'USD') {
-      return priceInINR / exchangeRate;
+      return Math.round((priceInINR / exchangeRate) * 100) / 100;
     }
-    return priceInINR;
+    return Math.round(priceInINR);
   };
 
   const getCurrencySymbol = () => {
