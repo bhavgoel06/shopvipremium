@@ -56,8 +56,19 @@ const ProductCard = ({ product, className = '' }) => {
     return stars;
   };
 
+  // Generate fallback slug if missing
+  const generateSlug = (name) => {
+    return name.toLowerCase()
+      .replace(/[^\w\s-]/g, '') // Remove special characters
+      .replace(/\s+/g, '-') // Replace spaces with hyphens
+      .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .trim(); // Remove leading/trailing spaces
+  };
+
+  const productSlug = product.slug || generateSlug(product.name);
+
   return (
-    <Link to={`/products/${product.slug}`} className="block">
+    <Link to={`/products/${productSlug}`} className="block">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
