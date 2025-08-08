@@ -895,6 +895,60 @@ async def get_low_stock_products(
         logger.error(f"Error getting low stock products: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
 
+@app.get("/api/admin/settings")
+async def get_site_settings(current_user_id: str = Depends(verify_token)):
+    """Get site settings"""
+    try:
+        settings = await db.db.site_settings.find_one({})
+        if not settings:
+            # Default settings
+            default_settings = {
+                "theme": "ai-tech",
+                "currency_rate": 90,
+                "site_name": "Shop VIP Premium",
+                "business_type": "Digital Workspace Solutions", 
+                "enable_crypto_usd": True,
+                "enable_dual_currency": True,
+                "seo_title": "Shop VIP Premium - Digital Workspace Toolkit | AI-Powered Tools",
+                "seo_description": "Next-Gen Digital Workspace Solutions with AI-Powered Premium Tools. 90+ Professional Utilities for modern professionals.",
+                "seo_keywords": "digital workspace, AI tools, premium software, professional utilities, crypto payments, workspace toolkit"
+            }
+            await db.db.site_settings.insert_one(default_settings)
+            return {
+                "success": True,
+                "data": default_settings
+            }
+        
+        settings.pop('_id', None)
+        return {
+            "success": True,
+            "data": settings
+        }
+    except Exception as e:
+        logger.error(f"Error getting site settings: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@app.put("/api/admin/settings")
+async def update_site_settings(
+    settings_data: dict,
+    current_user_id: str = Depends(verify_token)
+):
+    """Update site settings"""
+    try:
+        await db.db.site_settings.update_one(
+            {},
+            {"$set": settings_data},
+            upsert=True
+        )
+        
+        return {
+            "success": True,
+            "message": "Site settings updated successfully"
+        }
+    except Exception as e:
+        logger.error(f"Error updating site settings: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 @app.post("/api/admin/content")
 async def save_content_data(content_data: dict):
     """Save content management data"""
