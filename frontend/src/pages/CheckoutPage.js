@@ -145,7 +145,7 @@ const CheckoutPage = () => {
                 orderId: orderResult.data.id,
                 paymentMethod: 'crypto',
                 paymentId: cryptoResult.data.payment_id,
-                amount: usdTotal,
+                amount: pricing.usd,
                 currency: 'USD'
               }
             });
