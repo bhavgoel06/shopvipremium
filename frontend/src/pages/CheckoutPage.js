@@ -342,7 +342,7 @@ const CheckoutPage = () => {
               </div>
               {formData.paymentMethod === 'crypto' && (
                 <p className="text-sm text-gray-600 mt-2">
-                  Crypto payment amount: ${usdTotal.toFixed(2)} USD
+                  Crypto payment amount: {pricing.formatted.usd}
                 </p>
               )}
             </div>
