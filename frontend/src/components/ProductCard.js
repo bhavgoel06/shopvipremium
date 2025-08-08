@@ -7,9 +7,25 @@ import { toast } from 'react-toastify';
 
 const ProductCard = ({ product, className = '' }) => {
   const { addToCart } = useCart();
-  const { formatPrice } = useCurrency();
+  const { formatPrice, currency } = useCurrency();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [priceKey, setPriceKey] = useState(0);
+
+  // Force re-render when currency changes
+  useEffect(() => {
+    setPriceKey(prev => prev + 1);
+  }, [currency]);
+
+  // Also listen to custom currency change event
+  useEffect(() => {
+    const handleCurrencyChange = () => {
+      setPriceKey(prev => prev + 1);
+    };
+
+    window.addEventListener('currencyChanged', handleCurrencyChange);
+    return () => window.removeEventListener('currencyChanged', handleCurrencyChange);
+  }, []);
 
   const handleAddToCart = (e) => {
     e.preventDefault();
