@@ -202,3 +202,4 @@ dmypy.json
 # Keep production environment templates
 !backend/.env.production
 !frontend/.env.productionfrontend/node_modules/.cache/default-development/0.pack
+frontend/node_modules/.cache/default-development/0.pack

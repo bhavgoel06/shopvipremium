@@ -1,0 +1,82 @@
+MIT License
+
+Copyright (c) 2024 Shop VIP Premium
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Additional Terms for Commercial Use
+
+This software is specifically designed for commercial use in the premium subscription reselling business. The following additional terms apply:
+
+### Commercial License Grant
+Permission is granted to use this software for commercial purposes, including but not limited to:
+- Selling premium subscriptions through the platform
+- Generating revenue through the e-commerce functionality
+- Customizing the platform for specific business needs
+- Integrating with payment processing services
+
+### Third-Party Services
+This software integrates with third-party services including:
+- NOWPayments API for cryptocurrency processing
+- MongoDB for data storage
+- Let's Encrypt for SSL certificates
+- Various premium subscription services
+
+Users are responsible for complying with the terms of service of all integrated third-party services.
+
+### NOWPayments Integration
+The included NOWPayments API keys are provided for development and testing purposes. For production use:
+- Users must obtain their own NOWPayments account and API keys
+- Compliance with NOWPayments terms of service is required
+- Users are responsible for any fees associated with payment processing
+
+### Disclaimer
+The software is provided for use in legitimate business operations. Users are responsible for:
+- Ensuring compliance with local laws and regulations
+- Obtaining proper licenses for reselling premium subscriptions
+- Following the terms of service of all premium subscription providers
+- Maintaining appropriate business practices and customer service
+
+### Support and Warranty
+While this software is provided under the MIT License with no warranty, commercial support may be available through:
+- Telegram: @shopvippremium
+- Email: admin@shopvippremium.com
+
+### Liability Limitation
+The authors and copyright holders shall not be liable for any claims, damages, or other liability arising from the commercial use of this software, including but not limited to:
+- Business losses or lost profits
+- Payment processing issues
+- Third-party service disruptions
+- Legal or regulatory compliance issues
+
+### Modification and Distribution
+Users may modify and distribute this software under the terms of the MIT License. When distributing modified versions:
+- Include this copyright notice and license
+- Clearly indicate any modifications made
+- Provide appropriate attribution to the original work
+
+### Termination
+These additional commercial terms may be terminated if the user violates any provisions. Upon termination:
+- The right to use the software for commercial purposes ends
+- The standard MIT License terms continue to apply
+- Users must cease using any included API keys or credentials
+
+By using this software for commercial purposes, you acknowledge that you have read, understood, and agree to be bound by both the MIT License and these additional terms.
