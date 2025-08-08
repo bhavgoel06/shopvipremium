@@ -223,7 +223,7 @@ const ProductDetailPage = () => {
             </div>
 
             {/* Price */}
-            <div className="flex items-center space-x-4 mb-8">
+            <div className="flex items-center space-x-4 mb-8" key={priceKey}>
               <span className="text-3xl font-bold text-gray-800">
                 {formatPrice(product.discounted_price)}
               </span>
