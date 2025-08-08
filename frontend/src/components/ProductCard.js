@@ -78,13 +78,28 @@ const ProductCard = ({ product, className = '' }) => {
       .replace(/[^\w\s-]/g, '') // Remove special characters
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/-+/g, '-') // Replace multiple hyphens with single
+      .replace(/^-|-$/g, '') // Remove leading/trailing hyphens
       .trim(); // Remove leading/trailing spaces
   };
 
   const productSlug = product.slug || generateSlug(product.name);
+  
+  const handleProductClick = (e) => {
+    // Prevent the link click if there's an issue with the slug
+    if (!productSlug || productSlug.length === 0) {
+      e.preventDefault();
+      console.error('Invalid product slug:', product);
+      toast.error('Unable to view this product');
+      return;
+    }
+  };
 
   return (
-    <Link to={`/products/${productSlug}`} className="block">
+    <Link 
+      to={`/products/${productSlug}`} 
+      className="block"
+      onClick={handleProductClick}
+    >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
