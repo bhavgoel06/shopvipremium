@@ -23,7 +23,7 @@ const ProductDetailPage = () => {
       setLoading(true);
       console.log('Fetching product with slug:', slug);
       
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products/slug/${slug}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/slug/${slug}`);
       console.log('Response status:', response.status);
       
       if (!response.ok) {
