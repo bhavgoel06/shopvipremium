@@ -324,7 +324,7 @@ const CheckoutPage = () => {
                     <p className="text-sm text-gray-600">Duration: {item.duration}</p>
                     <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right" key={priceKey}>
                     <p className="font-medium text-gray-900">
                       {formatPrice(item.price * item.quantity)}
                     </p>
