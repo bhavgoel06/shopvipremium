@@ -175,14 +175,14 @@ const ModernDarkHomePage = () => {
                     </div>
                   )}
                   
-                  <div className="text-center">
+                  <div className="ai-product-card text-center p-8">
                     <img 
                       src={product.image_url} 
                       alt={product.name}
-                      className="w-20 h-20 object-contain mx-auto mb-4 rounded-lg"
+                      className="w-20 h-20 object-contain mx-auto mb-4 rounded-lg filter drop-shadow-lg"
                     />
 
-                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-purple-400 transition-colors">
+                    <h3 className="text-xl font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors">
                       {product.name}
                     </h3>
                     
@@ -198,17 +198,17 @@ const ModernDarkHomePage = () => {
 
                     <div className="mb-4" key={priceKey}>
                       <div className="flex items-center justify-center space-x-2">
-                        <span className="text-2xl font-bold text-purple-400">{formatPrice(product.discounted_price)}</span>
+                        <span className="text-2xl font-bold ai-text-glow">{formatPrice(product.discounted_price)}</span>
                         <span className="text-lg text-gray-500 line-through">{formatPrice(product.original_price)}</span>
                       </div>
                       <p className="text-sm text-gray-400 mt-1">{product.short_description}</p>
                     </div>
 
                     <Link
-                      to={`/products/${product.id}`}
-                      className="w-full bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 transform group-hover:scale-105 inline-block"
+                      to={`/products/${product.slug || product.id}`}
+                      className="ai-neon-button w-full py-3 px-6 text-center"
                     >
-                      Buy Now
+                      Get Access Now
                     </Link>
                   </div>
                 </motion.div>
