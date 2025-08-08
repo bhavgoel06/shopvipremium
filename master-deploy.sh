@@ -279,6 +279,16 @@ REACT_APP_BACKEND_URL=https://$DOMAIN/api
 GENERATE_SOURCEMAP=false
 REACT_APP_NOWPAYMENTS_PUBLIC_KEY="$NOWPAYMENTS_PUBLIC_KEY"
 FAST_REFRESH=false
+
+# AI Tech Theme Configuration
+REACT_APP_THEME="ai-tech"
+REACT_APP_CURRENCY_RATE=90
+
+# SEO and Gateway Configuration
+REACT_APP_SITE_NAME="Shop VIP Premium"
+REACT_APP_BUSINESS_TYPE="Digital Workspace Solutions"
+REACT_APP_ENABLE_CRYPTO_USD=true
+REACT_APP_ENABLE_DUAL_CURRENCY=true
 EOF
     
     # Install dependencies using Yarn
