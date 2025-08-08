@@ -51,7 +51,7 @@ const ProductDetailPage = () => {
 
   const fetchReviews = async (productId) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/${productId}/reviews`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products/${productId}/reviews`);
       const data = await response.json();
       
       if (data.success) {
