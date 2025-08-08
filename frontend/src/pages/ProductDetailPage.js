@@ -20,16 +20,30 @@ const ProductDetailPage = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/products/slug/${slug}`);
-      const data = await response.json();
+      setLoading(true);
+      console.log('Fetching product with slug:', slug);
       
-      if (data.success) {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products/slug/${slug}`);
+      console.log('Response status:', response.status);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('Product data:', data);
+      
+      if (data.success && data.data) {
         setProduct(data.data);
         setSelectedDuration(data.data.duration_options[0]);
         fetchReviews(data.data.id);
+      } else {
+        console.error('Product not found or API returned error:', data);
+        setProduct(null);
       }
     } catch (error) {
       console.error('Error fetching product:', error);
+      setProduct(null);
     } finally {
       setLoading(false);
     }
