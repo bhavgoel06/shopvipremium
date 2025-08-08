@@ -17,9 +17,16 @@ import {
 } from '@heroicons/react/24/solid';
 
 const ModernDarkHomePage = () => {
+  const { formatPrice, currency } = useCurrency();
   const [timeLeft, setTimeLeft] = useState(3600); // 1 hour countdown
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [priceKey, setPriceKey] = useState(0);
+
+  // Force re-render when currency changes
+  useEffect(() => {
+    setPriceKey(prev => prev + 1);
+  }, [currency]);
 
   useEffect(() => {
     fetchFeaturedProducts();
