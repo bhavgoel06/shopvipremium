@@ -32,6 +32,7 @@ import ScrollToTop from './components/ScrollToTop';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 import './App.css';
 import './styles/modern-dark-theme.css';
+import './styles/ai-tech-theme.css';
 
 function App() {
   const [loading, setLoading] = useState(true);
