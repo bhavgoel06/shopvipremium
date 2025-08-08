@@ -179,7 +179,7 @@ const ProductCard = ({ product, className = '' }) => {
           </div>
 
           {/* Price Section */}
-          <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+          <div className="mb-6 p-4 bg-gray-50 rounded-lg" key={priceKey}>
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
                 <span className="text-2xl font-bold text-gray-900">
