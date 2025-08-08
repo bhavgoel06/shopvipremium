@@ -111,7 +111,7 @@ const CheckoutPage = () => {
         // Create crypto payment
         const cryptoPaymentData = {
           order_id: orderId,
-          amount: usdTotal,
+          amount: pricing.usd,
           currency: 'USD'
         };
 
