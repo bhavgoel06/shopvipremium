@@ -209,6 +209,9 @@ backend:
         - working: true
           agent: "testing"
           comment: "✅ TESTED: Backend provides proper price data (original_price, discounted_price, discount_percentage) for frontend currency conversion. Products endpoint supports pagination and filtering."
+        - working: true
+          agent: "testing"
+          comment: "✅ CURRENCY SUPPORT VERIFIED: All products provide complete pricing data for USD/INR conversion. Tested products show proper structure: original_price, discounted_price, and discount_percentage fields present. Examples: Tidal Music (₹999→₹299), Netflix Premium 4K UHD (₹809), LeetCode Premium (₹749). Backend ready to support frontend currency switching functionality."
 
   - task: "User authentication system"
     implemented: true
