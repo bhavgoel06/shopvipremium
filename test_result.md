@@ -427,6 +427,21 @@ frontend:
           agent: "main"
           comment: "✅ PHASE 2 COMPLETE: Fixed button alignment and responsive design, added working WhatsApp (+91 9876543210) and Telegram (@shopforpremium) contact buttons in header and contact page, added comprehensive disclaimers section in footer, ensured consistent 'Shop For Premium' branding across all components, improved loading performance by reducing timeout to 100ms, enhanced product cards with better mobile responsiveness, expanded navigation categories to include Education, Social Media, and Health & Fitness, added smooth animations and loading skeletons."
 
+  - task: "Fix product visibility and domain configuration issues"
+    implemented: true
+    working: "NA"
+    file: "frontend/.env, nginx.conf, master-deploy.sh, fix-domain-typo-and-ssl.sh"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "user"
+          comment: "User reported 'all my products are not visible' on deployed site shopvipremium.com. Frontend unable to fetch data from backend API."
+        - working: "NA"
+          agent: "main"
+          comment: "🔧 CRITICAL FRONTEND CONFIGURATION FIXED: Updated REACT_APP_BACKEND_URL from misconfigured preview URL (https://22950937-fc04-4288-9379-0d8fc2f99fa5.preview.emergentagent.com) to correct production URL (https://shopvipremium.com/api). Added REACT_APP_CURRENCY_RATE=90 for proper INR/USD conversion. Fixed domain typo bug in all configuration files. Created comprehensive deployment fix script for user to run on VPS. Frontend is now properly configured to communicate with production backend."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
