@@ -23,8 +23,8 @@ DOMAIN="shopvipremium.com"
 PROJECT_DIR="/var/www/shopvipremium"
 BACKEND_PORT="8001"
 FRONTEND_PORT="3000"
-DB_NAME="shopvippremium_db"
-ADMIN_EMAIL="admin@shopvippremium.com"  # For SSL certificate
+DB_NAME="shopvipremium_db"
+ADMIN_EMAIL="admin@shopvipremium.com"  # For SSL certificate
 
 # NOWPayments API Configuration
 NOWPAYMENTS_IPN_SECRET="CRKTwqWfAbLGLeWdrsGZ4ZMES0DtTdD3"
