@@ -165,6 +165,18 @@ backend:
           agent: "testing"
           comment: "✅ CRYPTO PAYMENT SYSTEM VERIFIED: Payment endpoints fully functional. /api/payments/crypto/currencies returns available cryptocurrencies (1 currency configured). Payment system ready for frontend integration. All crypto payment infrastructure is operational and ready for production use."
 
+  - task: "Domain connectivity and SSL configuration for shopvipremium.com"
+    implemented: false
+    working: false
+    file: "nginx configuration, SSL certificates"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL DOMAIN ISSUE IDENTIFIED: shopvipremium.com domain is NOT accessible from testing environment. Connection attempts to https://shopvipremium.com timeout after 5+ seconds. This explains why users report 'products not visible' - the domain itself is not reachable. Backend is fully functional locally (100% test success rate), but the domain/SSL/DNS configuration prevents external access. URGENT: Fix domain configuration, SSL certificates, and ensure shopvipremium.com resolves and serves the application properly."
+
   - task: "Order confirmation and failure pages backend"
     implemented: true
     working: true
