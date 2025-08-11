@@ -24,7 +24,7 @@ class BackendTester:
             print("❌ Could not get backend URL from frontend/.env")
             sys.exit(1)
         
-        self.api_url = f"{self.base_url}/api"
+        self.api_url = self.base_url
         self.session = requests.Session()
         self.auth_token = None
         self.test_user_data = {
