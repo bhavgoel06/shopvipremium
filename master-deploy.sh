@@ -19,8 +19,8 @@ PURPLE='\033[0;35m'
 NC='\033[0m' # No Color
 
 # Configuration
-DOMAIN="shopvippremium.com"
-PROJECT_DIR="/var/www/shopvippremium"
+DOMAIN="shopvipremium.com"
+PROJECT_DIR="/var/www/shopvipremium"
 BACKEND_PORT="8001"
 FRONTEND_PORT="3000"
 DB_NAME="shopvippremium_db"
