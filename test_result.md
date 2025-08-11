@@ -407,7 +407,9 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Product visibility bug fix - updated REACT_APP_BACKEND_URL to https://shopvipremium.com/api"
+    - "SSL certificate installation for shopvipremium.com domain"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
