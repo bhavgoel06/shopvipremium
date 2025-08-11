@@ -3,7 +3,7 @@
 #========================================
 # SHOP VIP PREMIUM - MASTER DEPLOYMENT SCRIPT
 # One-Click Complete Website Deployment
-# Domain: shopvippremium.com
+# Domain: shopvipremium.com
 # Author: AI Assistant
 # Date: $(date)
 #========================================
